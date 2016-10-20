@@ -6,7 +6,7 @@ return array(
     'ACTION_SUFFIX' => '_action',
     'URL_HTML_SUFFIX' => '',
 
-    'DEFAULT_MODULE'        =>  'Qwechat',  // 默认模块
+    'DEFAULT_MODULE'        =>  'Qwechat',      // 默认模块
     'DEFAULT_CONTROLLER'    =>  'Qwechat',      // 默认控制器名称
     'DEFAULT_ACTION'        =>  'qwechat',      // 默认操作名称
 
