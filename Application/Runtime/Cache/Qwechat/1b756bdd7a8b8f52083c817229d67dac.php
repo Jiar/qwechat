@@ -64,18 +64,14 @@
                         <a href="<?php echo U('Qwechat/Qwechat/qwechat');?>" class="active"><i class="fa fa-dashboard fa-fw"></i> <?php echo L('_DASHBOARD_');?></a>
                     </li>
                     <li>
-                        <a href="<?php echo U('Qwechat/Organize/index');?>"><i class="fa fa-file-text fa-fw"></i> <?php echo L('_ORGANIZESETTINGS_');?><span class="fa arrow"></span></a>
+                        <a href="<?php echo U('Qwechat/Organize/index');?>"><i class="fa fa-group fa-fw"></i> <?php echo L('_ORGANIZESETTINGS_');?><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="<?php echo U('Qwechat/Organize/groupSettings');?>"> <?php echo L('_GROUPSETTINGS_');?></a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="<?php echo U('Qwechat/Organize/branchManage');?>"> <?php echo L('_BRANCHMANAGE_');?></a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="<?php echo U('Qwechat/Organize/departmentManage');?>"> <?php echo L('_DEPARTMENTMANAGE_');?></a>
                             </li>
@@ -88,21 +84,17 @@
                             <li>
                                 <a href="<?php echo U('Qwechat/Employee/employeeManage');?>"> <?php echo L('_EMPLOYEEMANAGE_SUB1_');?></a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="<?php echo U('Qwechat/Employee/leaveEmployee');?>"> <?php echo L('_LEAVEEMPLOYEE_');?></a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo U('Qwechat/Application/index');?>"><i class="fa fa-lock fa-fw"></i> <?php echo L('_APPLICATIONMANAGE_');?><span class="fa arrow"></span></a>
+                        <a href="<?php echo U('Qwechat/Application/index');?>"><i class="fa fa-th fa-fw"></i> <?php echo L('_APPLICATIONMANAGE_');?><span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="<?php echo U('Qwechat/Application/applicationManage');?>"> <?php echo L('_APPLICATIONMANAGE_SUB1_');?></a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="<?php echo U('Qwechat/Application/basicConfig');?>"> <?php echo L('_BASICCONFIG_');?></a>
                             </li>
@@ -110,13 +102,11 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="<?php echo U('Qwechat/Message/index');?>"><i class="fa fa-user-md fa-fw"></i> <?php echo L('_MESSAGEMANAGE_');?><span class="fa arrow"></span></a>
+                        <a href="<?php echo U('Qwechat/Message/index');?>"><i class="fa fa-envelope fa-fw"></i> <?php echo L('_MESSAGEMANAGE_');?><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="<?php echo U('Qwechat/Message/activeMessage');?>"> <?php echo L('_ACTIVEMESSAGE_');?></a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-second-level collapse">
                             <li>
                                 <a href="<?php echo U('Qwechat/Message/messageList');?>"> <?php echo L('_MESSAGELIST_');?></a>
                             </li>
@@ -129,7 +119,7 @@
         <!-- /.navbar-static-side -->
     </nav>
 
-    <div id="page-wrapper" style="min-height: 299px;">
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header"> <?php echo L('_DASHBOARD_');?></h1>

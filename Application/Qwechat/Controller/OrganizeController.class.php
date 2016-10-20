@@ -14,21 +14,21 @@ class OrganizeController extends BaseController {
 	* 集团设置
 	*/
 	public function groupSettings_action() {
-		echo '集团设置';
+		$this->display('groupSettings');
 	}
 
 	/**
 	* 分店管理
 	*/
 	public function branchManage_action() {
-		echo '分店管理';
+		$this->display('branchManage');
 	}
 
 	/**
 	* 部门管理
 	*/
 	public function departmentManage_action() {
-		echo '部门管理';
+		$this->display('departmentManage');
 	}
 
 }

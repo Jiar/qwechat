@@ -19,7 +19,7 @@ class AdminController extends Controller {
         // } else {
         //     redirect('login');
         // }
-        redirect(U('Qwechat/Qwechat/qwechat'));
+        redirect(U('Qwechat/qwechat'));
     }
 
     // // 进入登录、注册界面

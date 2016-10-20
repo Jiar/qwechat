@@ -14,14 +14,14 @@ class MessageController extends BaseController {
 	* 主动消息
 	*/
 	public function activeMessage_action() {
-		echo '主动消息';
+		$this->display('activeMessage');
 	}
 
 	/**
 	* 消息列表
 	*/
 	public function messageList_action() {
-		echo '消息列表';
+		$this->display('messageList');
 	}
 	
 }
