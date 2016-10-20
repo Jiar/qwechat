@@ -13,14 +13,14 @@ class EmployeeController extends BaseController {
 	/**
 	* 员工管理
 	*/
-	public function employeeManage_action {
+	public function employeeManage_action() {
 		echo '员工管理';
 	}
 
 	/**
 	* 离职员工
 	*/
-	public function leaveEmployee_action {
+	public function leaveEmployee_action() {
 		echo '离职员工';
 	}
 

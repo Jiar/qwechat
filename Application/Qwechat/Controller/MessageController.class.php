@@ -13,14 +13,14 @@ class MessageController extends BaseController {
 	/**
 	* 主动消息
 	*/
-	public function activeMessage_action {
+	public function activeMessage_action() {
 		echo '主动消息';
 	}
 
 	/**
 	* 消息列表
 	*/
-	public function messageList_action {
+	public function messageList_action() {
 		echo '消息列表';
 	}
 	
