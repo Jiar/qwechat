@@ -34,7 +34,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{:U('Application/Qwechat/qwechat')}">Qwechat Admin Manage System</a>
+            <a class="navbar-brand" href="{:U('Qwechat/Qwechat/qwechat')}">Qwechat Admin Manage System</a>
         </div>
         <!-- /.navbar-header -->
 
@@ -45,10 +45,10 @@
                     <i><img class="nav-user-photo" src="{$Think.cookie.avatar}" alt="{$Think.cookie.name}" style="width:30px;height:30px;border-radius: 50%;" /></i> &nbsp;<i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="{:U('Application/Admin/admin')}"><i class="fa fa-user fa-fw"></i>{$Think.cookie.name}</a>
+                    <li><a href="{:U('Qwechat/Admin/admin')}"><i class="fa fa-user fa-fw"></i>{$Think.cookie.name}</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="{:U('Application/Admin/signout')}"><i class="fa fa-sign-out fa-fw"></i>{:L('_LOGOUT_')}</a>
+                    <li><a href="{:U('Qwechat/Admin/signout')}"><i class="fa fa-sign-out fa-fw"></i>{:L('_LOGOUT_')}</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -61,64 +61,64 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav in" id="side-menu">
                     <li>
-                        <a href="{:U('Application/Qwechat/admin')}" class="active"><i class="fa fa-dashboard fa-fw"></i> {:L('_DASHBOARD_')}</a>
+                        <a href="{:U('Qwechat/Qwechat/admin')}" class="active"><i class="fa fa-dashboard fa-fw"></i> {:L('_DASHBOARD_')}</a>
                     </li>
                     <li>
-                        <a href="{:U('Application/Organize/index')}"><i class="fa fa-file-text fa-fw"></i> {:L('_ORGANIZESETTINGS_')}<span class="fa arrow"></span></a>
+                        <a href="{:U('Qwechat/Organize/index')}"><i class="fa fa-file-text fa-fw"></i> {:L('_ORGANIZESETTINGS_')}<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Organize/groupSettings')}"> {:L('_GROUPSETTINGS_')}</a>
+                                <a href="{:U('Qwechat/Organize/groupSettings')}"> {:L('_GROUPSETTINGS_')}</a>
                             </li>
                         </ul>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Organize/branchManage')}"> {:L('_BRANCHMANAGE_')}</a>
+                                <a href="{:U('Qwechat/Organize/branchManage')}"> {:L('_BRANCHMANAGE_')}</a>
                             </li>
                         </ul>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Organize/departmentManage')}"> {:L('_DEPARTMENTMANAGE_')}</a>
+                                <a href="{:U('Qwechat/Organize/departmentManage')}"> {:L('_DEPARTMENTMANAGE_')}</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="{:U('Application/Employee/index')}"><i class="fa fa-user fa-fw"></i> {:L('_EMPLOYEEMANAGE_')}<span class="fa arrow"></span></a>
+                        <a href="{:U('Qwechat/Employee/index')}"><i class="fa fa-user fa-fw"></i> {:L('_EMPLOYEEMANAGE_')}<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Employee/employeeManage')}"> {:L('_EMPLOYEEMANAGE_SUB1_')}</a>
+                                <a href="{:U('Qwechat/Employee/employeeManage')}"> {:L('_EMPLOYEEMANAGE_SUB1_')}</a>
                             </li>
                         </ul>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Employee/leaveEmployee')}"> {:L('_LEAVEEMPLOYEE_')}</a>
+                                <a href="{:U('Qwechat/Employee/leaveEmployee')}"> {:L('_LEAVEEMPLOYEE_')}</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="{:U('Application/Application/index')}"><i class="fa fa-lock fa-fw"></i> {:L('_APPLICATIONMANAGE_')}<span class="fa arrow"></span></a>
+                        <a href="{:U('Qwechat/Qwechat/index')}"><i class="fa fa-lock fa-fw"></i> {:L('_APPLICATIONMANAGE_')}<span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Application/applicationManage')}"> {:L('_APPLICATIONMANAGE_SUB1_')}</a>
+                                <a href="{:U('Qwechat/Qwechat/applicationManage')}"> {:L('_APPLICATIONMANAGE_SUB1_')}</a>
                             </li>
                         </ul>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Application/basicConfig')}"> {:L('_BASICCONFIG_')}</a>
+                                <a href="{:U('Qwechat/Qwechat/basicConfig')}"> {:L('_BASICCONFIG_')}</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="{:U('Application/Message/index')}"><i class="fa fa-user-md fa-fw"></i> {:L('_MESSAGEMANAGE_')}<span class="fa arrow"></span></a>
+                        <a href="{:U('Qwechat/Message/index')}"><i class="fa fa-user-md fa-fw"></i> {:L('_MESSAGEMANAGE_')}<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Message/activeMessage')}"> {:L('_ACTIVEMESSAGE_')}</a>
+                                <a href="{:U('Qwechat/Message/activeMessage')}"> {:L('_ACTIVEMESSAGE_')}</a>
                             </li>
                         </ul>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{:U('Application/Message/messageList')}"> {:L('_MESSAGELIST_')}</a>
+                                <a href="{:U('Qwechat/Message/messageList')}"> {:L('_MESSAGELIST_')}</a>
                             </li>
                         </ul>
                     </li>
