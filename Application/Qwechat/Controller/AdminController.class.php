@@ -3,7 +3,7 @@
  * Created by: Jiar
  */
 
-namespace Admin\Controller;
+namespace Qwechat\Controller;
 
 use Think\Controller;
 
@@ -19,7 +19,7 @@ class AdminController extends Controller {
         // } else {
         //     redirect('login');
         // }
-        redirect('Qwechat/qwechat');
+        redirect(U('Qwechat/Qwechat/qwechat'));
     }
 
     // // 进入登录、注册界面

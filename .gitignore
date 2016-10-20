@@ -1,10 +1,6 @@
-
-/Application/Common/Conf
-
 /Application/Runtime
 
 /.idea
 /.settings
 /.project
 /.buildpath
-#test
