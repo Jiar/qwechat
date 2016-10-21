@@ -13,7 +13,11 @@ class ApplicationController extends BaseController {
 	/**
 	* 应用管理
 	*/
-	public function applicationManage_action() {
+	public function applicationManage_action($page = 1, $row = 20) {
+		$mode = D('qwechat');
+		$result = $mode -> applicationManage($page, $row);
+		$this->assign('list', $result['list']);
+		$this->assign('totalCount', $result['totalCount']);
 		$this->display('applicationManage');
 	}
 
