@@ -1,5 +1,6 @@
 <?php
 return array(
+    'URL_ROUTER_ON' => true,
     'URL_MODEL' => 2,
 
     'SHOW_PAGE_TRACE' => true,
