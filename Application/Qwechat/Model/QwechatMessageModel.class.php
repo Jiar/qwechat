@@ -14,12 +14,8 @@ use Qwechat\Sdk\errCode;
 
 use Think\Model;
 
-class QwechatMessageModel extends Model
-{
+class QwechatMessageModel extends Model {
     
-  
-
-
       /**
      * sendCustomMessage  发送客服消息
      * @param $to_uids 接收消息的用户们

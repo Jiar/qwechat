@@ -6,8 +6,8 @@ use Think\Model;
 /**
  * 响应型接口基类
  */
-class WechatRobModel extends Model
-{
+class WechatRobModel extends Model {
+  
     protected $Model;
     public $data;//接收到的数据，类型为关联数组
     var $returnParameters;//返回参数，类型为关联数组

@@ -26,5 +26,20 @@ return array(
     '_ACTIVEMESSAGE_' => 'Active Message',
     '_MESSAGELIST_' => 'Message List',
 
+    '_AUTHORITYCONFIG_' => 'Authority Config',
 
+    // 显示文本
+    '_CORPID_' => 'CorpID',
+    '_SECRET_' => 'Secret',
+
+    // 提示
+    '_FROM_QWECHAT_DASHBOARD_' => 'From Qwechat Dashboard',
+
+    // 占位符
+    '_PLEASE_INPUT_CORPID_' => 'please input CorpID',
+    '_PLEASE_INPUT_SECRET_' => 'please input Secret',
+
+    // 按钮文本
+    '_BTN_SAVE_' => '保存',
+    
 );

@@ -1,0 +1,13 @@
+/*!
+ * 一些常用实用的css集合
+ * 由Jiar整理
+ */
+
+.vertical-container {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+}

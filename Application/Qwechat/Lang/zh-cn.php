@@ -26,5 +26,21 @@ return array(
     '_ACTIVEMESSAGE_' => '主动消息',
     '_MESSAGELIST_' => '消息列表',
 
+    '_AUTHORITYCONFIG_' => '权限配置',
+
+    // 显示文本
+    '_CORPID_' => 'CorpID',
+    '_SECRET_' => 'Secret',
+
+    // 提示
+    '_FROM_QWECHAT_DASHBOARD_' => '（来自微信号后台）',
+
+    // 占位符
+    '_PLEASE_INPUT_CORPID_' => '请填写CorpID',
+    '_PLEASE_INPUT_SECRET_' => '请填写Secret',
+
+    // 按钮文本
+    '_BTN_SAVE_' => '保存',
+
   
 );

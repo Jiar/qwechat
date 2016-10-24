@@ -10,8 +10,8 @@ namespace Qwechat\Model;
 
 use Think\Model;
 
-class QwechatShopModel extends Model
-{
+class QwechatShopModel extends Model {
+    
     protected $_validate = array(
         array('name', '1,99999', '应用名称不能为空', self::EXISTS_VALIDATE, 'length'),
         array('name', '0,100', '应用名称太长', self::EXISTS_VALIDATE, 'length'),

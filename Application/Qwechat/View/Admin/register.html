@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../favicon.ico">-->
+
+    <title>管理员注册</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="__CSS__/form-signin-signup.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <script src="__JS__/ie-emulation-modes-warning.js"></script>
+
+</head>
+
+<style>
+    body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #e0e0e0;
+    }
+</style>
+
+<body>
+
+<div class="container">
+
+    <div align="center">
+
+        <form class="form-horizontal form-signin-signup" role="form" method="post" action="{:U('Qwechat/Admin/signup')}">
+            <h3 class="form-signin-signup-heading">管理员注册</h3>
+            <h6><a href="{:U('Qwechat/Admin/login')}">已有账户?去登录</a></h6>
+            <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="请输入邮箱">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="name" placeholder="请输入账户名">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="请输入密码">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="repassword" placeholder="请再一次输入密码">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger btn-block">管理员注册</button>
+            </div>
+        </form>
+
+    </div>
+
+</div> <!-- /container -->
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="__JS__/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

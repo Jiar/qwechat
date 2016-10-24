@@ -18,6 +18,7 @@
 
     <!-- Custom CSS -->
     <link href="__CSS__/qwechat-admin.css" rel="stylesheet">
+    <link href="__CSS__/common-jiar.css" rel="stylesheet">
 
 </head>
 
@@ -119,14 +120,52 @@
         <!-- /.navbar-static-side -->
     </nav>
 
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header"> {:L('_BASICCONFIG_')}</h1>
+    <div id="page-wrapper" style="padding: 20px">
+        <div class="row" style="margin: 0px; padding: 0px">
+            <div class="col-lg-12" style="margin-bottom: 20px; padding: 0px">
+            <!-- class="page-header" -->
+                <h4 style="margin: 0px; padding: 0px"> {:L('_BASICCONFIG_')}</h4>
             </div>
             <!-- /.col-lg-12 -->
         </div>
 
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#" style="font-size: medium">{:L('_AUTHORITYCONFIG_')}</a></li>
+        </ul>
+
+        <form action="/mywork/wechat/index.php?s=/admin/qwechat/config.html" method="post" style="margin-top: 20px" >
+            <div class="col-md-12 vertical-container" style="height: 50px;">
+                <div class="col-xs-2" align="right">
+                    {:L('_CORPID_')}
+                </div>
+                <div class="col-xs-10" align="left">
+                    <input type="text" class="form-control" name="appid" value="{$appid}" placeholder="{:L('_PLEASE_INPUT_CORPID_')}">
+                </div>
+            </div>
+            <div class="col-md-12" style="height: 30px">
+                <div class="col-md-offset-2 col-xs-10" align="left" style="color: gray; font-size: small">
+                    {:L('_FROM_QWECHAT_DASHBOARD_')}
+                </div>
+            </div>
+            <div class="col-md-12 vertical-container" style="height: 50px;">
+                <div class="col-xs-2" align="right">
+                    {:L('_SECRET_')}
+                </div>
+                <div class="col-xs-10" align="left">
+                    <input type="text" class="form-control" name="appsecret" value="{$appsecret}" placeholder="{:L('_PLEASE_INPUT_SECRET_')}">
+                </div>
+            </div>
+            <div class="col-md-12" style="height: 30px">
+                <div class="col-md-offset-2 col-xs-10" align="left" style="color: gray; font-size: small">
+                    {:L('_FROM_QWECHAT_DASHBOARD_')}
+                </div>
+            </div>
+            <div class="col-md-12" style="height: 30px">
+                <div class="col-md-offset-2 col-xs-10" align="left" style="color: gray; font-size: small">
+                    <button type="button" class="btn btn-primary btn-sm" href="{:U('/Admin/UserManage/blockUser', array('id'=>$user['id']))}">{:L('_BTN_SAVE_')}</button>
+                </div>
+            </div>
+        </form>
 
     </div>
     <!-- /#page-wrapper -->

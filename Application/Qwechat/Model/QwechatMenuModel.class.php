@@ -12,7 +12,7 @@ namespace Qwechat\Model;
 
 use Think\Model;
 
-class QwechatMenuModel extends Model{
+class QwechatMenuModel extends Model {
 
     protected $_auto = array(
         array('status', '1', self::MODEL_INSERT),
