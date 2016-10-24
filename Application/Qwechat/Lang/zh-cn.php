@@ -5,7 +5,7 @@ return array(
     '_QWECHAT_TITLE_' => '企业微信后台管理系统',
     '_DASHBOARD_' => '控制台',
 
-    '_LOGOUT_' => '推出登录',
+    '_LOGOUT_' => '退出登录',
 
     // 标签分类
 
