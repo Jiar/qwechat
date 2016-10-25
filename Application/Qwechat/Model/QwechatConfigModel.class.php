@@ -44,10 +44,13 @@ class QwechatConfigModel extends Model {
         if($weObj) {
         	$config = D('QwechatConfig');
         	$where['corpid'] = $appid;
-        	$where['corpsecret'] = $appid;
+        	$where['corpsecret'] = $appsecret;
         	if(count($config->where($where)->select()) == 0) {
         		$data = $where;
-                trace('$data:' .$data);
+                trace('$data1:' .$data);
+                $data['corpid'] = $appid;
+                $data['corpsecret'] = $appsecret;
+                trace('$data2:' .$data);
         		D('QwechatConfig')->data($data)->save();
         	}
         	return true;
