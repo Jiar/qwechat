@@ -94,7 +94,7 @@ class QwechatDepartmentModel extends Model {
 
     $tempsCount = count($temps);
     for($i=0;$i<$tempsCount;$i++) {
-      var_dump($temp);
+      var_dump($temps[$i]);
       var_dump('<br />');
       $this->loopDepartment($temps[$i]);
     }
