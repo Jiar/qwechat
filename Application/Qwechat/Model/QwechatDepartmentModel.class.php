@@ -32,7 +32,7 @@ class QwechatDepartmentModel extends Model {
   public function departmentManage() {
     $department = D('QwechatDepartment')->select();
     if(count($department) == 0) {
-      $department = $self->getDepartmentFromQwechat();
+      $department = $this->getDepartmentFromQwechat();
     }
     return $department;
   }
