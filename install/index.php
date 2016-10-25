@@ -15,7 +15,7 @@ if($step == 3)
 	    // echo '<script type="text/javascript"> alert("发布成功") </script>';
 	    echo 
 	    '<script language="JavaScript" type="text/javascript">
-           window.location.href="/index.php"; 
+           window.location.href="/mywork/qwechat"; 
     	</script>';
 	}
 // 	Header("Location: index.php");
