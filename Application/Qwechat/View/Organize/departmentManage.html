@@ -129,11 +129,8 @@
 
         <?php
             function recursionDepartment($rootDepartment) {
-                echo 'rootDepartment__' .$rootDepartment .'<br/>';
                 $subDepartments = $rootDepartment["subDepartments"];
-                echo 'subDepartments__' .$subDepartments .'<br/>';
                 $subDepartmentsCount = count($subDepartments);
-                echo 'subDepartmentsCount__' .$subDepartmentsCount .'<br/>';
                 if($subDepartmentsCount!=0) {
                     echo "<li class='open'>" ."<a href='javascript:;'>" ."<span class='title'>" .$rootDepartment["name"] ."</span>" ."<span class='arrow open'>" ."</span>" ."</a>";
                     echo "<ul class='sub-menu' style='display:block;'>";
@@ -154,8 +151,10 @@
 
         <ul class='wraplist' >
             <li class="open">
-                {$departments}<br/><br/>
-                {$departments|recursionDepartment}
+                <volist name="departments" id="department">
+                    {$department|recursionDepartment}
+                </volist>
+                
             </li>
         </ul>
 
