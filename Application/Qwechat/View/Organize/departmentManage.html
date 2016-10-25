@@ -132,14 +132,20 @@
                 $subDepartments = $rootDepartment['subDepartments'];
                 $subDepartmentsCount = count($subDepartments);
                 if($subDepartmentsCount!=0) {
-                    echo '<li class="open"><a href="javascript:;"><span class="title">$rootDepartment["name"]</span><span class="arrow open"></span> </a>';
+                    echo '<li class="open"><a href="javascript:;"><span class="title">' .$rootDepartment['name'] .'</span><span class="arrow open"></span> </a>';
+                    echo '<ul class="sub-menu" style="display:block;">';
                 } else {
-                    echo '<li><a href="javascript:;"><span class="title">$rootDepartment["name"]</span></a>';
+                    echo '<li><a href="javascript:;"><span class="title">' .$rootDepartment['name'] .'</span></a>';
                 }
                 for($i=0;$i<$subDepartmentsCount;$i++) {
                     recursionDepartment($subDepartments[$i]);
                 }
-                echo '</li>';
+                if($subDepartmentsCount!=0) {
+                    echo '</ul>';
+                    echo '</li>';
+                } else {
+                    echo '</li>';
+                }
             }
         ?>
 
