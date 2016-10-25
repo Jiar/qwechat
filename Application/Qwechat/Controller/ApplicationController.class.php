@@ -6,6 +6,7 @@
 namespace Qwechat\Controller;
 
 use Qwechat\Model\QwechatModel;
+use Qwechat\Model\QwechatConfigModel;
 
 /**
 * 应用管理分栏控制器
@@ -32,7 +33,7 @@ class ApplicationController extends BaseController {
 		if(IS_POST) {
 			$appid = I('post.APPID');
 			$appsecret = I('post.APPSECRET');
-	   		$config = M('QwechatConfig');
+	   		$config = new QwechatConfigModel();
 	   		$config->saveConfig($appid, $appsecret);
 	   		$this->redirect('basicConfig', array('appid'=>$appid, 'appsecret'=>$appsecret));
 		} 
