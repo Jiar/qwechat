@@ -41,33 +41,7 @@ class QwechatDepartmentModel extends Model {
         }
       }
     }
-
     return $this->structureDepartment();
-
-    // $departments = array();
-    
-    // // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
-    // // array_push($departments, );
-
-    // $lastDepartment = array();
-    // $parentids = M("QwechatDepartment")->distinct(true)->field('parentid')->order(array('parentid'=>'asc'))->select();
-    // $parentidsCount = count($parentids);
-    // for(int $parentid=0;$parentid<$parentidsCount;$parentid++) {
-    //   $where['parentid'] = $parentid;
-    //   $subDepartments = M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
-    //   $subDepartmentsCount = count($subDepartments);
-    //   for(int $key=0;$key<$subDepartmentsCount;$key++) {
-
-    //   }
-
-    //   $temp = array_merge($temp, );
-    // }
-
-    // $parentid = 0;
-    
-    // $parentid += 1;
-
-    // return $departments;
   }
 
   /********************** Controller's Function 对应 Model 操作 -end **********************/
@@ -103,10 +77,6 @@ class QwechatDepartmentModel extends Model {
       $this->loopDepartment($temp, $temp['id']);
     }
     $parentDepartment['subDepartments']= $temps;
-
-
-
-    
     // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
     // array_push($departments, );
 
