@@ -30,12 +30,13 @@ class QwechatDepartmentModel extends Model {
    * @return 部门集合
    */
   public function departmentManage() {
-    $department = D('QwechatDepartment')->select();
-    if(count($department) == 0) {
-      $department = $this->getDepartmentFromQwechat();
-      $department = $department['department'];
-      // $department = json_decode($department,true);
-      // $department = $department['department'];
+    $departments = D('QwechatDepartment')->select();
+    if(count($departments) == 0) {
+      $departments = $this->getDepartmentFromQwechat();
+      $departments = $departments['department'];
+      foreach ($departments as $department) {
+        M("QwechatDepartment")->save($department);
+      }
     }
     return $department;
   }
