@@ -37,7 +37,8 @@ class ApplicationController extends BaseController {
 			trace($appid);
 	   		trace($appsecret);
 
-	   		$config = new QwechatConfigModel();
+	   		// $config = new QwechatConfigModel();
+	   		$config = D('QwechatConfig');
 	   		trace($config->saveConfig($appid, $appsecret));
 
 
