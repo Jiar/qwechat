@@ -18,23 +18,45 @@
  */
 namespace Qwechat\Sdk;
 
-class TPWechat extends Wechat
-{
+class TPWechat extends Wechat {
+
+	private static $_instance;
+ 
+	private function __construct($options=array()) {
+		if(count($options) == 0) {
+			$config = D('QwechatConfig');
+			$config = $config->getConfig();
+			$options = array(
+				'appid'=>$config['corpid'],
+				'appsecret'=>$config['corpsecret'],
+			);
+		}
+		parent::__construct($options);
+	}
+ 
+	public function __clone() {
+		trigger_error('Clone is not allow!',E_USER_ERROR);
+	}
+ 
+	public static function getInstance($options=array()){
+		if(!(self::$_instance instanceof self)) {
+			self::$_instance = new self($options);
+		}
+		return self::$_instance;
+	}
+
 	/**
 	 * log overwrite
 	 * @see Wechat::log()
 	 */
-	public function log($log){
-
+	public function log($log) {
 		// if ($this->debug) {
-
 			if (is_array($log)) $log = print_r($log,true);
 		    return self::logdebug($log);
-				
-		
 		// }
 		return false;
 	}
+
 	/**
 	 * 重载设置缓存
 	 * @param string $cachename
@@ -42,7 +64,7 @@ class TPWechat extends Wechat
 	 * @param int $expired
 	 * @return boolean
 	 */
-	protected function setCache($cachename,$value,$expired){
+	protected function setCache($cachename,$value,$expired) {
 		return S($cachename,$value,$expired);
 	}
 
@@ -51,7 +73,7 @@ class TPWechat extends Wechat
 	 * @param string $cachename
 	 * @return mixed
 	 */
-	protected function getCache($cachename){
+	protected function getCache($cachename) {
 		return S($cachename);
 	}
 
@@ -60,16 +82,13 @@ class TPWechat extends Wechat
 	 * @param string $cachename
 	 * @return boolean
 	 */
-	protected function removeCache($cachename){
+	protected function removeCache($cachename) {
 		return S($cachename,null);
 	}
 
-	public function logdebug($text){
-
+	public function logdebug($text) {
 		file_put_contents('log.txt',$text."\n",FILE_APPEND);   
-			
     }
-
 
 }
 

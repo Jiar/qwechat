@@ -14,15 +14,17 @@ class QwechatConfigModel extends Model {
 
 	protected $patchValidate = ture;
 	protected $_validate = array(
-        array('corpid','require','请输入CorpID'),
-        array('corpsecret','require','请输入Secret'),
-        array('access_token','require','未获取到access_token'),
+        array('corpid','require','请输入CorpID', self::EXISTS_VALIDATE),
+        array('corpsecret','require','请输入Secret', self::EXISTS_VALIDATE),
     );
 	protected $autoCheckFields = true;
     protected $_auto = array(
         array('create_time', NOW_TIME, self::MODEL_INSERT),
         array('update_time', NOW_TIME, self::MODEL_BOTH),
     );
+
+
+    /********************** Controller's Function 对应 Model 操作 -start **********************/
 
     /**
      * 保存基础配置（corpid、corpsecret）
@@ -32,11 +34,11 @@ class QwechatConfigModel extends Model {
      * @return bool
      */
     public function saveConfig($corpid, $corpsecret) {
-    	$option = array(
+    	$options = array(
 	   		'appid'=>$corpid,
 	   		'appsecret'=>$corpsecret,
 	   	);
-	   	$weObj = new TPWechat($option);
+        $weObj = TPWechat::getInstance($options);
         $access_token = $weObj->checkAuth();
         trace('access_token:' .$access_token);
         if($access_token) {
@@ -59,7 +61,10 @@ class QwechatConfigModel extends Model {
      * @return array('corpid'=>'value', 'corpsecret'=>'value');
      */
     public function getConfig() {
-        return D('QwechatConfig')->limit(1)->find();
+        return D('QwechatConfig')->find();
     }
+
+    /********************** Controller's Function 对应 Model 操作 -end **********************/
+
 
 }

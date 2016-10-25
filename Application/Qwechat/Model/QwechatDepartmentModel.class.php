@@ -1,34 +1,68 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: caipeichao
- * Date: 14-3-8
- * Time: PM4:14
+ * Created by: Jiar
+ * Github: https://www.github.com/Jiar/
  */
 
 namespace Qwechat\Model;
 
 use Think\Model;
+use Qwechat\Sdk\TPWechat;
+use Qwechat\Sdk\errCode;
 
 class QwechatDepartmentModel extends Model {
   
-    protected $_validate = array(
-        array('name', '1,99999', '应用名称不能为空', self::EXISTS_VALIDATE, 'length'),
-        array('name', '0,100', '应用名称太长', self::EXISTS_VALIDATE, 'length'),
-    );
+  protected $patchValidate = ture;
+  protected $_validate = array(
+    array('name','require','应用名称不能为空', self::EXISTS_VALIDATE),
+    array('name', '0,100', '应用名称太长', self::EXISTS_VALIDATE, 'length'),
+    array('id','number','id必须为数字', self::EXISTS_VALIDATE),
+    array('parentid','number','parentid必须为数字', self::EXISTS_VALIDATE),
+    array('order','number','order必须为数字', self::EXISTS_VALIDATE),
+  );
 
-    protected $_auto = array(
-        array('create_time', NOW_TIME, self::MODEL_INSERT),
-        array('close', '0', self::MODEL_INSERT)
-       
-    );
 
-    public function updateDepartment($department=array())
-    {
+  /********************** Controller's Function 对应 Model 操作 -start **********************/
+
+  /**
+   * 从数据库中获取所有部门，若数据库中没有部门数据，则从微信企业号获取。
+   *
+   * @return 部门集合
+   */
+  public funciton departmentManage() {
+    $department = D('QwechatDepartment')->select();
+    if(count($department) == 0) {
+      $department = $self->getDepartmentFromQwechat();
+    }
+    return $department;
+  }
+
+  /********************** Controller's Function 对应 Model 操作 -end **********************/
+
+
+  /********************** private -start **********************/
+
+  /**
+   * 从微信企业号后台请求所有部门
+   * 
+   * @return 所有部门
+   */
+  private function getDepartmentFromQwechat() {
+    $weObj = TPWechat::getInstance();
+    return $weObj->getDepartment();
+  }
+
+  /********************** private -end **********************/
+
+
+  /********************** old functions -start **********************/
+
+    public function updateDepartment($department=array()) {
        
         $map['id']=$department['id'];
         $map['aid']=session('user_auth.aid');
         $department['aid']=session('user_auth.aid');
+
 
       $have = M("QwechatDepartment")->where($map)->find();
       $data = $this->create($department);
@@ -142,8 +176,7 @@ class QwechatDepartmentModel extends Model {
 
     }
 
+/********************** old functions -end **********************/
 
-   
 
-   
 }
