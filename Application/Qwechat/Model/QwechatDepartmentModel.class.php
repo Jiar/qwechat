@@ -75,7 +75,7 @@ class QwechatDepartmentModel extends Model {
   /**
    * 利用递归的方式，将部门按树状形式组合成多维数组
    * 
-   * @param  根部门
+   * @param $rootDepartment 根部门
    */
   private function recursionDepartment(&$rootDepartment) {
     $where['parentid'] = $rootDepartment['id'];
