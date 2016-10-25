@@ -100,6 +100,7 @@ class QwechatDepartmentModel extends Model {
 
     foreach ($temps as $temp) {
       var_dump($temp);
+      var_dump('<br />');
       $this->loopDepartment($temp);
     }
 
