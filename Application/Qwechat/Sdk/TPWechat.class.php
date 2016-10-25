@@ -22,7 +22,7 @@ class TPWechat extends Wechat {
 
 	private static $_instance;
  
-	private static function __construct($options=array()) {
+	protected function __construct($options=array()) {
 		if(count($options) == 0) {
 			$config = D('QwechatConfig');
 			$config = $config->getConfig();
