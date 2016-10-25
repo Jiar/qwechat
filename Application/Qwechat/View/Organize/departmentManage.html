@@ -127,11 +127,33 @@
             <!-- /.col-lg-12 -->
         </div>
 
-        <?php echo 'testtesttesttesttest';?>
+        <?php
+            function recursionDepartment($rootDepartment) {
+                $subDepartments = $rootDepartment['subDepartments'];
+                $subDepartmentsCount = count($subDepartments);
+                if($subDepartmentsCount!=0) {
+                    echo '<li class="open"><a href="javascript:;"><span class="title">$rootDepartment["name"]</span><span class="arrow open"></span> </a>';
+                } else {
+                    echo '<li><a href="javascript:;"><span class="title">$rootDepartment["name"]</span></a>';
+                }
+                for($i=0;$i<$subDepartmentsCount;$i++) {
+                    recursionDepartment($subDepartments[$i]);
+                }
+                echo '</li>';
+            }
+        ?>
 
         <ul class='wraplist' >
+            <li class="open">
+                <?php
+                    recursionDepartment($departments);
+                ?>
+            </li>
+        </ul>
+
+        <!-- <ul class='wraplist' >
                 <li class="open">
-                    <a href="javascript:;"><i class="fa fa-folder-open"></i><span class="title">Menu Levels</span><span class="arrow  open"></span> </a>
+                    <a href="javascript:;"><i class="title"></i><span class="title">Menu Levels</span><span class="arrow  open"></span> </a>
                     <ul class="sub-menu" style="display:block;">
                     <li> <a href="javascript:;"> <span class="title">Level 1.1</span> </a> </li>
                     <li class="open"> <a href="javascript:;"> <span class="title">Level 1.2</span> <span class="arrow  open"></span> </a>
@@ -152,7 +174,7 @@
                     </li>
                 </ul>
             </li>
-         </ul>
+         </ul> -->
 
 
         <!-- <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
