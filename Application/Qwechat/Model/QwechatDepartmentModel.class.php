@@ -29,7 +29,7 @@ class QwechatDepartmentModel extends Model {
    *
    * @return 部门集合
    */
-  public funciton departmentManage() {
+  public function departmentManage() {
     $department = D('QwechatDepartment')->select();
     if(count($department) == 0) {
       $department = $self->getDepartmentFromQwechat();
