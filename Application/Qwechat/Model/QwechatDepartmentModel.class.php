@@ -33,6 +33,7 @@ class QwechatDepartmentModel extends Model {
     $department = D('QwechatDepartment')->select();
     if(count($department) == 0) {
       $department = $this->getDepartmentFromQwechat();
+      $department = $department['department'];
       // $department = json_decode($department,true);
       // $department = $department['department'];
     }
