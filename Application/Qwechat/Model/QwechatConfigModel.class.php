@@ -56,11 +56,10 @@ class QwechatConfigModel extends Model {
     /**
      *获取基础配置（appid、appsecret）
      * 
-     * @return [type]
+     * @return array('appid'=>'value', 'appsecret'=>'value');
      */
     public function getConfig() {
-        var_dump(D('QwechatConfig')->limit(1)->find());
-        // trace(D('QwechatConfig')->limit(1)->find());
+        return D('QwechatConfig')->limit(1)->find();
     }
 
 }
