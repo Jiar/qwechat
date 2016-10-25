@@ -35,7 +35,8 @@ class QwechatDepartmentModel extends Model {
       $departments = $this->getDepartmentFromQwechat();
       $departments = $departments['department'];
       foreach ($departments as $department) {
-        echo M("QwechatDepartment")->save($department);
+        echo $department;
+        M("QwechatDepartment")->save($department);
       }
     }
     return $departments;
