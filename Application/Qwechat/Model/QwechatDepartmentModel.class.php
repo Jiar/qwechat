@@ -102,7 +102,7 @@ class QwechatDepartmentModel extends Model {
     //   $this->loopDepartment($temp);
     // }
 
-    $parentDepartment['subDepartments']= &$temps;
+    $rootDepartment['subDepartments']= &$temps;
     // var_dump('123 <br />');
 
     // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
