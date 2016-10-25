@@ -59,7 +59,7 @@ class QwechatConfigModel extends Model {
      * @return array('appid'=>'value', 'appsecret'=>'value');
      */
     public function getConfig() {
-        return D('QwechatConfig')->limit(1)->find();
+        return D('QwechatConfig')->limit(1)->find()[0];
     }
 
 }

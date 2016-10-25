@@ -45,6 +45,8 @@ class ApplicationController extends BaseController {
 				var_dump($data);
 				$appid = $data['appid'];
 				$appsecret = $data['appsecret'];
+				trace($appid);
+				trace($appsecret);
 			}
 			$this->assign('appid', $appid);
 			$this->assign('appsecret', $appsecret);
