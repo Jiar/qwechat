@@ -127,29 +127,7 @@
             <!-- /.col-lg-12 -->
         </div>
 
-        <?php
-            function recursionDepartment($rootDepartment) {
-                $subDepartments = $rootDepartment['subDepartments'];
-                $subDepartmentsCount = count($subDepartments);
-                if($subDepartmentsCount!=0) {
-
-                
-                    echo "<li class='open'>" ."<a href='javascript:;'>" ."<span class='title'>" .$rootDepartment["name"] ."</span>" ."<span class='arrow open'>" ."</span>" ."</a>";
-                    
-                } else {
-                    echo "<li>" ."<a href='javascript:;'>" ."<span class='title'>" .$rootDepartment["name"] ."</span>" ."</a>";
-                }
-                for($i=0;$i<$subDepartmentsCount;$i++) {
-                    recursionDepartment($subDepartments[$i]);
-                }
-                if($subDepartmentsCount!=0) {
-                    echo "</ul>";
-                    echo "</li>";
-                } else {
-                    echo "</li>";
-                }
-            }
-        ?>
+        
 
         <ul class='wraplist' >
             <li class="open">
