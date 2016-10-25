@@ -36,7 +36,7 @@ class ApplicationController extends BaseController {
 	   		if(D('QwechatConfig')->saveConfig($corpid, $corpsecret)) {
 				$this->redirect('basicConfig', array('corpid'=>$corpid, 'corpsecret'=>$corpsecret));
 	   		} else {
-	   			$this->error('CorpID或Secret有误');
+	   			// $this->error('CorpID或Secret有误');
 	   		}
 		} 
 		if(IS_GET) {
