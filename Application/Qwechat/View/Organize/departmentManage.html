@@ -150,12 +150,9 @@
         ?>
 
         <ul class='wraplist' >
-            <li class="open">
-                <volist name="departments" id="department">
-                    {$department|recursionDepartment}
-                </volist>
-                
-            </li>
+            <volist name="departments" id="department">
+                {$department|recursionDepartment}
+            </volist>
         </ul>
 
         <!-- <ul class='wraplist' >
