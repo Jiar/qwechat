@@ -133,7 +133,7 @@
             <li role="presentation" class="active"><a href="#" style="font-size: medium">{:L('_AUTHORITYCONFIG_')}</a></li>
         </ul>
 
-        <form action="{:U('Qwechat/Application/basicConfig')}" method="post" style="margin-top: 20px" >
+        <form role="form" action="{:U('Qwechat/Application/basicConfig')}" method="post" style="margin-top: 20px" >
             <div class="col-md-12 vertical-container" style="height: 50px;">
                 <div class="col-xs-2" align="right">
                     {:L('_CORPID_')}
@@ -162,7 +162,7 @@
             </div>
             <div class="col-md-12" style="height: 30px">
                 <div class="col-md-offset-2 col-xs-10" align="left" style="color: gray; font-size: small">
-                    <button type="button" class="btn btn-primary btn-sm" href="{:U('/Admin/UserManage/blockUser', array('id'=>$user['id']))}">{:L('_BTN_SAVE_')}</button>
+                    <button type="submit" class="btn btn-primary btn-sm">{:L('_BTN_SAVE_')}</button>
                 </div>
             </div>
         </form>
