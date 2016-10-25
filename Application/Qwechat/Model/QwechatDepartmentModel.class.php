@@ -27,7 +27,8 @@ class QwechatDepartmentModel extends Model {
   /**
    * 从数据库中获取所有部门，若数据库中没有部门数据，则从微信企业号获取。
    *
-   * @return 部门集合
+   * @return 部门集合 
+   * array('id'=>'value', 'parentid'=>'value', 'name'=>'value', 'order'=>'value', 'aid'=>'value', 'subDepartments'=>array())
    */
   public function departmentManage() {
     if(D('QwechatDepartment')->Count() == 0) {
@@ -59,77 +60,32 @@ class QwechatDepartmentModel extends Model {
     return $weObj->getDepartment();
   }
 
+  /**
+   * 准备构建部门树状集合
+   * 
+   * @return 部门树状集合
+   */
   private function structureDepartment() {
     $rootDepartment['id'] = 0;
-    // $parentids = M("QwechatDepartment")->distinct(true)->field('parentid')->order(array('parentid'=>'asc'))->select();
-    // foreach ($parentid as $parentids) {
-    //   $this->loopDepartment($departments, $parentid);
-    // }
-    $this->loopDepartment($rootDepartment);
+    $this->recursionDepartment($rootDepartment);
     $rootDepartment = $rootDepartment['subDepartments'];
     return $rootDepartment;
   }
 
-  private function loopDepartment(&$rootDepartment) {
-    // $departments = array();
-
-    // var_dump('$parentid: ---' .$rootDepartment['id'] .'---<br />');
+  /**
+   * 利用递归的方式，将部门按树状形式组合成多维数组
+   * 
+   * @param  根部门
+   */
+  private function recursionDepartment(&$rootDepartment) {
     $where['parentid'] = $rootDepartment['id'];
-
-    // var_dump('$where: ---');
-    // var_dump($where);
-    // var_dump('---<br />');
-
     $temps = D("QwechatDepartment")->where($where)->order(array('id'=>'asc','order'=>'asc'))->select();
-
-    // var_dump('temps.count:  ---' .count($temps) .'---<br />');
-
-    // var_dump('<br />temps:---');
-    // var_dump($temps);
-    // var_dump('---<br />');
-
-    // var_dump('<br />$temps[0]:---');
-    // var_dump($temps[0]);
-    // var_dump('---<br />');
-
     $tempsCount = count($temps);
+    //foreach形式循环是对数组的拷贝，想要用引用，必须用传统的for形式循环。
     for($i=0;$i<$tempsCount;$i++) {
-      var_dump($temps[$i]);
-      var_dump('<br />');
-      $this->loopDepartment($temps[$i]);
+      $this->recursionDepartment($temps[$i]);
     }
-
-    // foreach ($temps as $temp) {
-    //   var_dump($temp);
-    //   var_dump('<br />');
-    //   $this->loopDepartment($temp);
-    // }
-
     $rootDepartment['subDepartments']= &$temps;
-    // var_dump('123 <br />');
-
-    // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
-    // array_push($departments, );
-
-    // $lastDepartment = array();
-    // $parentids = M("QwechatDepartment")->distinct(true)->field('parentid')->order(array('parentid'=>'asc'))->select();
-    // $parentidsCount = count($parentids);
-    // for(int $parentid=0;$parentid<$parentidsCount;$parentid++) {
-    //   $where['parentid'] = $parentid;
-    //   $subDepartments = M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
-    //   $subDepartmentsCount = count($subDepartments);
-    //   for(int $key=0;$key<$subDepartmentsCount;$key++) {
-        
-    //   }
-
-    //   $temp = array_merge($temp, );
-    // }
-
-    // $parentid = 0;
-    
-    // $parentid += 1;
-
-    // return $departments;
   }
 
   /********************** private -end **********************/
