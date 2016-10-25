@@ -34,8 +34,11 @@ class ApplicationController extends BaseController {
 			$appid = I('post.APPID');
 			$appsecret = I('post.APPSECRET');
 	   		$config = new QwechatConfigModel();
-	   		$config->saveConfig($appid, $appsecret);
-	   		$this->redirect('basicConfig', array('appid'=>$appid, 'appsecret'=>$appsecret));
+	   		trace($config->saveConfig($appid, $appsecret));
+	   		trace($appid);
+	   		trace($appsecret);
+
+	   		// $this->redirect('basicConfig', array('appid'=>$appid, 'appsecret'=>$appsecret));
 		} 
 		if(IS_GET) {
 			$this->assign('appid', $appid);
