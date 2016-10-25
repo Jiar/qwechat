@@ -37,7 +37,9 @@ class QwechatConfigModel extends Model {
 	   		'appsecret'=>$appsecret,
 	   	);
 	   	$weObj = new TPWechat($option);
-        if($weObj->checkAuth()) {
+        $access_token = $weObj->checkAuth();
+        trace('access_token:' .$access_token);
+        if($access_token) {
         	$config = D('QwechatConfig');
         	$where['corpid'] = $appid;
         	$where['corpsecret'] = $appsecret;
