@@ -34,7 +34,7 @@ class TPWechat extends Wechat {
 		parent::__construct($options);
 	}
  
-	private function __clone() () {
+	private function __clone() {
 		
 	}
  
