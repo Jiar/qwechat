@@ -29,27 +29,24 @@ class ApplicationController extends BaseController {
 	/**
 	* 基础配置
 	*/
-	public function basicConfig_action($appid = '', $appsecret = '') {
+	public function basicConfig_action($corpid = '', $corpsecret = '') {
 		if(IS_POST) {
-			$appid = I('post.appid');
-			$appsecret = I('post.appsecret');
-	   		if(D('QwechatConfig')->saveConfig($appid, $appsecret)) {
-				$this->redirect('basicConfig', array('appid'=>$appid, 'appsecret'=>$appsecret));
+			$corpid = I('post.corpid');
+			$corpsecret = I('post.corpsecret');
+	   		if(D('QwechatConfig')->saveConfig($corpid, $corpsecret)) {
+				$this->redirect('basicConfig', array('corpid'=>$corpid, 'corpsecret'=>$corpsecret));
 	   		} else {
 	   			$this->error('CorpID或Secret有误');
 	   		}
 		} 
 		if(IS_GET) {
-			if($appid == '' || $appsecret == '') {
+			if($corpid == '' || $corpsecret == '') {
 				$data = D('QwechatConfig')->getConfig();
-				var_dump($data);
-				$appid = $data['appid'];
-				$appsecret = $data['appsecret'];
-				trace($appid);
-				trace($appsecret);
+				$corpid = $data['corpid'];
+				$corpsecret = $data['corpsecret'];
 			}
-			$this->assign('appid', $appid);
-			$this->assign('appsecret', $appsecret);
+			$this->assign('corpid', $corpid);
+			$this->assign('corpsecret', $corpsecret);
 			$this->display('basicConfig');
 		}
 	}

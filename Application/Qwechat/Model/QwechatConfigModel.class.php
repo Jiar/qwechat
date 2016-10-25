@@ -25,16 +25,16 @@ class QwechatConfigModel extends Model {
     );
 
     /**
-     * 保存基础配置（appid、appsecret）
+     * 保存基础配置（corpid、corpsecret）
      * 
-     * @param  appid
-     * @param  appsecret
+     * @param  corpid
+     * @param  corpsecret
      * @return bool
      */
-    public function saveConfig($appid, $appsecret) {
+    public function saveConfig($corpid, $corpsecret) {
     	$option = array(
-	   		'appid'=>$appid,
-	   		'appsecret'=>$appsecret,
+	   		'corpid'=>$corpid,
+	   		'corpsecret'=>$corpsecret,
 	   	);
 	   	$weObj = new TPWechat($option);
         $access_token = $weObj->checkAuth();
@@ -42,8 +42,8 @@ class QwechatConfigModel extends Model {
         if($access_token) {
             // 清空数据
             M("QwechatConfig")->where('1')->delete();
-        	$where['corpid'] = $appid;
-        	$where['corpsecret'] = $appsecret;
+        	$where['corpid'] = $corpid;
+        	$where['corpsecret'] = $corpsecret;
         	if(count(D('QwechatConfig')->where($where)->select()) == 0) {
         		$data = $where;
         		D('QwechatConfig')->add($data);
@@ -54,9 +54,9 @@ class QwechatConfigModel extends Model {
     }
 
     /**
-     *获取基础配置（appid、appsecret）
+     *获取基础配置（corpid、corpsecret）
      * 
-     * @return array('appid'=>'value', 'appsecret'=>'value');
+     * @return array('corpid'=>'value', 'corpsecret'=>'value');
      */
     public function getConfig() {
         return D('QwechatConfig')->limit(1)->find();
