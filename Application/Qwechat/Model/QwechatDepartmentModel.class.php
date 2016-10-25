@@ -74,7 +74,8 @@ class QwechatDepartmentModel extends Model {
 
     var_dump('$parentid: ---' .$rootDepartment['id'] .'---<br />');
     $where['parentid'] = $rootDepartment['id'];
-    $temps = M("QwechatDepartment")->where($where)->order(array('order','id'=>'asc'))->select();
+    //->order(array('order'=>'asc'))
+    $temps = M("QwechatDepartment")->where($where)->select();
 
     var_dump('temps:  ---' .$temps .'---<br />');
 
