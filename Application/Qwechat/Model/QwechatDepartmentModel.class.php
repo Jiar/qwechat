@@ -30,18 +30,44 @@ class QwechatDepartmentModel extends Model {
    * @return 部门集合
    */
   public function departmentManage() {
-    $departments = D('QwechatDepartment')->select();
-    if(count($departments) == 0) {
+    if(D('QwechatDepartment')->Count() == 0) {
       $departments = $this->getDepartmentFromQwechat();
       $departments = $departments['department'];
       foreach ($departments as $department) {
-        var_dump($department);
-        if(M("QwechatDepartment")->add($department) == 0) {
+        if(M("QwechatDepartment")->find($department['id'])) {
           M("QwechatDepartment")->save($department);
+        } else {
+          M("QwechatDepartment")->add($department)
         }
       }
     }
-    return $departments;
+
+    return $this->structureDepartment();
+
+    // $departments = array();
+    
+    // // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
+    // // array_push($departments, );
+
+    // $lastDepartment = array();
+    // $parentids = M("QwechatDepartment")->distinct(true)->field('parentid')->order(array('parentid'=>'asc'))->select();
+    // $parentidsCount = count($parentids);
+    // for(int $parentid=0;$parentid<$parentidsCount;$parentid++) {
+    //   $where['parentid'] = $parentid;
+    //   $subDepartments = M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
+    //   $subDepartmentsCount = count($subDepartments);
+    //   for(int $key=0;$key<$subDepartmentsCount;$key++) {
+
+    //   }
+
+    //   $temp = array_merge($temp, );
+    // }
+
+    // $parentid = 0;
+    
+    // $parentid += 1;
+
+    // return $departments;
   }
 
   /********************** Controller's Function 对应 Model 操作 -end **********************/
@@ -57,6 +83,52 @@ class QwechatDepartmentModel extends Model {
   private function getDepartmentFromQwechat() {
     $weObj = TPWechat::getInstance();
     return $weObj->getDepartment();
+  }
+
+  private function structureDepartment() {
+    $departments = array();
+    // $parentids = M("QwechatDepartment")->distinct(true)->field('parentid')->order(array('parentid'=>'asc'))->select();
+    // foreach ($parentid as $parentids) {
+    //   $this->loopDepartment($departments, $parentid);
+    // }
+    $this->loopDepartment($departments, 0);
+  }
+
+  private function loopDepartment(&$parentDepartment, $parentid) {
+    // $departments = array();
+    $where['parentid'] = $parentid;
+    $temps = M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
+
+    foreach ($temp as $temps) {
+      $this->loopDepartment($temp, $temp['id']);
+    }
+    $parentDepartment['subDepartments']= $temps;
+
+
+
+    
+    // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
+    // array_push($departments, );
+
+    // $lastDepartment = array();
+    // $parentids = M("QwechatDepartment")->distinct(true)->field('parentid')->order(array('parentid'=>'asc'))->select();
+    // $parentidsCount = count($parentids);
+    // for(int $parentid=0;$parentid<$parentidsCount;$parentid++) {
+    //   $where['parentid'] = $parentid;
+    //   $subDepartments = M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
+    //   $subDepartmentsCount = count($subDepartments);
+    //   for(int $key=0;$key<$subDepartmentsCount;$key++) {
+        
+    //   }
+
+    //   $temp = array_merge($temp, );
+    // }
+
+    // $parentid = 0;
+    
+    // $parentid += 1;
+
+    // return $departments;
   }
 
   /********************** private -end **********************/

@@ -127,6 +127,87 @@
             <!-- /.col-lg-12 -->
         </div>
 
+        <volist name="admins" id="admin">
+                                    <tr>
+                                        <td>{$key+1}</td>
+                                        <td>
+                                            <img src="{$admin['avatar']}" alt="{$admin['name']}" style="width:25px;height:25px;border-radius: 50%;" />
+                                        </td>
+                                        <td>{$admin['email']}</td>
+                                        <td>
+                                            <if condition="$admin['sex'] == 0">
+                                                女
+                                                <else />
+                                                男
+                                            </if>
+                                        </td>
+                                        <td>{$admin['create_time']}</td>
+                                        <td>
+                                            <a type="button" class="btn btn-default btn-xs" href="{:U('/Admin/AdminManage/detailAdmin', array('id'=>$admin['id']))}">{$admin['name']}</a>
+                                        </td>
+                                        <td>
+                                            <if condition="$admin['is_examine'] == 0">
+                                                    <a type="button" class="btn btn-primary btn-xs" href="{:U('/Admin/AdminManage/examinePass', array('id'=>$admin['id']))}">通过审核</a>
+                                                    <a type="button" class="btn btn-danger btn-xs" href="{:U('/Admin/AdminManage/examineRefuse', array('id'=>$admin['id']))}">拒绝审核</a>
+                                                <elseif condition="$admin['is_examine'] == 1"/>
+                                                    <p class="text-success">审核已通过</p>
+                                                <else />
+                                                    <p class="text-danger">审核已拒绝</p>
+                                            </if>
+                                        </td>
+                                        <td>
+                                            <if condition="$admin['is_block'] == 0">
+                                                <a type="button" class="btn btn-danger btn-xs" href="{:U('/Admin/AdminManage/blockAdmin', array('id'=>$admin['id']))}">屏蔽</a>
+                                                <else />
+                                                <a type="button" class="btn btn-primary btn-xs" href="{:U('/Admin/AdminManage/blockAdmin', array('id'=>$admin['id']))}">恢复</a>
+                                            </if>
+                                        </td>
+                                        <td>
+                                            <a type="button" class="btn btn-info btn-xs" href="{:U('/Admin/PermisManage/permission', array('type'=>1, 'id'=>$admin['id']))}">权限操作</a>
+                                        </td>
+                                    </tr>
+                                </volist>
+
+        <!-- <volist name="admins" id="admin">
+                                    <tr>
+                                        <td>{$key+1}</td>
+                                        <td>
+                                            <img src="{$admin['avatar']}" alt="{$admin['name']}" style="width:25px;height:25px;border-radius: 50%;" />
+                                        </td>
+                                        <td>{$admin['email']}</td>
+                                        <td>
+                                            <if condition="$admin['sex'] == 0">
+                                                女
+                                                <else />
+                                                男
+                                            </if>
+                                        </td>
+                                        <td>{$admin['create_time']}</td>
+                                        <td>
+                                            <a type="button" class="btn btn-default btn-xs" href="{:U('/Admin/AdminManage/detailAdmin', array('id'=>$admin['id']))}">{$admin['name']}</a>
+                                        </td>
+                                        <td>
+                                            <if condition="$admin['is_examine'] == 0">
+                                                    <a type="button" class="btn btn-primary btn-xs" href="{:U('/Admin/AdminManage/examinePass', array('id'=>$admin['id']))}">通过审核</a>
+                                                    <a type="button" class="btn btn-danger btn-xs" href="{:U('/Admin/AdminManage/examineRefuse', array('id'=>$admin['id']))}">拒绝审核</a>
+                                                <elseif condition="$admin['is_examine'] == 1"/>
+                                                    <p class="text-success">审核已通过</p>
+                                                <else />
+                                                    <p class="text-danger">审核已拒绝</p>
+                                            </if>
+                                        </td>
+                                        <td>
+                                            <if condition="$admin['is_block'] == 0">
+                                                <a type="button" class="btn btn-danger btn-xs" href="{:U('/Admin/AdminManage/blockAdmin', array('id'=>$admin['id']))}">屏蔽</a>
+                                                <else />
+                                                <a type="button" class="btn btn-primary btn-xs" href="{:U('/Admin/AdminManage/blockAdmin', array('id'=>$admin['id']))}">恢复</a>
+                                            </if>
+                                        </td>
+                                        <td>
+                                            <a type="button" class="btn btn-info btn-xs" href="{:U('/Admin/PermisManage/permission', array('type'=>1, 'id'=>$admin['id']))}">权限操作</a>
+                                        </td>
+                                    </tr>
+                                </volist> -->
 
     </div>
     <!-- /#page-wrapper -->
