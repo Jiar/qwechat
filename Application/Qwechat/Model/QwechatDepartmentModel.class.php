@@ -36,7 +36,9 @@ class QwechatDepartmentModel extends Model {
       $departments = $departments['department'];
       foreach ($departments as $department) {
         var_dump($department);
-        M("QwechatDepartment")->save($department);
+        if(M("QwechatDepartment")->add($department) == 0) {
+          M("QwechatDepartment")->save($department);
+        }
       }
     }
     return $departments;
