@@ -37,7 +37,7 @@ class QwechatDepartmentModel extends Model {
         if(M("QwechatDepartment")->find($department['id'])) {
           M("QwechatDepartment")->save($department);
         } else {
-          M("QwechatDepartment")->add($department)
+          M("QwechatDepartment")->add($department);
         }
       }
     }
@@ -66,6 +66,7 @@ class QwechatDepartmentModel extends Model {
     //   $this->loopDepartment($departments, $parentid);
     // }
     $this->loopDepartment($departments, 0);
+    return $departments;
   }
 
   private function loopDepartment(&$parentDepartment, $parentid) {
