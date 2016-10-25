@@ -898,14 +898,13 @@ class Wechat
 		if ($result)
 		{
 			$json = json_decode($result,true);
-			trace($json);
-			return;
 			if (!$json || isset($json['errcode'])) {
 				$this->errCode = $json['errcode'];
 				$this->errMsg = $json['errmsg'];
 				return false;
 			}
 			$this->access_token = $json['access_token'];
+			trace($this->access_token);
 			$expire = $json['expires_in'] ? intval($json['expires_in'])-100 : 3600;
 			$this->setCache($authname,$this->access_token,$expire);
 			return $this->access_token;
