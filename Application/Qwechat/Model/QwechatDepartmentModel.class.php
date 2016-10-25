@@ -91,10 +91,16 @@ class QwechatDepartmentModel extends Model {
     var_dump($temps[0]);
     var_dump('---<br />');
 
-    foreach ($temp as $temps) {
+    $tempsCount = count($temps);
+    for(int i=0;i<$tempsCount;i++) {
       var_dump('<br /> 999 <br />');
       $this->loopDepartment($temp);
+      
     }
+    // foreach ($temp as $temps) {
+    //   var_dump('<br /> 999 <br />');
+    //   $this->loopDepartment($temp);
+    // }
 
     $parentDepartment['subDepartments']= $temps;
     var_dump('123 <br />');
