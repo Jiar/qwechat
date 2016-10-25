@@ -72,28 +72,28 @@ class QwechatDepartmentModel extends Model {
   private function loopDepartment(&$rootDepartment) {
     // $departments = array();
 
-    var_dump('$parentid: ---' .$rootDepartment['id'] .'---<br />');
+    // var_dump('$parentid: ---' .$rootDepartment['id'] .'---<br />');
     $where['parentid'] = $rootDepartment['id'];
 
-    var_dump('$where: ---');
-    var_dump($where);
-    var_dump('---<br />');
+    // var_dump('$where: ---');
+    // var_dump($where);
+    // var_dump('---<br />');
 
-    $temps = D("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
+    $temps = D("QwechatDepartment")->where($where)->order(array('id'=>'asc','order'=>'asc'))->select();
 
-    var_dump('temps.count:  ---' .count($temps) .'---<br />');
+    // var_dump('temps.count:  ---' .count($temps) .'---<br />');
 
-    var_dump('<br />temps:---');
-    var_dump($temps);
-    var_dump('---<br />');
+    // var_dump('<br />temps:---');
+    // var_dump($temps);
+    // var_dump('---<br />');
 
-    var_dump('<br />$temps[0]:---');
-    var_dump($temps[0]);
-    var_dump('---<br />');
+    // var_dump('<br />$temps[0]:---');
+    // var_dump($temps[0]);
+    // var_dump('---<br />');
 
     $tempsCount = count($temps);
     for($i=0;$i<$tempsCount;$i++) {
-      var_dump('<br /> 999 <br />');
+      // var_dump('<br /> 999 <br />');
       $this->loopDepartment($temps[$i]);
 
     }
@@ -103,7 +103,7 @@ class QwechatDepartmentModel extends Model {
     // }
 
     $parentDepartment['subDepartments']= $temps;
-    var_dump('123 <br />');
+    // var_dump('123 <br />');
 
     // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
     // array_push($departments, );
