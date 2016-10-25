@@ -131,7 +131,9 @@
             function recursionDepartment($rootDepartment) {
                 echo "function recursionDepartment";
                 $subDepartments = $rootDepartment['subDepartments'];
+                echo $subDepartments;
                 $subDepartmentsCount = count($subDepartments);
+                echo $subDepartmentsCount;
                 if($subDepartmentsCount!=0) {
                     echo "<li class='open'>" ."<a href='javascript:;'>" ."<span class='title'>" .$rootDepartment["name"] ."</span>" ."<span class='arrow open'>" ."</span>" ."</a>";
                     echo "<ul class='sub-menu' style='display:block;'>";
