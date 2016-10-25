@@ -60,26 +60,26 @@ class QwechatDepartmentModel extends Model {
   }
 
   private function structureDepartment() {
-    $departments = array();
+    $rootDepartment['id'] = 0;
     // $parentids = M("QwechatDepartment")->distinct(true)->field('parentid')->order(array('parentid'=>'asc'))->select();
     // foreach ($parentid as $parentids) {
     //   $this->loopDepartment($departments, $parentid);
     // }
-    $this->loopDepartment($departments, 0);
-    return $departments;
+    $this->loopDepartment($rootDepartment);
+    return $rootDepartment;
   }
 
-  private function loopDepartment(&$parentDepartment, $parentid) {
+  private function loopDepartment(&$rootDepartment) {
     // $departments = array();
 
-    var_dump('$parentid: ---' .$parentid .'---<br />');
-    $where['parentid'] = $parentid;
+    var_dump('$parentid: ---' .$rootDepartment['id'] .'---<br />');
+    $where['parentid'] = $rootDepartment['id'];
     $temps = M("QwechatDepartment")->where($where)->order(array('order','id'=>'asc'))->select();
 
     var_dump('temps:  ---' .$temps .'---<br />');
 
     foreach ($temp as $temps) {
-      $this->loopDepartment($temp, $temp['id']);
+      $this->loopDepartment($temp);
     }
     $parentDepartment['subDepartments']= $temps;
     // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
