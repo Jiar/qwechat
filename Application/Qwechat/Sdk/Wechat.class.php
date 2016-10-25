@@ -106,7 +106,7 @@ class Wechat
 	public $errMsg = "no access";
 	public $logcallback;
 
-	public function __construct($options)
+	protected function __construct($options)
 	{
 		$this->token = isset($options['token'])?$options['token']:'';
 		$this->encodingAesKey = isset($options['encodingaeskey'])?$options['encodingaeskey']:'';
