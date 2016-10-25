@@ -22,7 +22,7 @@ class TPWechat extends Wechat {
 
 	private static $_instance;
  
-	private function __construct($options=array()) {
+	private static function __construct($options=array()) {
 		if(count($options) == 0) {
 			$config = D('QwechatConfig');
 			$config = $config->getConfig();
@@ -34,8 +34,8 @@ class TPWechat extends Wechat {
 		parent::__construct($options);
 	}
  
-	public function __clone() {
-		trigger_error('Clone is not allow!',E_USER_ERROR);
+	private function __clone() () {
+		
 	}
  
 	public static function getInstance($options=array()){
