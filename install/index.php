@@ -12,7 +12,11 @@ if($step == 3)
 	exec(KOL_ROOT."init &",$output,$status);
 	exec(' cd '.KOL_ROOT.' && /usr/bin/git fetch --all && /usr/bin/git reset --hard origin/develop',$output,$status);
 	if ($status == 0){
-	    echo '<script type="text/javascript"> alert("发布成功") </script>';
+	    // echo '<script type="text/javascript"> alert("发布成功") </script>';
+	    echo 
+	    '<script language="JavaScript" type="text/javascript">
+           window.location.href="/index.php"; 
+    	</script>';
 	}
 // 	Header("Location: index.php");
 }
