@@ -37,8 +37,11 @@ class QwechatConfigModel extends Model {
 	   		'appsecret'=>$appsecret,
 	   	);
 	   	$weObj = new TPWechat($option);
-	   	trace('哈哈');
-        if($weObj->checkAuth()) {
+	   	
+        $weObj = $weObj->checkAuth();
+        trace($weObj);
+
+        if($weObj) {
         	$config = D('QwechatConfig');
         	$where['corpid'] = $appid;
         	$where['corpsecret'] = $appid;
