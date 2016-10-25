@@ -84,7 +84,7 @@ class QwechatDepartmentModel extends Model {
     var_dump('temps.count:  ---' .count($temps) .'---<br />');
 
     var_dump('<br />---');
-    var_dump(temps);
+    var_dump($temps);
     var_dump('---<br />');
 
     var_dump('temps[0]:  ---' .$temps[0] .'---<br />');
