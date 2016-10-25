@@ -129,6 +129,7 @@
 
         <?php
             function recursionDepartment($rootDepartment) {
+                echo "function recursionDepartment";
                 $subDepartments = $rootDepartment['subDepartments'];
                 $subDepartmentsCount = count($subDepartments);
                 if($subDepartmentsCount!=0) {
