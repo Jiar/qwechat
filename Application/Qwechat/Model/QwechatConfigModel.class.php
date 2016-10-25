@@ -33,8 +33,8 @@ class QwechatConfigModel extends Model {
      */
     public function saveConfig($corpid, $corpsecret) {
     	$option = array(
-	   		'corpid'=>$corpid,
-	   		'corpsecret'=>$corpsecret,
+	   		'appid'=>$corpid,
+	   		'appsecret'=>$corpsecret,
 	   	);
 	   	$weObj = new TPWechat($option);
         $access_token = $weObj->checkAuth();

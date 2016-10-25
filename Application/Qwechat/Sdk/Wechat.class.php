@@ -898,7 +898,7 @@ class Wechat
 		if ($result)
 		{
 			$json = json_decode($result,true);
-			trace($json);
+			trace('checkAuth json: ' .$json);
 			if (!$json || isset($json['errcode'])) {
 				$this->errCode = $json['errcode'];
 				$this->errMsg = $json['errmsg'];
