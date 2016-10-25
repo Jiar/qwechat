@@ -47,11 +47,11 @@ class QwechatConfigModel extends Model {
         	$where['corpsecret'] = $appsecret;
         	if(count($config->where($where)->select()) == 0) {
         		$data = $where;
-                trace('$data1:' .$data);
+                trace('$data1:' .var_dump($data));
                 $data['corpid'] = $appid;
                 $data['corpsecret'] = $appsecret;
-                trace('$data2:' .$data);
-        		D('QwechatConfig')->data($data)->save();
+                trace('$data2:' .var_dump($data));
+        		D('QwechatConfig')->add($data);
         	}
         	return true;
         }
