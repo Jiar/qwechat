@@ -66,6 +66,7 @@ class QwechatDepartmentModel extends Model {
     //   $this->loopDepartment($departments, $parentid);
     // }
     $this->loopDepartment($rootDepartment);
+    $rootDepartment = $rootDepartment['subDepartments'];
     return $rootDepartment;
   }
 
