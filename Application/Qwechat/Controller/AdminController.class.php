@@ -23,8 +23,6 @@ class AdminController extends Controller {
 
     // 进入登录、注册界面
     public function login_action() {
-
-
         if(session('?adminId') && session('?adminToken')) {
             redirect(U('Admin/admin'));
         } else {
