@@ -42,6 +42,7 @@ class ApplicationController extends BaseController {
 		if(IS_GET) {
 			if($appid == '' || $appsecret == '') {
 				$data = D('QwechatConfig')->getConfig();
+				var_dump($data);
 				$appid = $data['appid'];
 				$appsecret = $data['appsecret'];
 			}
