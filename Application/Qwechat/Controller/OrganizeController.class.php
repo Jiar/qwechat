@@ -29,8 +29,10 @@ class OrganizeController extends BaseController {
 	*/
 	public function departmentManage_action() {
 		$departments = D('QwechatDepartment')->departmentManage();
-		$this->assign('departments', $departments);
-		$this->display('departmentManage');
+		var_dump($departments);
+		trace($departments);
+		// $this->assign('departments', $departments);
+		// $this->display('departmentManage');
 	}
 
 }
