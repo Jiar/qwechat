@@ -129,7 +129,8 @@
 
         <?php
             function recursionDepartment($rootDepartment) {
-                var_dumpt($rootDepartment);
+                echo $rootDepartment;
+                trace($rootDepartment);
                 echo "function recursionDepartment";
                 $subDepartments = $rootDepartment['subDepartments'];
                 echo $subDepartments;
