@@ -25,7 +25,7 @@ class QwechatConfigModel extends Model {
     );
 
     /**
-     * 保存基础配置
+     * 保存基础配置（appid、appsecret）
      * 
      * @param  appid
      * @param  appsecret
@@ -40,16 +40,27 @@ class QwechatConfigModel extends Model {
         $access_token = $weObj->checkAuth();
         trace('access_token:' .$access_token);
         if($access_token) {
-        	$config = D('QwechatConfig');
+            // 清空数据
+            M("QwechatConfig")->where('1')->delete();
         	$where['corpid'] = $appid;
         	$where['corpsecret'] = $appsecret;
-        	if(count($config->where($where)->select()) == 0) {
+        	if(count(D('QwechatConfig')->where($where)->select()) == 0) {
         		$data = $where;
         		D('QwechatConfig')->add($data);
         	}
         	return true;
         }
         return false;
+    }
+
+    /**
+     *获取基础配置（appid、appsecret）
+     * 
+     * @return [type]
+     */
+    public function getConfig() {
+        var_dump(D('QwechatConfig')->limit(1)->find());
+        // trace(D('QwechatConfig')->limit(1)->find());
     }
 
 }
