@@ -74,6 +74,8 @@ class QwechatDepartmentModel extends Model {
     $where['parentid'] = $parentid;
     $temps = M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
 
+    trace('temps:  ' .$temps);
+
     foreach ($temp as $temps) {
       $this->loopDepartment($temp, $temp['id']);
     }
