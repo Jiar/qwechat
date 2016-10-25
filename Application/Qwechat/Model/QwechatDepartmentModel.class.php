@@ -82,6 +82,11 @@ class QwechatDepartmentModel extends Model {
     $temps = D("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
 
     var_dump('temps.count:  ---' .count($temps) .'---<br />');
+
+    var_dump('<br />---');
+    var_dump(temps);
+    var_dump('---<br />');
+
     var_dump('temps[0]:  ---' .$temps[0] .'---<br />');
 
     foreach ($temp as $temps) {
