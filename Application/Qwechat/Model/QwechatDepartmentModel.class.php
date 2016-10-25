@@ -79,10 +79,13 @@ class QwechatDepartmentModel extends Model {
 
     var_dump('temps:  ---' .$temps .'---<br />');
 
+    $parentDepartment['subDepartments']= $temps;
+    
     foreach ($temp as $temps) {
       $this->loopDepartment($temp);
     }
-    $parentDepartment['subDepartments']= $temps;
+
+    
     // M("QwechatDepartment")->where($where)->order(array('order'=>'asc'))->select();
     // array_push($departments, );
 
