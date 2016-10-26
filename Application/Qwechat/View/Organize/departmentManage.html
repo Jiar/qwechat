@@ -168,6 +168,7 @@
             </li>
 
         <?php
+            $echoHtml = "";
             function treeDepartment($rootDepartment, $depth=1) {
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
@@ -176,47 +177,47 @@
                 if($subDepartmentsCount!=0) {
                     // 存在子节点
                     if($depth < $openDepth) {
-                        echo "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml += "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else if($depth == $openDepth) {
-                        echo "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml += "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else {
-                        echo "<li class='parent_li item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml += "<li class='parent_li item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                 } else {
                     if($depth <= $openDepth) {
-                        echo "<li class='item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml += "<li class='item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else {
-                        echo "<li class='item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml += "<li class='item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                 }
 
-                echo "<li class='dropdown' style='display: none;'>";
-                echo "<a class='dropdown-toggle' data-toggle='dropdown' href='#' style='padding: 10px;'>";
-                echo "<i class='fa fa-reorder'>";
-                echo "</i>";
-                echo "</a>";
-                echo "<ul class='dropdown-menu dropdown-user'>";
-                echo "<li>";
-                echo "<a href=''>";
-                echo "添加子部门";
-                echo "</a>";
-                echo "</li>";
-                echo "<li>";
-                echo "<a href=''>";
-                echo "修改部门";
-                echo "</a>";
-                echo "</li>";
-                echo "<li>";
-                echo "<a href=''>";
-                echo "删除部门";
-                echo "</a>";
-                echo "</li>";
-                echo "</ul>";
-                echo "</li>";
+                $echoHtml += "<li class='dropdown' style='display: none;'>";
+                $echoHtml += "<a class='dropdown-toggle' data-toggle='dropdown' href='#' style='padding: 10px;'>";
+                $echoHtml += "<i class='fa fa-reorder'>";
+                $echoHtml += "</i>";
+                $echoHtml += "</a>";
+                $echoHtml += "<ul class='dropdown-menu dropdown-user'>";
+                $echoHtml += "<li>";
+                $echoHtml += "<a href=''>";
+                $echoHtml += "添加子部门";
+                $echoHtml += "</a>";
+                $echoHtml += "</li>";
+                $echoHtml += "<li>";
+                $echoHtml += "<a href=''>";
+                $echoHtml += "修改部门";
+                $echoHtml += "</a>";
+                $echoHtml += "</li>";
+                $echoHtml += "<li>";
+                $echoHtml += "<a href=''>";
+                $echoHtml += "删除部门";
+                $echoHtml += "</a>";
+                $echoHtml += "</li>";
+                $echoHtml += "</ul>";
+                $echoHtml += "</li>";
                 
-                
+                $echoHtml += "</p>";
                 if($subDepartmentsCount!=0) {
-                    echo "<ul class='son_ul'>";
+                    $echoHtml += "<ul class='son_ul'>";
                 }
 
                 if($subDepartmentsCount!=0) {
@@ -225,15 +226,20 @@
                 for($i=0;$i<$subDepartmentsCount;$i++) {
                     treeDepartment($subDepartments[$i], $depth);
                 }
-                
+                $echoHtml += "</li>";
                 if($subDepartmentsCount!=0) {
-                    
+                    $echoHtml += "</ul>";
                 }
+            }
+
+            function echoHtml() {
+                echo $echoHtml;
             }
         ?>
         <div class="tree unableSelectText">
             <volist name="departments" id="department">
                 {$department|treeDepartment}
+                {|echoHtml}
             </volist>
         </div>
 
