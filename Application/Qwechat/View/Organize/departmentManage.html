@@ -216,16 +216,17 @@
     background-color:#fbfbfb;
     -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
     -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
-    box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05)
+    box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .tree li>p {
     height: 38px;
+    line-height: 38px;
     margin: 0px;
 }
 .tree li>p:hover {
     background:#eee;
-    color:#000
-    cursor:pointer
+    color:#000;
+    cursor:pointer;
 }
 .tree li p span {
     display:inline-block;
@@ -239,7 +240,7 @@
 
 <script type="text/javascript">
 $(function () {
-    $('.tree li>p').addClass('vertical-container');
+    // $('.tree li>p')
     $('.tree li:has(ul)').addClass('parent_li').find(' > p > span').attr('title', '折叠分支');
     $(".tree li:not([class='parent_li'])").find(' > p > span').css('display', 'none');
     $('.tree li.parent_li > p > span').on('click', function (e) {
