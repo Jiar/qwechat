@@ -223,6 +223,9 @@
     line-height: 38px;
     margin: 0px;
 }
+.tree li>p:before {
+    content: " ";
+}
 .tree li>p:hover {
     background:#eee;
     color:#000;
@@ -230,7 +233,7 @@
 }
 .tree li p span {
     display:inline-block;
-    padding:0px 6px;
+    padding:0px 8px;
     text-decoration:none;
 }
 .tree li>p>a {
@@ -240,7 +243,6 @@
 
 <script type="text/javascript">
 $(function () {
-    // $('.tree li>p')
     $('.tree li:has(ul)').addClass('parent_li').find(' > p > span').attr('title', '折叠分支');
     $(".tree li:not([class='parent_li'])").find(' > p > span').css('display', 'none');
     $('.tree li.parent_li > p > span').on('click', function (e) {
