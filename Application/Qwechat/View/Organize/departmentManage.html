@@ -298,7 +298,7 @@ $(function () {
         }
         e.stopPropagation();
     });
-    $('.tree li.parent_li > p').on('mouseover mouseout', function (e) {
+    $('.tree li > p').on('mouseover mouseout', function (e) {
         var dropdown = $(this).find(' > .dropdown');
         if(event.type == "mouseover"){
             //鼠标悬浮
