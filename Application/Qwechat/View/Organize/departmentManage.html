@@ -232,14 +232,14 @@
                 }
             }
 
-            function echoHtml() {
+            function echoHtml($none) {
                 echo $echoHtml;
             }
         ?>
         <div class="tree unableSelectText">
             <volist name="departments" id="department">
                 {$department|treeDepartment}
-                {|echoHtml}
+                {$department|echoHtml}
             </volist>
         </div>
 
