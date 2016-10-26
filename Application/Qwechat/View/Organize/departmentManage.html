@@ -282,8 +282,8 @@
 
 <script type="text/javascript">
 $(function () {
-    $('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', '折叠分支');
-    $('.tree li.parent_li > span').on('click', function (e) {
+    $('.tree li:has(ul)').addClass('parent_li').find(' > a > span').attr('title', '折叠分支');
+    $('.tree li.parent_li > a > span').on('click', function (e) {
         var children = $(this).parent('li.parent_li').find(' > ul > li');
         if (children.is(":visible")) {
             children.hide('fast');
