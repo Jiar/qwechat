@@ -271,7 +271,7 @@
             <volist name="departments" id="department">
                 <?php
                     $echoHtml = "";
-                    treeDepartment($echoHtml, "both",$department);
+                    treeDepartment($echoHtml,$department, "both");
                     echoHtml($echoHtml);
                     trace($echoHtml);
                     \Think\Log::write($echoHtml);
