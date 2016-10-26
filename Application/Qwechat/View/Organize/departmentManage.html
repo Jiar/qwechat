@@ -232,7 +232,7 @@
             }
 
             function echoHtml($echoHtml) {
-                echo $echoHtml;
+                echo htmlentities($echoHtml);
             }
         ?>
         <div class="tree unableSelectText">
@@ -241,7 +241,6 @@
                     $echoHtml = "";
                     treeDepartment($echoHtml, $department);
                     echoHtml($echoHtml);
-                    trace($echoHtml);
                 ?>
             </volist>
         </div>
