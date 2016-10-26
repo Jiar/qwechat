@@ -190,7 +190,31 @@
                     }
                 }
 
-                
+                $echoHtml .= "<ul>";
+                $echoHtml .= "<li class='dropdown' style='display: none;'>";
+                $echoHtml .= "<a class='dropdown-toggle' data-toggle='dropdown' href='#' style='padding: 10px;'>";
+                $echoHtml .= "<i class='fa fa-reorder'>";
+                $echoHtml .= "</i>";
+                $echoHtml .= "</a>";
+                $echoHtml .= "<ul class='dropdown-menu dropdown-user'>";
+                $echoHtml .= "<li>";
+                $echoHtml .= "<a href=''>";
+                $echoHtml .= "添加子部门";
+                $echoHtml .= "</a>";
+                $echoHtml .= "</li>";
+                $echoHtml .= "<li>";
+                $echoHtml .= "<a href=''>";
+                $echoHtml .= "修改部门";
+                $echoHtml .= "</a>";
+                $echoHtml .= "</li>";
+                $echoHtml .= "<li>";
+                $echoHtml .= "<a href=''>";
+                $echoHtml .= "删除部门";
+                $echoHtml .= "</a>";
+                $echoHtml .= "</li>";
+                $echoHtml .= "</ul>";
+                $echoHtml .= "</li>";
+                $echoHtml .= "</ul>";
                 
                 $echoHtml .= "</p>";
                 
@@ -288,7 +312,7 @@ $(function () {
         e.stopPropagation();
     });
     $('.tree li > p').on('mouseover mouseout', function (e) {
-        var dropdown = $(this).find(' > .dropdown');
+        var dropdown = $(this).find(' > ul > .dropdown');
         if(event.type == "mouseover"){
             //鼠标悬浮
             dropdown.css('display', 'inline');
