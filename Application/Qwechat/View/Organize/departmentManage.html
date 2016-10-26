@@ -132,6 +132,7 @@
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
                 if($subDepartmentsCount!=0) {
+                    // 存在子节点
                     echo "<li class='open'>" ."<a href='javascript:;'>" ."<span class='title'>" .$rootDepartment["name"] ."</span>" ."<span class='arrow open'>" ."</span>" ."</a>";
                     echo "<ul class='sub-menu' style='display:block;'>";
                 } else {
@@ -151,14 +152,23 @@
             function treeDepartment($rootDepartment, $depth=1) {
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
-                if($depth == 1) {
-                    echo "<li style='display:block;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
-                } else {
-                    echo "<li style='display:none;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
-                }
+                
                 if($subDepartmentsCount!=0) {
+                    // 存在子节点
+                    if($depth == 1) {
+                        echo "<li style='display:block;'>" ."<span>" ."<i class='glyphicon glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                    } else {
+                        echo "<li style='display:none;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                    }
                     echo "<ul>";
+                } else {
+                    if($depth == 1) {
+                        echo "<li style='display:block;'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                    } else {
+                        echo "<li style='display:none;'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                    }
                 }
+
                 for($i=0;$i<$subDepartmentsCount;$i++) {
                     treeDepartment($subDepartments[$i], ++$depth);
                 }
@@ -314,7 +324,7 @@ $(function () {
             $(this).attr('title', 'Expand this branch').find(' > i').addClass('glyphicon glyphicon-plus').removeClass('glyphicon glyphicon-minus');
         } else {
             children.show('fast');
-            $(this).attr('title', 'Collapse this branch').find(' > i').addClass('iglyphicon glyphicon-minus').removeClass('glyphicon glyphicon-plus');
+            $(this).attr('title', 'Collapse this branch').find(' > i').addClass('glyphicon glyphicon-minus').removeClass('glyphicon glyphicon-plus');
         }
         e.stopPropagation();
     });
