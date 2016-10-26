@@ -153,16 +153,17 @@
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
                 
+                $openDepth = 2;
                 if($subDepartmentsCount!=0) {
                     // 存在子节点
-                    if($depth == 1) {
+                    if($depth < $openDepth) {
                         echo "<li style='display:block;'>" ."<span>" ."<i class='glyphicon glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else {
                         echo "<li style='display:none;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                     echo "<ul>";
                 } else {
-                    if($depth == 1) {
+                    if($depth < $openDepth) {
                         echo "<li style='display:block;'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else {
                         echo "<li style='display:none;'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
