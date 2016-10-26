@@ -176,11 +176,11 @@
                 if($subDepartmentsCount!=0) {
                     // 存在子节点
                     if($depth < $openDepth) {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     } else if($depth == $openDepth) {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     } else {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     }
                 } else {
                     if($depth <= $openDepth) {
@@ -241,6 +241,7 @@
                     $echoHtml = "";
                     treeDepartment($echoHtml, $department);
                     echoHtml($echoHtml);
+                    trace($echoHtml);
                 ?>
             </volist>
         </div>
