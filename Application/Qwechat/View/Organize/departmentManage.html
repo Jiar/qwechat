@@ -176,17 +176,17 @@
                 if($subDepartmentsCount!=0) {
                     // 存在子节点
                     if($depth < $openDepth) {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "\n<li class='parent_li item_li' style='display:block;'>" ."\n<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     } else if($depth == $openDepth) {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "\n<li class='parent_li item_li' style='display:block;'>" ."\n<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     } else {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "\n<li class='parent_li item_li' style='display:none;'>" ."\n<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     }
                 } else {
                     if($depth <= $openDepth) {
-                        $echoHtml .= "<li class='item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "\n<li class='item_li' style='display:block;'>" ."\n<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else {
-                        $echoHtml .= "<li class='item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "\n<li class='item_li' style='display:none;'>" ."\n<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                 }
 
@@ -214,9 +214,9 @@
                 $echoHtml .= "</ul>";
                 $echoHtml .= "</li>";
                 
-                $echoHtml .= "</p>";
+                $echoHtml .= "</p>\n";
                 if($subDepartmentsCount!=0) {
-                    $echoHtml .= "<ul class='son_ul'>";
+                    $echoHtml .= "\n<ul class='son_ul'>";
                 }
 
                 if($subDepartmentsCount!=0) {
@@ -227,9 +227,9 @@
                 }
                 
                 if($subDepartmentsCount!=0) {
-                    $echoHtml .= "</ul>";
+                    $echoHtml .= "</ul>\n";
                 }
-                $echoHtml .= "</li>";
+                $echoHtml .= "</li>\n";
             }
 
             function echoHtml($echoHtml) {
@@ -289,7 +289,37 @@
 }
 </style> 
 
-
+<script type="text/javascript">
+$(function () {
+    // $('.tree li:has(ul)').addClass('parent_li');
+    $(".tree li.parent_li > p > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
+    $(".tree li.parent_li > p > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
+    $(".tree li:not([class='parent_li item_li'])").find(' > p > span').css('display', 'none');
+    $('.tree li.parent_li > p > span').on('click', function (e) {
+        var children = $(this).parent('p').parent('li.parent_li').parent().find(' > ul.son_ul > li.item_li');
+        if (children.is(":visible")) {
+            children.hide('fast');
+            children.css('display', 'none');
+            $(this).attr('title', '展开分支').find(' > i').addClass('glyphicon-plus').removeClass('glyphicon-minus');
+        } else {
+            children.show('fast');
+            children.css('display', 'block');
+            $(this).attr('title', '折叠分支').find(' > i').addClass('glyphicon-minus').removeClass('glyphicon-plus');
+        }
+        e.stopPropagation();
+    });
+    $('.tree li > p').on('mouseover mouseout', function (e) {
+        var dropdown = $(this).find(' > .dropdown');
+        if(event.type == "mouseover"){
+            //鼠标悬浮
+            dropdown.css('display', 'inline');
+        } else if(event.type == "mouseout"){
+            //鼠标离开
+            dropdown.css('display', 'none');
+        }
+    });
+});
+</script>
 
 </body>
 
