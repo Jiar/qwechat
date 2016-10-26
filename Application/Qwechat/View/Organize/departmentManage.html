@@ -148,7 +148,14 @@
                     echo "</li>";
                 }
             }
+        ?>
+        <ul class='wraplist' >
+            <volist name="departments" id="department">
+                {$department|recursionDepartment}
+            </volist>
+        </ul>
 
+        <?php
             function treeDepartment($rootDepartment, $depth=1) {
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
@@ -169,9 +176,11 @@
                         echo "<li style='display:none;'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                 }
-
+                if($subDepartmentsCount!=0) {
+                    $depth++;
+                }
                 for($i=0;$i<$subDepartmentsCount;$i++) {
-                    treeDepartment($subDepartments[$i], ++$depth);
+                    treeDepartment($subDepartments[$i], $depth);
                 }
                 echo "</li>";
                 if($subDepartmentsCount!=0) {
@@ -179,64 +188,11 @@
                 }
             }
         ?>
-
-        <ul class='wraplist' >
-            <volist name="departments" id="department">
-                {$department|recursionDepartment}
-            </volist>
-        </ul>
-
         <div class="tree well">
             <ul>
                 <volist name="departments" id="department">
                     {$department|treeDepartment}
                 </volist>
-            </ul>
-        </div>
-
-        <div class="tree well">
-            <ul>
-                <li>
-                    <span><i class="icon-folder-open"></i></span> <a href="">Goes somewhere</a>
-                    <ul>
-                        <li>
-                            <span><i class="glyphicon glyphicon-plus"></i></span> <a href="">Goes somewhere</a>
-                            <ul><li style="display:none;"><span><i class="">&nbsp;&nbsp;</i></span> <a href="">Goes somewhere</a></li></ul>
-                        </li>
-                        <li>
-                            <span><i class="glyphicon glyphicon-plus"></i> Child</span> <a href="">Goes somewhere</a>
-                            <ul>
-                                <li style="display:none"><span><i class="icon-leaf"></i> Grand Child1</span> <a href="">Goes somewhere</a></li>
-                                <li style="display:none;"><span><i class="iglyphicon glyphicon-minus"></i> Grand Child</span> <a href="">Goes somewhere</a>
-                                    <ul>
-                                        <li><span><i class="iglyphicon glyphicon-minus"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
-                                            <ul>
-                                                <li><span><i class="icon-leaf"></i> Great great Grand Child</span> <a href="">Goes somewhere</a>
-                                                </li>
-                                                <li><span><i class="icon-leaf"></i> Great great Grand Child</span> <a href="">Goes somewhere</a>
-                                                </li>
-                                             </ul>
-                                        </li>
-                                        <li><span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
-                                        </li>
-                                        <li><span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li style="display:none;"><span><i class="icon-leaf"></i> Grand Child</span> <a href="">Goes somewhere</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <span><i class="icon-folder-open"></i> Parent2</span> <a href="">Goes somewhere</a>
-                    <ul>
-                        <li>
-                            <span><i class="icon-leaf"></i> Child</span> <a href="">Goes somewhere</a>
-                        </li>
-                    </ul>
-                </li>
             </ul>
         </div>
 
