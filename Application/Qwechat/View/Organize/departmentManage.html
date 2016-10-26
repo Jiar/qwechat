@@ -225,10 +225,11 @@
                 for($i=0;$i<$subDepartmentsCount;$i++) {
                     treeDepartment($echoHtml, $subDepartments[$i], $depth);
                 }
-                $echoHtml .= "</li>";
+                
                 if($subDepartmentsCount!=0) {
                     $echoHtml .= "</ul>";
                 }
+                $echoHtml .= "</li>";
             }
 
             function echoHtml($echoHtml) {
@@ -242,6 +243,7 @@
                     treeDepartment($echoHtml, $department);
                     echoHtml($echoHtml);
                     trace($echoHtml);
+                    \Think\Log::write($echoHtml);
                 ?>
             </volist>
         </div>
