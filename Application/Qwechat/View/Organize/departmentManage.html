@@ -176,47 +176,26 @@
                 if($subDepartmentsCount!=0) {
                     // 存在子节点
                     if($depth < $openDepth) {
-                        $echoHtml .= "\n<li class='parent_li item_li' style='display:block;'>" ."\n<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     } else if($depth == $openDepth) {
-                        $echoHtml .= "\n<li class='parent_li item_li' style='display:block;'>" ."\n<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     } else {
-                        $echoHtml .= "\n<li class='parent_li item_li' style='display:none;'>" ."\n<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     }
                 } else {
                     if($depth <= $openDepth) {
-                        $echoHtml .= "\n<li class='item_li' style='display:block;'>" ."\n<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else {
-                        $echoHtml .= "\n<li class='item_li' style='display:none;'>" ."\n<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                 }
 
-                $echoHtml .= "<li class='dropdown' style='display: none;'>";
-                $echoHtml .= "<a class='dropdown-toggle' data-toggle='dropdown' href='#' style='padding: 10px;'>";
-                $echoHtml .= "<i class='fa fa-reorder'>";
-                $echoHtml .= "</i>";
-                $echoHtml .= "</a>";
-                $echoHtml .= "<ul class='dropdown-menu dropdown-user'>";
-                $echoHtml .= "<li>";
-                $echoHtml .= "<a href=''>";
-                $echoHtml .= "添加子部门";
-                $echoHtml .= "</a>";
-                $echoHtml .= "</li>";
-                $echoHtml .= "<li>";
-                $echoHtml .= "<a href=''>";
-                $echoHtml .= "修改部门";
-                $echoHtml .= "</a>";
-                $echoHtml .= "</li>";
-                $echoHtml .= "<li>";
-                $echoHtml .= "<a href=''>";
-                $echoHtml .= "删除部门";
-                $echoHtml .= "</a>";
-                $echoHtml .= "</li>";
-                $echoHtml .= "</ul>";
-                $echoHtml .= "</li>";
                 
-                $echoHtml .= "</p>\n";
+                
+                $echoHtml .= "</p>";
+                
                 if($subDepartmentsCount!=0) {
-                    $echoHtml .= "\n<ul class='son_ul'>";
+                    $echoHtml .= "<ul class='son_ul'>";
                 }
 
                 if($subDepartmentsCount!=0) {
@@ -227,9 +206,9 @@
                 }
                 
                 if($subDepartmentsCount!=0) {
-                    $echoHtml .= "</ul>\n";
+                    $echoHtml .= "</ul>";
                 }
-                $echoHtml .= "</li>\n";
+                $echoHtml .= "</li>";
             }
 
             function echoHtml($echoHtml) {
