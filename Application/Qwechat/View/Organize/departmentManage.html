@@ -268,10 +268,25 @@
             }
         ?>
         <div class="tree unableSelectText">
-            <volist name="departments" id="department">
+            <volist name="departments" id="department" key="key">
                 <?php
                     $echoHtml = "";
-                    treeDepartment($echoHtml,$department, "none");
+
+                    $toMove = "none";
+                    $subDepartmentsCount = count($departments);
+                    if($subDepartmentsCount == 1) {
+                        $toMove = "none";
+                    } else {
+                        if($key == 0) {
+                            $toMove = "down";
+                        } else if($key == $subDepartmentsCount-1) {
+                            $toMove = "up";
+                        } else {
+                            $toMove = "both";
+                        }
+                    }
+
+                    treeDepartment($echoHtml,$department, $toMove);
                     echoHtml($echoHtml);
                     trace($echoHtml);
                     \Think\Log::write($echoHtml);
