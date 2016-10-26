@@ -253,7 +253,8 @@
 <script type="text/javascript">
 $(function () {
     // !$('.tree li:has(ul)').css('display', 'none');
-    !$('.tree li').hasClass('.parent_li').css('display', 'none');
+    // $('.tree li').hasClass('.parent_li')!.css('display', 'none');
+    $(".tree li:not([class='parent_li'])")..find(' > p > span').css('display', 'none');
     $('.tree li:has(ul)').addClass('parent_li').find(' > p > span').attr('title', '折叠分支');
     $('.tree li.parent_li > p > span').on('click', function (e) {
         var children = $(this).parent('p').parent('li.parent_li').find(' > ul > li');
