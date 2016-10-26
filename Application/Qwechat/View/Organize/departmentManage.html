@@ -18,6 +18,7 @@
 
     <!-- Custom CSS -->
     <link href="__CSS__/qwechat-admin.css" rel="stylesheet">
+    <link href="__CSS__/common-jiar.css" rel="stylesheet">
 
 </head>
 
@@ -224,20 +225,21 @@
 .tree li>p:hover {
     background:#eee;
     color:#000
+    cursor:pointer
 }
 .tree li p span {
     display:inline-block;
     padding:0px 6px;
-    text-decoration:none
-    cursor:pointer
+    text-decoration:none;
 }
 .tree li>p>a {
-    padding: 0px 0px 0px 10px;
+    text-decoration:none;
 }
 </style> 
 
 <script type="text/javascript">
 $(function () {
+    $('.tree li>p').addClass('vertical-container');
     $('.tree li:has(ul)').addClass('parent_li').find(' > p > span').attr('title', '折叠分支');
     $(".tree li:not([class='parent_li'])").find(' > p > span').css('display', 'none');
     $('.tree li.parent_li > p > span').on('click', function (e) {
