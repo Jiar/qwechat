@@ -182,7 +182,7 @@
                     } else {
                         echo "<li style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
-                    echo "<ul>";
+                    echo "<ul class='parent_li'>";
                 } else {
                     if($depth <= $openDepth) {
                         echo "<li style='display:block;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
@@ -281,7 +281,7 @@
 
 <script type="text/javascript">
 $(function () {
-    $('.tree li:has(ul)').addClass('parent_li');
+    // $('.tree li:has(ul)').addClass('parent_li');
     $(".tree li.parent_li > p > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
     $(".tree li.parent_li > p > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
     $(".tree li:not([class='parent_li'])").find(' > p > span').css('display', 'none');
