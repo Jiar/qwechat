@@ -274,6 +274,7 @@
     height: 38px;
     line-height: 38px;
     margin: 0px;
+    padding: 0px;
 }
 .tree li>ul.item_line:hover {
     background:#eee;
@@ -295,7 +296,7 @@ $(function () {
     // $('.tree li:has(ul)').addClass('parent_li');
     $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
     $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
-    $(".tree li:not([class='parent_li item_li'])").find(' > ul.item_line > ul > span').css('display', 'none');
+    $(".tree li:not([class='parent_li item_li'])").find(' > ul.item_line > span').css('display', 'none');
     $('.tree li.parent_li > ul.item_line > span').on('click', function (e) {
         var children = $(this).parent('ul.item_line').parent('li.parent_li').find(' > ul.son_ul > li.item_li');
         if (children.is(":visible")) {
@@ -310,7 +311,7 @@ $(function () {
         e.stopPropagation();
     });
     $('.tree li > ul.item_line').on('mouseover mouseout', function (e) {
-        var dropdown = $(this).find(' > ul > li.dropdown');
+        var dropdown = $(this).find(' > li.dropdown');
         if(event.type == "mouseover"){
             //鼠标悬浮
             dropdown.css('display', 'inline');
