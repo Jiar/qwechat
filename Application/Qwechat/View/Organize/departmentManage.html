@@ -164,18 +164,18 @@
                 if($subDepartmentsCount!=0) {
                     // 存在子节点
                     if($depth < $openDepth) {
-                        echo "<li style='display:block;'>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        echo "<li style='display:block;'>" ."<a>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>" ."</a>";
                     } else if($depth == $openDepth) {
-                        echo "<li style='display:block;'>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        echo "<li style='display:block;'>" ."<a>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>" ."</a>";
                     } else {
-                        echo "<li style='display:none;'>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        echo "<li style='display:none;'>" ."<a>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>" ."</a>";
                     }
                     echo "<ul>";
                 } else {
                     if($depth <= $openDepth) {
-                        echo "<li style='display:block;'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        echo "<li style='display:block;'>" ."<a>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>" ."</a>";
                     } else {
-                        echo "<li style='display:none;'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        echo "<li style='display:none;'>" ."<a>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>" ."</a>";
                     }
                 }
                 if($subDepartmentsCount!=0) {
@@ -269,7 +269,7 @@
 /*.tree li:last-child::before {
     height:30px
 }*/
-.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
+.tree li.parent_li>a:hover, .tree li.parent_li>a:hover+ul li span {
     background:#eee;
     /*border:1px solid #94a0b4;*/
     color:#000
