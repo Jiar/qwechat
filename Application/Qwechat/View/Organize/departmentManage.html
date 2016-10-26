@@ -232,10 +232,7 @@
             }
 
             function echoHtml($echoHtml) {
-                echo html_entity_decode($echoHtml);
-                echo "<br />";
-                echo "<br />";
-                echo htmlentities($echoHtml);
+                echo html_entity_decode(htmlentities($echoHtml));
             }
         ?>
         <div class="tree unableSelectText">
