@@ -160,7 +160,7 @@
                     echo "<ul>";
                 }
                 for($i=0;$i<$subDepartmentsCount;$i++) {
-                    treeDepartment($subDepartments[$i], $depth++);
+                    treeDepartment($subDepartments[$i], ++$depth);
                 }
                 echo "</li>";
                 if($subDepartmentsCount!=0) {
