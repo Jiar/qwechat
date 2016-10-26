@@ -168,7 +168,7 @@
             </li> -->
 
         <?php
-            function treeDepartment(&$echoHtml = "", $rootDepartment, $depth=1) {
+            function treeDepartment(&$echoHtml="", $rootDepartment, $move="both",$depth=1) {
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
                 
@@ -196,16 +196,34 @@
                 $echoHtml .= "</i>";
                 $echoHtml .= "</a>";
                 $echoHtml .= "<ul class='dropdown-menu dropdown-user'>";
+
                 $echoHtml .= "<li>";
                 $echoHtml .= "<a href=''>";
                 $echoHtml .= "添加子部门";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
+
                 $echoHtml .= "<li>";
                 $echoHtml .= "<a href=''>";
                 $echoHtml .= "修改部门";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
+
+                if($move == "up" || $move == "both") {
+                    $echoHtml .= "<li>";
+                    $echoHtml .= "<a href=''>";
+                    $echoHtml .= "上移";
+                    $echoHtml .= "</a>";
+                    $echoHtml .= "</li>";
+                } else 
+                if($move == "down" || $move == "both") {
+                    $echoHtml .= "<li>";
+                    $echoHtml .= "<a href=''>";
+                    $echoHtml .= "下移";
+                    $echoHtml .= "</a>";
+                    $echoHtml .= "</li>";
+                }
+
                 $echoHtml .= "<li>";
                 $echoHtml .= "<a href=''>";
                 $echoHtml .= "删除部门";
@@ -224,7 +242,19 @@
                     $depth++;
                 }
                 for($i=0;$i<$subDepartmentsCount;$i++) {
-                    treeDepartment($echoHtml, $subDepartments[$i], $depth);
+                    $toMove = "";
+                    if($subDepartmentsCount == 1) {
+                        $toMove = "none";
+                    } else {
+                        if(i == 0) {
+                            $toMove = "down";
+                        } else if(i == $subDepartmentsCount-1) {
+                            $toMove = "up";
+                        } else {
+                            $toMove = "both";
+                        }
+                    }
+                    treeDepartment($echoHtml, $subDepartments[$i], $toMove, $depth);
                 }
                 
                 if($subDepartmentsCount!=0) {
@@ -241,7 +271,7 @@
             <volist name="departments" id="department">
                 <?php
                     $echoHtml = "";
-                    treeDepartment($echoHtml, $department);
+                    treeDepartment($echoHtml, "both",$department);
                     echoHtml($echoHtml);
                     trace($echoHtml);
                     \Think\Log::write($echoHtml);
