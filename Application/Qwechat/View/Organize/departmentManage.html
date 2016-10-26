@@ -176,21 +176,20 @@
                 if($subDepartmentsCount!=0) {
                     // 存在子节点
                     if($depth < $openDepth) {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<ul class='item_line'>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     } else if($depth == $openDepth) {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:block;'>" ."<ul class='item_line'>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     } else {
-                        $echoHtml .= "<li class='parent_li item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='parent_li item_li' style='display:none;'>" ."<ul class='item_line'>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>" .$rootDepartment["name"] ."</a>";
                     }
                 } else {
                     if($depth <= $openDepth) {
-                        $echoHtml .= "<li class='item_li' style='display:block;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='item_li' style='display:block;'>" ."<ul class='item_line'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else {
-                        $echoHtml .= "<li class='item_li' style='display:none;'>" ."<p>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        $echoHtml .= "<li class='item_li' style='display:none;'>" ."<ul class='item_line'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                 }
 
-                $echoHtml .= "<ul>";
                 $echoHtml .= "<li class='dropdown' style='display: none;'>";
                 $echoHtml .= "<a class='dropdown-toggle' data-toggle='dropdown' href='#' style='padding: 10px;'>";
                 $echoHtml .= "<i class='fa fa-reorder'>";
@@ -214,9 +213,8 @@
                 $echoHtml .= "</li>";
                 $echoHtml .= "</ul>";
                 $echoHtml .= "</li>";
-                $echoHtml .= "</ul>";
-                
-                $echoHtml .= "</p>";
+
+                $echoHtml .= "</ul>";                
                 
                 if($subDepartmentsCount!=0) {
                     $echoHtml .= "<ul class='son_ul'>";
@@ -272,22 +270,22 @@
     -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
-.tree li>p {
+.tree li>ul.item_line {
     height: 38px;
     line-height: 38px;
     margin: 0px;
 }
-.tree li>p:hover {
+.tree li>ul.item_line:hover {
     background:#eee;
     color:#000;
     cursor:pointer;
 }
-.tree li>p>span {
+.tree li>ul.item_line>span {
     display:inline-block;
     padding:0px 8px;
     text-decoration:none;
 }
-.tree li>p>a {
+.tree li>ul.item_line>a {
     text-decoration:none;
 }
 </style> 
@@ -295,11 +293,11 @@
 <script type="text/javascript">
 $(function () {
     // $('.tree li:has(ul)').addClass('parent_li');
-    $(".tree li.parent_li > p > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
-    $(".tree li.parent_li > p > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
-    $(".tree li:not([class='parent_li item_li'])").find(' > p > span').css('display', 'none');
-    $('.tree li.parent_li > p > span').on('click', function (e) {
-        var children = $(this).parent('p').parent('li.parent_li').find(' > ul.son_ul > li.item_li');
+    $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
+    $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
+    $(".tree li:not([class='parent_li item_li'])").find(' > ul.item_line > ul > span').css('display', 'none');
+    $('.tree li.parent_li > ul.item_line > span').on('click', function (e) {
+        var children = $(this).parent('ul.item_line').parent('li.parent_li').find(' > ul.son_ul > li.item_li');
         if (children.is(":visible")) {
             children.hide('fast');
             children.css('display', 'none');
@@ -311,8 +309,8 @@ $(function () {
         }
         e.stopPropagation();
     });
-    $('.tree li > p').on('mouseover mouseout', function (e) {
-        var dropdown = $(this).find(' > ul > .dropdown');
+    $('.tree li > ul.item_line').on('mouseover mouseout', function (e) {
+        var dropdown = $(this).find(' > ul > li.dropdown');
         if(event.type == "mouseover"){
             //鼠标悬浮
             dropdown.css('display', 'inline');
