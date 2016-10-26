@@ -191,7 +191,7 @@
                     }
                 }
 
-                echo "<li class='dropdown' style='display:block;'>";
+                echo "<li class='dropdown' style='display: none;'>";
                 echo "<a class='dropdown-toggle' data-toggle='dropdown' href='#' style='padding: 10px;'>";
                 echo "<i class='fa fa-reorder'>";
                 echo "</i>";
@@ -301,7 +301,7 @@ $(function () {
     $('.tree li.parent_li > p > .dropdown').on('mouseover mouseout', function (e) {
         if(event.type == "mouseover"){
             //鼠标悬浮
-            $(this).css('display', 'block');
+            $(this).css('display', 'inline');
         } else if(event.type == "mouseout"){
             //鼠标离开
             $(this).css('display', 'none');
