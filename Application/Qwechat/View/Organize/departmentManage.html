@@ -298,13 +298,14 @@ $(function () {
         }
         e.stopPropagation();
     });
-    $('.tree li.parent_li > p > .dropdown').on('mouseover mouseout', function (e) {
+    $('.tree li.parent_li > p').on('mouseover mouseout', function (e) {
+        var dropdown = $(this).find(' > .dropdown');
         if(event.type == "mouseover"){
             //鼠标悬浮
-            $(this).css('display', 'inline');
+            dropdown.css('display', 'inline');
         } else if(event.type == "mouseout"){
             //鼠标离开
-            $(this).css('display', 'none');
+            dropdown.css('display', 'none');
         }
     });
 });
