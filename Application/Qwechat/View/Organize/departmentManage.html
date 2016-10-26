@@ -168,8 +168,7 @@
             </li> -->
 
         <?php
-            $echoHtml = "";
-            function treeDepartment($rootDepartment, $depth=1) {
+            function treeDepartment($echoHtml = "", $rootDepartment, $depth=1) {
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
                 
@@ -224,7 +223,7 @@
                     $depth++;
                 }
                 for($i=0;$i<$subDepartmentsCount;$i++) {
-                    treeDepartment($subDepartments[$i], $depth);
+                    treeDepartment($echoHtml, $subDepartments[$i], $depth);
                 }
                 $echoHtml .= "</li>";
                 if($subDepartmentsCount!=0) {
@@ -232,14 +231,17 @@
                 }
             }
 
-            function echoHtml($none) {
+            function echoHtml($echoHtml) {
                 echo $echoHtml;
             }
         ?>
         <div class="tree unableSelectText">
             <volist name="departments" id="department">
-                {$department|treeDepartment}
-                {$department|echoHtml}
+                <?php
+                    $echoHtml = "";
+                    treeDepartment($echoHtml, $department);
+                    echoHtml($echoHtml);
+                ?>
             </volist>
         </div>
 
