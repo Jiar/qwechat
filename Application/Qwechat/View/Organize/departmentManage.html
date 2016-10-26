@@ -151,12 +151,12 @@
             function treeDepartment($rootDepartment) {
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
-                echo "<li style='display:none;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                echo "<li style='display:block;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                 if($subDepartmentsCount!=0) {
                     echo "<ul>";
                 }
                 for($i=0;$i<$subDepartmentsCount;$i++) {
-                    recursionDepartment($subDepartments[$i]);
+                    treeDepartment($subDepartments[$i]);
                 }
                 echo "</li>";
                 if($subDepartmentsCount!=0) {
@@ -191,7 +191,7 @@
                         <li>
                             <span><i class="glyphicon glyphicon-plus"></i> Child</span> <a href="">Goes somewhere</a>
                             <ul>
-                                <li style="display:none;"><span><i class="icon-leaf"></i> Grand Child1</span> <a href="">Goes somewhere</a></li>
+                                <li style="display:none"><span><i class="icon-leaf"></i> Grand Child1</span> <a href="">Goes somewhere</a></li>
                                 <li style="display:none;"><span><i class="iglyphicon glyphicon-minus"></i> Grand Child</span> <a href="">Goes somewhere</a>
                                     <ul>
                                         <li><span><i class="iglyphicon glyphicon-minus"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
