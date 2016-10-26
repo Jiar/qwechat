@@ -141,10 +141,26 @@
                     recursionDepartment($subDepartments[$i]);
                 }
                 if($subDepartmentsCount!=0) {
-                    echo "</ul>";
                     echo "</li>";
+                    echo "</ul>";
                 } else {
                     echo "</li>";
+                }
+            }
+
+            function treeDepartment($rootDepartment) {
+                $subDepartments = $rootDepartment["subDepartments"];
+                $subDepartmentsCount = count($subDepartments);
+                echo "<li style='display:none;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                if($subDepartmentsCount!=0) {
+                    echo "<ul>";
+                }
+                for($i=0;$i<$subDepartmentsCount;$i++) {
+                    recursionDepartment($subDepartments[$i]);
+                }
+                echo "</li>";
+                if($subDepartmentsCount!=0) {
+                    echo "</ul>";
                 }
             }
         ?>
@@ -155,50 +171,44 @@
             </volist>
         </ul>
 
+        <div class="tree well">
+            <ul>
+                <volist name="departments" id="department">
+                    {$department|treeDepartment}
+                </volist>
+            </ul>
+        </div>
 
         <div class="tree well">
             <ul>
                 <li>
-                    <span><i class="icon-folder-open"></i> Parent</span> <a href="">Goes somewhere</a>
+                    <span><i class="icon-folder-open"></i></span> <a href="">Goes somewhere</a>
                     <ul>
                         <li>
-                            <span><i class="glyphicon glyphicon-plus"></i> Child</span> <a href="">Goes somewhere</a>
-                            <ul>
-                                                    <li style="display:none;">
-                                    <span><i class="icon-leaf"></i> Grand Child</span> <a href="">Goes somewhere</a>
-                                </li>
-                            </ul>
+                            <span><i class="glyphicon glyphicon-plus"></i></span> <a href="">Goes somewhere</a>
+                            <ul><li style="display:none;"><span><i class="">&nbsp;&nbsp;</i></span> <a href="">Goes somewhere</a></li></ul>
                         </li>
                         <li>
                             <span><i class="glyphicon glyphicon-plus"></i> Child</span> <a href="">Goes somewhere</a>
                             <ul>
-                                                    <li style="display:none;">
-                                    <span><i class="icon-leaf"></i> Grand Child1</span> <a href="">Goes somewhere</a>
-                                </li>
-                                <li style="display:none;">
-                                    <span><i class="iglyphicon glyphicon-minus"></i> Grand Child</span> <a href="">Goes somewhere</a>
+                                <li style="display:none;"><span><i class="icon-leaf"></i> Grand Child1</span> <a href="">Goes somewhere</a></li>
+                                <li style="display:none;"><span><i class="iglyphicon glyphicon-minus"></i> Grand Child</span> <a href="">Goes somewhere</a>
                                     <ul>
-                                        <li>
-                                            <span><i class="iglyphicon glyphicon-minus"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
+                                        <li><span><i class="iglyphicon glyphicon-minus"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
                                             <ul>
-                                                <li>
-                                                    <span><i class="icon-leaf"></i> Great great Grand Child</span> <a href="">Goes somewhere</a>
+                                                <li><span><i class="icon-leaf"></i> Great great Grand Child</span> <a href="">Goes somewhere</a>
                                                 </li>
-                                                <li>
-                                                    <span><i class="icon-leaf"></i> Great great Grand Child</span> <a href="">Goes somewhere</a>
+                                                <li><span><i class="icon-leaf"></i> Great great Grand Child</span> <a href="">Goes somewhere</a>
                                                 </li>
                                              </ul>
                                         </li>
-                                        <li>
-                                            <span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
+                                        <li><span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
                                         </li>
-                                        <li>
-                                            <span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
+                                        <li><span><i class="icon-leaf"></i> Great Grand Child</span> <a href="">Goes somewhere</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li style="display:none;">
-                                    <span><i class="icon-leaf"></i> Grand Child</span> <a href="">Goes somewhere</a>
+                                <li style="display:none;"><span><i class="icon-leaf"></i> Grand Child</span> <a href="">Goes somewhere</a>
                                 </li>
                             </ul>
                         </li>
