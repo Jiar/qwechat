@@ -168,7 +168,7 @@
             </li> -->
 
         <?php
-            function treeDepartment(&$echoHtml="", $rootDepartment, $move="both",$depth=1) {
+            function treeDepartment(&$echoHtml="", $rootDepartment, $move="none",$depth=1) {
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
                 
@@ -242,7 +242,7 @@
                     $depth++;
                 }
                 for($i=0;$i<$subDepartmentsCount;$i++) {
-                    $toMove = "";
+                    $toMove = "none";
                     if($subDepartmentsCount == 1) {
                         $toMove = "none";
                     } else {
@@ -271,7 +271,7 @@
             <volist name="departments" id="department">
                 <?php
                     $echoHtml = "";
-                    treeDepartment($echoHtml,$department, "both");
+                    treeDepartment($echoHtml,$department, "none");
                     echoHtml($echoHtml);
                     trace($echoHtml);
                     \Think\Log::write($echoHtml);
