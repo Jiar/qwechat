@@ -289,37 +289,7 @@
 }
 </style> 
 
-<script type="text/javascript">
-$(function () {
-    // $('.tree li:has(ul)').addClass('parent_li');
-    $(".tree li.parent_li > p > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
-    $(".tree li.parent_li > p > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
-    $(".tree li:not([class='parent_li item_li'])").find(' > p > span').css('display', 'none');
-    $('.tree li.parent_li > p > span').on('click', function (e) {
-        var children = $(this).parent('p').parent('li.parent_li').parent().find(' > ul.son_ul > li.item_li');
-        if (children.is(":visible")) {
-            children.hide('fast');
-            children.css('display', 'none');
-            $(this).attr('title', '展开分支').find(' > i').addClass('glyphicon-plus').removeClass('glyphicon-minus');
-        } else {
-            children.show('fast');
-            children.css('display', 'block');
-            $(this).attr('title', '折叠分支').find(' > i').addClass('glyphicon-minus').removeClass('glyphicon-plus');
-        }
-        e.stopPropagation();
-    });
-    $('.tree li > p').on('mouseover mouseout', function (e) {
-        var dropdown = $(this).find(' > .dropdown');
-        if(event.type == "mouseover"){
-            //鼠标悬浮
-            dropdown.css('display', 'inline');
-        } else if(event.type == "mouseout"){
-            //鼠标离开
-            dropdown.css('display', 'none');
-        }
-    });
-});
-</script>
+
 
 </body>
 
