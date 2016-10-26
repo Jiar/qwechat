@@ -287,9 +287,11 @@ $(function () {
         var children = $(this).parent('li.parent_li').find(' > ul > li');
         if (children.is(":visible")) {
             children.hide('fast');
+            children.css('display', 'none');
             $(this).attr('title', '展开分支').find(' > i').addClass('glyphicon-plus').removeClass('glyphicon-minus');
         } else {
             children.show('fast');
+            children.css('display', 'block');
             $(this).attr('title', '折叠分支').find(' > i').addClass('glyphicon-minus').removeClass('glyphicon-plus');
         }
         e.stopPropagation();
