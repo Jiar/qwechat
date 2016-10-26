@@ -176,11 +176,11 @@
                 if($subDepartmentsCount!=0) {
                     // 存在子节点
                     if($depth < $openDepth) {
-                        echo "<li style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        echo "<li class='parent_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-minus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else if($depth == $openDepth) {
-                        echo "<li style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        echo "<li class='parent_li' style='display:block;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     } else {
-                        echo "<li style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                        echo "<li class='parent_li' style='display:none;'>" ."<p>" ."<span>" ."<i class='glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                 } else {
                     if($depth <= $openDepth) {
@@ -216,7 +216,7 @@
                 
                 echo "</p>";
                 if($subDepartmentsCount!=0) {
-                    echo "<ul class='parent_li'>";
+                    echo "<ul>";
                 }
                 echo $echoHtml;
 
