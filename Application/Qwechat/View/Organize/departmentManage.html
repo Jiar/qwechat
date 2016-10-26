@@ -148,15 +148,19 @@
                 }
             }
 
-            function treeDepartment($rootDepartment) {
+            function treeDepartment($rootDepartment, $depth=1) {
                 $subDepartments = $rootDepartment["subDepartments"];
                 $subDepartmentsCount = count($subDepartments);
-                echo "<li style='display:block;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                if($depth == 1) {
+                    echo "<li style='display:block;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                } else {
+                    echo "<li style='display:none;'>" ."<span>" ."<i class='glyphicon glyphicon-plus'>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
+                }
                 if($subDepartmentsCount!=0) {
                     echo "<ul>";
                 }
                 for($i=0;$i<$subDepartmentsCount;$i++) {
-                    treeDepartment($subDepartments[$i]);
+                    treeDepartment($subDepartments[$i], $depth++);
                 }
                 echo "</li>";
                 if($subDepartmentsCount!=0) {
