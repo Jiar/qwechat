@@ -368,11 +368,16 @@ $(function () {
         }
     });
     $("li.deleteDepartment").click(function(e) {
-        alert('哈哈');
         e.preventDefault();
-        alert('哦哦');
-        bootbox.confirm("Are you sure?", function(confirmed) {
-            console.log("Confirmed: "+confirmed);
+        // bootbox.confirm("Are you sure?", function(confirmed) {
+        //     console.log("Confirmed: "+confirmed);
+        // });
+        bootbox.prompt("What is your name?", function(result) {                
+            if (result === null) {                                             
+                Example.show("Prompt dismissed");                              
+            } else {
+                Example.show("Hi <b>"+result+"</b>");                          
+            }
         });
     });
 });
