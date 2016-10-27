@@ -368,25 +368,13 @@ $(function () {
         }
     });
     $("li.deleteDepartment").click(function(e) {
+        alert('哈哈');
         e.preventDefault();
         bootbox.confirm("Are you sure?", function(confirmed) {
             console.log("Confirmed: "+confirmed);
         });
     });
 });
-// $(".delete_department").click(function () {
-
-//         bootbox.alert("确认删除该部门？", function () {
-//             var strResult = "";
-//         })
-//       // bootbox.prompt("确认删除", function (result) {
-//       //   var strResult = result;
-//       // })
-//       // bootbox.confirm("确认删除", function (result) {
-//       //   var strResult = result;
-//       // })
-       
-//     });
 </script>
 
 </body>
