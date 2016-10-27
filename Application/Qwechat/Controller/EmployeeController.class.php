@@ -14,14 +14,14 @@ class EmployeeController extends BaseController {
 	* 员工管理
 	*/
 	public function employeeManage_action() {
-		$this->display('employeeManage');
+		$this->display('Employee/employeeManage');
 	}
 
 	/**
 	* 离职员工
 	*/
 	public function leaveEmployee_action() {
-		$this->display('leaveEmployee');
+		$this->display('Employee/leaveEmployee');
 	}
 
 }

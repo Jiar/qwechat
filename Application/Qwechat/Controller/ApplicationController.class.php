@@ -23,7 +23,7 @@ class ApplicationController extends BaseController {
 		// $result = $mode -> applicationManage($page, $row);
 		// $this->assign('list', $result['list']);
 		// $this->assign('totalCount', $result['totalCount']);
-		$this->display('applicationManage');
+		$this->display('Application/applicationManage');
 	}
 
 	/**
@@ -47,7 +47,7 @@ class ApplicationController extends BaseController {
 			}
 			$this->assign('corpid', $corpid);
 			$this->assign('corpsecret', $corpsecret);
-			$this->display('basicConfig');
+			$this->display('Application/basicConfig');
 		}
 	}
 

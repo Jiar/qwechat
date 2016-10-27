@@ -14,14 +14,14 @@ class OrganizeController extends BaseController {
 	* 集团设置
 	*/
 	public function groupSettings_action() {
-		$this->display('groupSettings');
+		$this->display('Organize/groupSettings');
 	}
 
 	/**
 	* 分店管理
 	*/
 	public function branchManage_action() {
-		$this->display('branchManage');
+		$this->display('Organize/branchManage');
 	}
 
 	/**
@@ -31,7 +31,7 @@ class OrganizeController extends BaseController {
 		$departments = D('QwechatDepartment')->departmentManage();
 		trace($departments);
 		$this->assign('departments', $departments);
-		$this->display('departmentManage');
+		$this->display('Organize/departmentManage');
 	}
 
 }

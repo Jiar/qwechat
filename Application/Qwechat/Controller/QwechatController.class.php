@@ -14,7 +14,7 @@ class QwechatController extends BaseController {
 	* 企业微信入口
 	*/
 	public function qwechat_action() {
-		$this->display('qwechat');
+		$this->display('Qwechat/qwechat');
 	}
 
 }
