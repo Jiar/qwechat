@@ -198,36 +198,36 @@
                 $echoHtml .= "<ul class='dropdown-menu dropdown-user'>";
 
                 $echoHtml .= "<li>";
-                $echoHtml .= "<a href=''>";
+                $echoHtml .= "<a>";
                 $echoHtml .= "添加子部门";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
                 $echoHtml .= "<li>";
-                $echoHtml .= "<a href=''>";
+                $echoHtml .= "<a>";
                 $echoHtml .= "修改部门";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
                 if($move == "up" || $move == "both") {
                     $echoHtml .= "<li>";
-                    $echoHtml .= "<a href=''>";
+                    $echoHtml .= "<a>";
                     $echoHtml .= "上移";
                     $echoHtml .= "</a>";
                     $echoHtml .= "</li>";
                 }
                 if($move == "down" || $move == "both") {
                     $echoHtml .= "<li>";
-                    $echoHtml .= "<a href=''>";
+                    $echoHtml .= "<a>";
                     $echoHtml .= "下移";
                     $echoHtml .= "</a>";
                     $echoHtml .= "</li>";
                 }
 
                 $echoHtml .= "<li class='delete_department'>";
-                
+                $echoHtml .= "<a>";
                 $echoHtml .= "删除部门";
-                
+                $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
                 $echoHtml .= "</ul>";
@@ -367,7 +367,8 @@ $(function () {
             dropdown.css('display', 'none');
         }
     });
-    $(".delete_department").click(function () {
+});
+$(".delete_department").click(function () {
 
         bootbox.alert("确认删除该部门？", function () {
             var strResult = "";
@@ -380,7 +381,6 @@ $(function () {
       // })
        
     });
-});
 </script>
 
 </body>
