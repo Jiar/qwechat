@@ -16,6 +16,5 @@ return array(
         '__CSS__' => __ROOT__ . '/Public/Static/css',
         '__JS__' => __ROOT__ . '/Public/Static/js',
         '__IMAGES__' => __ROOT__ . '/Public/Static/images',
-        '__FONTS__' => __ROOT__ . '/Public/Static/fonts',
     ),
 );
