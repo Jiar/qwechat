@@ -305,7 +305,7 @@
 <script src="__JS__/bootstrap.min.js"></script>
 <script src="__JS__/metisMenu.min.js"></script>
 <script src="__JS__/qwechat-admin.js"></script>
-<script src="cdn.bootcss.com/bootbox.js/3.3.0/bootbox.js"></script>
+<script src="http://cdn.bootcss.com/bootbox.js/3.3.0/bootbox.js"></script>
 
 <style type="text/css">
 .tree {
@@ -369,9 +369,6 @@ $(function () {
     });
     $("li.deleteDepartment").click(function(e) {
         e.preventDefault();
-        // bootbox.confirm("Are you sure?", function(confirmed) {
-        //     console.log("Confirmed: "+confirmed);
-        // });
         bootbox.prompt("What is your name?", function(result) {                
             if (result === null) {                                             
                 Example.show("Prompt dismissed");                              
@@ -381,13 +378,6 @@ $(function () {
         });
     });
 });
-bootbox.prompt("What is your name?", function(result) {                
-            if (result === null) {                                             
-                Example.show("Prompt dismissed");                              
-            } else {
-                Example.show("Hi <b>"+result+"</b>");                          
-            }
-        });
 </script>
 
 </body>
