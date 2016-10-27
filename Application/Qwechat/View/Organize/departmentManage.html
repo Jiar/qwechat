@@ -377,12 +377,8 @@ $(function () {
             }
         });
     });
-    bootbox.prompt("What is your name?", function(result) {                
-        if (result === null) {                                             
-            Example.show("Prompt dismissed");                              
-        } else {
-            Example.show("Hi <b>"+result+"</b>");                          
-        }
+    bootbox.alert("Hello world!", function() {
+        Example.show("Hello world callback");
     });
 });
 </script>
