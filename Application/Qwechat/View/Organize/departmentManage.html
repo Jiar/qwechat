@@ -224,11 +224,12 @@
                     $echoHtml .= "</li>";
                 }
 
-                $echoHtml .= "<li>";
+                $echoHtml .= "<li class='delete_department'>";
                 $echoHtml .= "<a href=''>";
                 $echoHtml .= "删除部门";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
+
                 $echoHtml .= "</ul>";
                 $echoHtml .= "</li>";
 
@@ -304,6 +305,7 @@
 <script src="__JS__/bootstrap.min.js"></script>
 <script src="__JS__/metisMenu.min.js"></script>
 <script src="__JS__/qwechat-admin.js"></script>
+<script src="cdn.bootcss.com/bootbox.js/4.4.0/bootbox.js"></script>
 
 <style type="text/css">
 .tree {
@@ -364,6 +366,19 @@ $(function () {
             //鼠标离开
             dropdown.css('display', 'none');
         }
+    });
+    $(".delete_department").click(function () {
+ 
+      bootbox.alert("确认删除该部门？", function () {
+        var strResult = "";
+      })
+      // bootbox.prompt("确认删除", function (result) {
+      //   var strResult = result;
+      // })
+      // bootbox.confirm("确认删除", function (result) {
+      //   var strResult = result;
+      // })
+       
     });
 });
 </script>
