@@ -388,9 +388,9 @@ $(function () {
         e.preventDefault();
         bootbox.prompt("What is your name?", function(result) {                
             if (result === null) {                                             
-                Example.show("Prompt dismissed");                              
+                console.log('NULL');
             } else {
-                Example.show("Hi <b>"+result+"</b>");                          
+                console.log(result);
             }
         });
     });
