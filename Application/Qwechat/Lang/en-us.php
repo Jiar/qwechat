@@ -45,6 +45,8 @@ return array(
     // 返回提示文本
     '_ADD_FAIL_' => 'add fail',
     '_ADD_SUCCESS_' => 'add success',
+    '_UPDATE_FAIL_' => 'update fail',
+    '_UPDATE_SUCCESS_' => 'update success',
     '_DELETE_FAIL_' => 'delete fail',
     '_DELETE_SUCCESS_' => 'delete success',
     

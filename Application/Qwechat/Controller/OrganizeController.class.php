@@ -36,36 +36,54 @@ class OrganizeController extends BaseController {
 	/**
 	 * 添加子部门
 	 */
-	public function addSubDepartment_action() {
+	public function createSubDepartment_action() {
 		$sup_department_id = I('post.sup_department_id');
 		$sub_department_name = I('post.sub_department_name');
-		if(D('QwechatDepartment')->addSubDepartment($sup_department_id, $sub_department_name)) {
+		$backEntity = array();
+		if(D('QwechatDepartment')->createSubDepartment($sup_department_id, $sub_department_name)) {
 			// $this->redirect('Organize/departmentManage' ,array($reFetch=>true));
 			$backEntity['success'] = 1;
             $backEntity['info'] = L('_ADD_SUCCESS_');
-			$this->ajaxReturn(json_encode($backEntity), 'JSON');
 		} else {
 			$backEntity['success'] = 0;
             $backEntity['info'] = L('_ADD_FAIL_');
-			$this->ajaxReturn(json_encode($backEntity), 'JSON');
 		}
+		$this->ajaxReturn(json_encode($backEntity), 'JSON');
+	}
+
+	/**
+	 * 更新部门信息
+	 */
+	public function updateDepartment_action() {
+		$department_id = I('post.department_id');
+		$department_name = I('post.department_name');
+		$backEntity = array();
+		if(D('QwechatDepartment')->updateDepartment($department_id, $department_name)) {
+			// $this->redirect('Organize/departmentManage' ,array($reFetch=>true));
+			$backEntity['success'] = 1;
+            $backEntity['info'] = L('_UPDATE_FAIL_');
+		} else {
+			$backEntity['success'] = 0;
+            $backEntity['info'] = L('_UPDATE_FAIL_');
+		}
+		$this->ajaxReturn(json_encode($backEntity), 'JSON');
 	}
 
 	/**
 	 * 删除部门
 	 */
 	public function deleteDepartment_action() {
-		$sup_department_id = I('post.sup_department_id');
-		if(D('QwechatDepartment')->deleteDepartment($sup_department_id)) {
+		$department_id = I('post.department_id');
+		$backEntity = array();
+		if(D('QwechatDepartment')->deleteDepartment($department_id)) {
 			// $this->redirect('Organize/departmentManage' ,array($reFetch=>true));
 			$backEntity['success'] = 1;
             $backEntity['info'] = L('_DELETE_SUCCESS_');
-			$this->ajaxReturn(json_encode($backEntity), 'JSON');
 		} else {
 			$backEntity['success'] = 0;
             $backEntity['info'] = L('_DELETE_FAIL_');
-			$this->ajaxReturn(json_encode($backEntity), 'JSON');
 		}
+		$this->ajaxReturn(json_encode($backEntity), 'JSON');
 	}
 
 }

@@ -202,13 +202,13 @@
                 $echoHtml .= "</a>";
                 $echoHtml .= "<ul class='dropdown-menu dropdown-user'>";
 
-                $echoHtml .= "<li class='addSubDepartment'>";
+                $echoHtml .= "<li class='createSubDepartment'>";
                 $echoHtml .= "<a>";
                 $echoHtml .= "添加子部门";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
-                $echoHtml .= "<li class='modifyDepartment'>";
+                $echoHtml .= "<li class='updateDepartment'>";
                 $echoHtml .= "<a>";
                 $echoHtml .= "修改部门";
                 $echoHtml .= "</a>";
@@ -350,8 +350,6 @@
         AlertInfo.init({
             "selector": ".alert-info"
         });
-
-        // $('.tree li:has(ul)').addClass('parent_li');
         $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
         $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
         $(".tree li:not([class='parent_li item_li'])").find(' > ul.item_line > span').css('display', 'none');
@@ -378,7 +376,7 @@
                 dropdown.css('display', 'none');
             }
         });
-        $("li.addSubDepartment").click(function(e) {
+        $("li.createSubDepartment").click(function(e) {
             e.preventDefault();
             var sup_department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
             bootbox.prompt("请输入子部门名称", function(result) {
@@ -388,11 +386,9 @@
                         AlertInfo.show('请输入子部门名称');
                     } else {
                         var dialog;
-                        console.log('sup_department_id:'+sup_department_id);
-                        console.log('sub_department_name:'+result);
                         $.ajax({
                             type: 'POST',
-                            url: "{:U('Qwechat/Organize/addSubDepartment')}",
+                            url: "{:U('Qwechat/Organize/createSubDepartment')}",
                             data: {'sup_department_id': sup_department_id, 'sub_department_name': result},
                             dataType: 'json',
                             beforeSend : function(){
@@ -411,15 +407,50 @@
                             },
                             error: function (xhr, desc, err) {
                                 dialog.modal('hide');
-                                AlertInfo.show("error: " + desc + "\n" + err);
+                                AlertInfo.show("error: " + desc + "&nbsp;" + err);
                             }
                         });
                     }
                 } 
             });
         });
-        $("li.modifyDepartment").click(function(e) {
+        $("li.updateDepartment").click(function(e) {
             e.preventDefault();
+            var department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
+            bootbox.prompt("请输入新的部门名称", function(result) {
+                if(result != null) {
+                    result = $.trim(result);
+                    if(result.length == 0) {
+                        AlertInfo.show('请输入新的部门名称');
+                    } else {
+                        var dialog;
+                        $.ajax({
+                            type: 'POST',
+                            url: "{:U('Qwechat/Organize/updateDepartment')}",
+                            data: {'department_id': department_id, 'department_name': result},
+                            dataType: 'json',
+                            beforeSend : function(){
+                                dialog = bootbox.dialog({
+                                    message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
+                                    closeButton: false,
+                                });
+                            },
+                            success: function (msg, status) {
+                                dialog.modal('hide');
+                                var result = eval("("+msg+")");
+                                AlertInfo.show(result.info);
+                                if (result.success === 1) {
+                                    window.location.href="{:U('Qwechat/Organize/departmentManage', array('reFetch'=>true))}"; 
+                                }
+                            },
+                            error: function (xhr, desc, err) {
+                                dialog.modal('hide');
+                                AlertInfo.show("error: " + desc + "&nbsp;" + err);
+                            }
+                        });
+                    }
+                } 
+            });
         });
         $("li.moveUp").click(function(e) {
             e.preventDefault();
@@ -429,11 +460,34 @@
         });
         $("li.deleteDepartment").click(function(e) {
             e.preventDefault();
+            var department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
             bootbox.confirm("确定删除改部门？", function(result) {
-                if(result == null) {
-
-                } else {
-                    // 执行
+                if(result != null) {
+                    var dialog;
+                    $.ajax({
+                        type: 'POST',
+                        url: "{:U('Qwechat/Organize/deleteDepartment')}",
+                        data: {'department_id': department_id},
+                        dataType: 'json',
+                        beforeSend : function(){
+                            dialog = bootbox.dialog({
+                                message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
+                                closeButton: false,
+                            });
+                        },
+                        success: function (msg, status) {
+                            dialog.modal('hide');
+                            var result = eval("("+msg+")");
+                            AlertInfo.show(result.info);
+                            if (result.success === 1) {
+                                window.location.href="{:U('Qwechat/Organize/departmentManage', array('reFetch'=>true))}"; 
+                            }
+                        },
+                        error: function (xhr, desc, err) {
+                            dialog.modal('hide');
+                            AlertInfo.show("error: " + desc + "&nbsp;" + err);
+                        }
+                    });    
                 }
             });
         });

@@ -37,16 +37,44 @@ class QwechatDepartmentModel extends Model {
     return $this->structureDepartment();
   }
 
-  public function addSubDepartment($sup_department_id, $sub_department_name) {
+  /**
+   * 添加子部门
+   * 
+   * @param $sup_department_id   父类部门Id
+   * @param $sub_department_name 需要添加的部门的名字
+   */
+  public function createSubDepartment($sup_department_id, $sub_department_name) {
     $weObj = TPWechat::getInstance();
     $data['parentid'] = $sup_department_id;
     $data['name'] = $sub_department_name;
     return $weObj->createDepartment($data);
   }
 
-  public function deleteDepartment($sup_department_id) {
+  /**
+   * 更新部门信息
+   * 
+   * @param $department_id   父类部门Id
+   * @param $department_name 需要添加的部门的名字
+   *
+   * @return 是否更新成功
+   */
+  public function updateDepartment($department_id, $department_name) {
     $weObj = TPWechat::getInstance();
-    return $weObj->deleteDepartment($sup_department_id);
+    $data['id'] = $department_id;
+    $data['name'] = $department_name;
+    return $weObj->updateDepartment($data);
+  }
+
+  /**
+   * 删除部门
+   * 
+   * @param  $department_id  需要删除的部门Id
+   * 
+   * @return 是否删除成功
+   */
+  public function deleteDepartment($department_id) {
+    $weObj = TPWechat::getInstance();
+    return $weObj->deleteDepartment($department_id);
   }
 
   /********************** Controller's Function 对应 Model 操作 -end **********************/
@@ -108,130 +136,5 @@ class QwechatDepartmentModel extends Model {
   }
 
   /********************** private -end **********************/
-
-
-  /********************** old functions -start **********************/
-
-    public function updateDepartment($department=array()) {
-       
-        $map['id']=$department['id'];
-        $map['aid']=session('user_auth.aid');
-        $department['aid']=session('user_auth.aid');
-
-
-      $have = M("QwechatDepartment")->where($map)->find();
-      $data = $this->create($department);
-      
-        if ($have){
-            $this->where($map)->save();
-            return "update";
-        }else{
-            $this->add();
-            return "add";
-        }
-    }
-
-     /**获得分类树
-     * @param int  $id
-     * @param bool $field
-     * @return array
-     * @auth 陈一枭
-     */
-    public function getTree($id = 1, $field = true){
-        /* 获取当前分类信息 */
-        
-
-        /* 获取所有分类 */
-        $map['aid']=session('user_auth.aid');
-        $map['status']= array('EGT', 0);
-       
-        $list = $this->field($field)->where($map)->order('`order`')->select(); 
-         foreach ($list as $key => $value) {
-            $map['department'] = array('like', '%' . $value['id'] . '%');
-            $list[$key]['total']=D('QwechatMember')->where($map)->count('id');     
-        }
-       
-
-        $list = list_to_tree($list, $pk = 'id', $pid = 'pid', $child = '_', $root = $id);
-      
-        /* 获取返回数据 */
-        if(isset($info)){ //指定分类则返回当前分类极其子分类
-            $info['_'] = $list;
-        } else { //否则返回所有分类
-            $info = $list;
-        }
-
-        return $info;
-    }
-
-      /**
-     * 获取部门详细信息
-     * @param $id
-     * @param bool $field
-     * @return mixed
-     * @author 郑钟良<zzl@ourstu.com>
-     */
-    public function info($id, $field = true){
-        /* 获取分类信息 */
-        $map = array();
-        if(is_numeric($id)){ //通过ID查询
-            $map['id'] = $id;
-        } else { //通过标识查询
-            $map['name'] = $id;
-        }
-        $department=$this->field($field)->where($map)->find();
-       
-        
-        return $department;
-    }
-
-
-     //传id 获取 子id
-    public  function getData($map , $field='*' ){
-      
-    
-      $map['status']= array('EGT', 0);
-      $list = $this->where($map)->select(); 
-      
-      return $list;
-
-    }
-
-     public  function getChilds($map ,$father ,$ge=''){
-      
-    
-      $list=$this->getData($map);
-      $childs=$this->Childs($list,$father);
-      array_push( $childs,$father) ;
-      if ($ge) $childs=implode('|',$childs);
-
-      return $childs;
-
-    }
-
-
-
-    //传id 获取 子id
-    public  function Childs($list , $father ){
-      
-      
-      $arr = array();
-      foreach($list as $val){   
-    
-        if($val['parentid'] == $father){
-          
-          $arr[] = $val['id'];
-          
-          $arr = array_merge($arr , $this-> Childs($list , $val['id']));
-          
-        }
-    
-      }
-      return $arr;
-
-    }
-
-/********************** old functions -end **********************/
-
 
 }
