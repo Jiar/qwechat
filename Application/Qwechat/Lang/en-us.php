@@ -40,6 +40,10 @@ return array(
     '_PLEASE_INPUT_SECRET_' => 'please input Secret',
 
     // 按钮文本
-    '_BTN_SAVE_' => '保存',
+    '_BTN_SAVE_' => 'Save',
+
+    // 返回提示文本
+    '_ADD_FAIL_' => 'add fail',
+    '_DELETE_FAIL_' => 'delete fail',
     
 );

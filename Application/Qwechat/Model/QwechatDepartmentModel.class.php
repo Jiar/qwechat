@@ -30,25 +30,44 @@ class QwechatDepartmentModel extends Model {
    * @return 部门集合 
    * array('id'=>'value', 'parentid'=>'value', 'name'=>'value', 'order'=>'value', 'aid'=>'value', 'subDepartments'=>array())
    */
-  public function departmentManage() {
-    if(D('QwechatDepartment')->Count() == 0) {
-      $departments = $this->getDepartmentFromQwechat();
-      $departments = $departments['department'];
-      foreach ($departments as $department) {
-        if(M("QwechatDepartment")->find($department['id'])) {
-          M("QwechatDepartment")->save($department);
-        } else {
-          M("QwechatDepartment")->add($department);
-        }
-      }
+  public function departmentManage($reFetch = false) {
+    if($reFetch || D('QwechatDepartment')->Count() == 0) {
+      $this->getDepartmentFromQwechatToSave();
     }
     return $this->structureDepartment();
+  }
+
+  public function addSubDepartment($sup_department_id, $sub_department_name) {
+    $weObj = TPWechat::getInstance();
+    $data['parentid'] = $sup_department_id;
+    $data['name'] = $sub_department_name;
+    return $weObj->createDepartment($data);
+  }
+
+  public function deleteDepartment($sup_department_id) {
+    $weObj = TPWechat::getInstance();
+    return $weObj->deleteDepartment($sup_department_id);
   }
 
   /********************** Controller's Function 对应 Model 操作 -end **********************/
 
 
   /********************** private -start **********************/
+
+  /**
+   * 从微信企业号后台请求所有部门存储到本地数据库
+   */
+  private function getDepartmentFromQwechatToSave() {
+    $departments = $this->getDepartmentFromQwechat();
+    $departments = $departments['department'];
+    foreach ($departments as $department) {
+      if(M("QwechatDepartment")->find($department['id'])) {
+        M("QwechatDepartment")->save($department);
+      } else {
+        M("QwechatDepartment")->add($department);
+      }
+    }
+  }
 
   /**
    * 从微信企业号后台请求所有部门

@@ -15,16 +15,16 @@ class AdminController extends Controller {
     // 进入主界面
     public function admin_action() {
         if(session('?adminId') && session('?adminToken')) {
-            redirect(U('Qwechat/qwechat'));
+            $this->redirect('Qwechat/qwechat');
         } else {
-            redirect(U('Admin/login'));
+            $this->redirect('Admin/login');
         }
     }
 
     // 进入登录、注册界面
     public function login_action() {
         if(session('?adminId') && session('?adminToken')) {
-            redirect(U('Admin/admin'));
+            $this->redirect('Admin/admin');
         } else {
             $this->display('Admin/login');
         }
@@ -33,7 +33,7 @@ class AdminController extends Controller {
     // 进入注册界面
     public function register_action() {
         if(session('?adminId') && session('?adminToken')) {
-            redirect(U('Admin/admin'));
+            $this->redirect('Admin/admin');
         } else {
             $this->display('Admin/register');
         }
@@ -42,7 +42,7 @@ class AdminController extends Controller {
     // 登录操作
     public function signin_action() {
         if(session('?adminId') && session('?adminToken')) {
-            redirect(U('Admin/admin'));
+            $this->redirect('Admin/admin');
         } else {
             $account = I('post.account');
             $password = sha1(I("post.password"));
@@ -115,7 +115,7 @@ class AdminController extends Controller {
             $this->error(structureErrorInfo($admin->getError()));
         } else {
             $admin->add();
-            redirect(U('Admin/login'));
+            $this->redirect('Admin/login');
         }
     }
 
@@ -125,7 +125,7 @@ class AdminController extends Controller {
         session('[regenerate]');
         cookie('name',null);
         cookie('avatar',null);
-        redirect(U('Admin/login'));
+        $this->redirect('Admin/login');
     }
 
     // 登录后保存session和cookie
@@ -142,7 +142,7 @@ class AdminController extends Controller {
             session('adminToken', $result['token']);
             cookie('name',$result['name']);
             cookie('avatar',$result['avatar']);
-            redirect(U('Admin/admin'));
+            $this->redirect('Admin/admin');
         } else {
             $this->error('账户或密码错误');
         }

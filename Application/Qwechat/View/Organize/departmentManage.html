@@ -124,7 +124,7 @@
     </div>
 
     <div id="page-wrapper">
-    
+
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header"> {:L('_DEPARTMENTMANAGE_')}</h1>
@@ -193,6 +193,7 @@
                         $echoHtml .= "<li class='item_li' style='display:none;'>" ."<ul class='item_line'>" ."<span>" ."<i class=''>" ."</i>" ."</span>" ."<a href=''>"  .$rootDepartment["name"] ."</a>";
                     }
                 }
+                $echoHtml .= "<input class='sup_department_id' type='hidden' name=" .$rootDepartment['id'] ." />";
 
                 $echoHtml .= "<li class='dropdown' style='display: none; float: right;'>";
                 $echoHtml .= "<a class='dropdown-toggle' data-toggle='dropdown' href='#' style='padding: 10px;'>";
@@ -380,13 +381,42 @@
         $("li.addSubDepartment").click(function(e) {
             e.preventDefault();
             bootbox.prompt("请输入子部门名称", function(result) {
-                if(result === null) {
-                    
-                } else if(result.length == 0) {
-                    AlertInfo.show('请输入子部门名称');
-                } else {
-                    // 执行
-                }
+                if(result != null) {
+                    result = $.trim(result);
+                    if(result.length == 0) {
+                        AlertInfo.show('请输入子部门名称');
+                    } else {
+                        var dialog = bootbox.dialog({
+                            title: '操作提示',
+                            message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
+                            closeButton: false,
+                        });
+                        var sup_department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
+
+                        $.ajax({
+                            type: 'POST',
+                            url: "{:U('Qwechat/Organize/addSubDepartment')}",
+                            data: {'sup_department_id': sup_department_id, 'sub_department_name': result},
+                            dataType: 'json',
+                            beforeSend : function(){
+                                
+                            },
+                            success: function (msg, status) {
+                                dialog.modal('hide');
+                                var result = eval("("+msg+")");
+                                if (result.success === 1) {
+
+                                } else {
+                                    AlertInfo.show(result.info);
+                                }
+                            },
+                            error: function (xhr, desc, err) {
+                                dialog.modal('hide');
+                                AlertInfo.show("error: " + desc + "\n" + err);
+                            }
+                        });
+                    }
+                } 
             });
         });
         $("li.modifyDepartment").click(function(e) {

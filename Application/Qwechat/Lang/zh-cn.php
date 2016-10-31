@@ -42,5 +42,8 @@ return array(
     // 按钮文本
     '_BTN_SAVE_' => '保存',
 
+    // 返回提示文本
+    '_ADD_FAIL_' => '添加失败',
+    '_DELETE_FAIL_' => '删除失败',
   
 );
