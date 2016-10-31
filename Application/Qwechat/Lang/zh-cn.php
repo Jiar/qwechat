@@ -44,6 +44,8 @@ return array(
 
     // 返回提示文本
     '_ADD_FAIL_' => '添加失败',
+    '_ADD_SUCCESS_' => '添加成功',
     '_DELETE_FAIL_' => '删除失败',
+    '_DELETE_SUCCESS_' => '删除成功',
   
 );

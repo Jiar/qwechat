@@ -387,10 +387,7 @@
                     if(result.length == 0) {
                         AlertInfo.show('请输入子部门名称');
                     } else {
-                        var dialog = bootbox.dialog({
-                            message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
-                            closeButton: false,
-                        });
+                        var dialog;
                         console.log('sup_department_id:'+sup_department_id);
                         console.log('sub_department_name:'+result);
                         $.ajax({
@@ -399,15 +396,17 @@
                             data: {'sup_department_id': sup_department_id, 'sub_department_name': result},
                             dataType: 'json',
                             beforeSend : function(){
-                                
+                                dialog = bootbox.dialog({
+                                    message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
+                                    closeButton: false,
+                                });
                             },
                             success: function (msg, status) {
                                 dialog.modal('hide');
                                 var result = eval("("+msg+")");
+                                AlertInfo.show(result.info);
                                 if (result.success === 1) {
-                                    AlertInfo.show(result.info);
-                                } else {
-                                    AlertInfo.show(result.info);
+                                    window.location.href="{:U('Qwechat/Organize/departmentManage', array('reFetch'=>true))}"; 
                                 }
                             },
                             error: function (xhr, desc, err) {

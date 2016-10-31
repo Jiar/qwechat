@@ -42,7 +42,7 @@ class OrganizeController extends BaseController {
 		if(D('QwechatDepartment')->addSubDepartment($sup_department_id, $sub_department_name)) {
 			// $this->redirect('Organize/departmentManage' ,array($reFetch=>true));
 			$backEntity['success'] = 1;
-            $backEntity['info'] = '添加成功';
+            $backEntity['info'] = L('_ADD_SUCCESS_');
 			$this->ajaxReturn(json_encode($backEntity), 'JSON');
 		} else {
 			$backEntity['success'] = 0;
@@ -57,7 +57,10 @@ class OrganizeController extends BaseController {
 	public function deleteDepartment_action() {
 		$sup_department_id = I('post.sup_department_id');
 		if(D('QwechatDepartment')->deleteDepartment($sup_department_id)) {
-			$this->redirect('Organize/departmentManage' ,array($reFetch=>true));
+			// $this->redirect('Organize/departmentManage' ,array($reFetch=>true));
+			$backEntity['success'] = 1;
+            $backEntity['info'] = L('_DELETE_SUCCESS_');
+			$this->ajaxReturn(json_encode($backEntity), 'JSON');
 		} else {
 			$backEntity['success'] = 0;
             $backEntity['info'] = L('_DELETE_FAIL_');
