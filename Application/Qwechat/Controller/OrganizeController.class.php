@@ -40,7 +40,10 @@ class OrganizeController extends BaseController {
 		$sup_department_id = I('post.sup_department_id');
 		$sub_department_name = I('post.sub_department_name');
 		if(D('QwechatDepartment')->addSubDepartment($sup_department_id, $sub_department_name)) {
-			$this->redirect('Organize/departmentManage' ,array($reFetch=>true));
+			// $this->redirect('Organize/departmentManage' ,array($reFetch=>true));
+			$backEntity['success'] = 1;
+            $backEntity['info'] = '添加成功';
+			$this->ajaxReturn(json_encode($backEntity), 'JSON');
 		} else {
 			$backEntity['success'] = 0;
             $backEntity['info'] = L('_ADD_FAIL_');
