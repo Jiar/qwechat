@@ -380,7 +380,7 @@
         });
         $("li.addSubDepartment").click(function(e) {
             e.preventDefault();
-            var addSubDepartment = e;
+            var addSubDepartment = $(this);
             bootbox.prompt("请输入子部门名称", function(result) {
                 if(result != null) {
                     result = $.trim(result);
@@ -388,10 +388,10 @@
                         AlertInfo.show('请输入子部门名称');
                     } else {
                         var dialog = bootbox.dialog({
-                            title: '操作提示',
                             message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
                             closeButton: false,
                         });
+                        console.log('addSubDepartment:'+addSubDepartment);
                         var sup_department_id = addSubDepartment.parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id:text').attr('name');
                         console.log('sup_department_id:'+sup_department_id);
                         console.log('sub_department_name:'+result);
