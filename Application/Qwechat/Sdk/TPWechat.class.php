@@ -18,7 +18,7 @@
  */
 namespace Qwechat\Sdk;
 
-class TPWechat extends Qwechat {
+class TPWechat extends Wechat {
 
 	private static $_instance;
  

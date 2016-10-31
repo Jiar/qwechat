@@ -11,7 +11,8 @@
  *      else
  *          echo "未找到对应的内容";
  */
-class QwechatErrCode
+namespace Qwechat\Sdk;
+class ErrCode
 {
 	public static $errCode=array(
 	        '-1'=>'系统繁忙',
@@ -169,7 +170,9 @@ class QwechatErrCode
 	        '60121'=>'找不到该用户',
 	        '60023'=>'应用已授权予第三方，不允许通过分级管理员修改菜单',
 	        '80001'=>'可信域名没有IPC备案，后续将不能在该域名下正常使用jssdk',
+
 	);
+
 	public static function getErrText($err) {
 		if (isset(self::$errCode[$err])) {
 			return self::$errCode[$err];
@@ -178,4 +181,5 @@ class QwechatErrCode
 		};
 	}
 }
+
 ?>

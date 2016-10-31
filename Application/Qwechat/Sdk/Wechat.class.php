@@ -16,7 +16,8 @@
  *		);
  *
  */
-class Qwechat
+namespace Qwechat\Sdk;
+class Wechat
 {
     const MSGTYPE_TEXT 		= 'text';
     const MSGTYPE_IMAGE 	= 'image';
@@ -27,21 +28,29 @@ class Qwechat
     const MSGTYPE_NEWS 		= 'news';
     const MSGTYPE_VOICE 	= 'voice';
     const MSGTYPE_VIDEO 	= 'video';
+    const MSGTYPE_SHORTVIDEO 	= 'shortvideo';
+
     const EVENT_SUBSCRIBE 	= 'subscribe';      //订阅
     const EVENT_UNSUBSCRIBE = 'unsubscribe'; 	//取消订阅
     const EVENT_LOCATION 	= 'LOCATION';       //上报地理位置
     const EVENT_ENTER_AGENT = 'enter_agent';   	//用户进入应用
+
     const EVENT_MENU_VIEW 			= 'VIEW'; 				//菜单 - 点击菜单跳转链接
-    const EVENT_MENU_CLICK 			= 'CLICK';              //菜单 - 点击菜单拉取消息
+    const EVENT_MENU_CLICK 			= 'click';              //菜单 - 点击菜单拉取消息
     const EVENT_MENU_SCAN_PUSH 		= 'scancode_push';      //菜单 - 扫码推事件(客户端跳URL)
     const EVENT_MENU_SCAN_WAITMSG 	= 'scancode_waitmsg'; 	//菜单 - 扫码推事件(客户端不跳URL)
     const EVENT_MENU_PIC_SYS 		= 'pic_sysphoto';       //菜单 - 弹出系统拍照发图
     const EVENT_MENU_PIC_PHOTO 		= 'pic_photo_or_album'; //菜单 - 弹出拍照或者相册发图
     const EVENT_MENU_PIC_WEIXIN 	= 'pic_weixin';         //菜单 - 弹出微信相册发图器
     const EVENT_MENU_LOCATION 		= 'location_select';    //菜单 - 弹出地理位置选择器
+
     const EVENT_SEND_MASS = 'MASSSENDJOBFINISH';        //发送结果 - 高级群发完成
     const EVENT_SEND_TEMPLATE = 'TEMPLATESENDJOBFINISH';//发送结果 - 模板消息发送结果
+
     const API_URL_PREFIX = 'https://qyapi.weixin.qq.com/cgi-bin';
+
+    const AGENT_LIST_URL 		= '/agent/list?';
+    const AGENT_GET_URL 		= '/agent/get?';
     const USER_CREATE_URL 		= '/user/create?';
     const USER_UPDATE_URL 		= '/user/update?';
     const USER_DELETE_URL 		= '/user/delete?';
@@ -75,6 +84,11 @@ class Qwechat
 	const CALLBACKSERVER_GET_URL = '/getcallbackip?';
 	const OAUTH_PREFIX 			= 'https://open.weixin.qq.com/connect/oauth2';
 	const OAUTH_AUTHORIZE_URL 	= '/authorize?';
+
+	//丁佳新增客服功能
+	const KF_SEND 		= '/kf/send?';
+	const KF_LIST		= '/kf/list?';
+
 	private $token;
 	private $encodingAesKey;
 	private $appid;         //也就是企业号的CorpID
@@ -91,6 +105,7 @@ class Qwechat
 	public $errCode = 40001;
 	public $errMsg = "no access";
 	public $logcallback;
+
 	public function __construct($options)
 	{
 		$this->token = isset($options['token'])?$options['token']:'';
@@ -101,12 +116,14 @@ class Qwechat
 		$this->debug = isset($options['debug'])?$options['debug']:false;
 		$this->logcallback = isset($options['logcallback'])?$options['logcallback']:false;
 	}
+
 	protected function log($log){
 	    if ($this->debug && function_exists($this->logcallback)) {
 	        if (is_array($log)) $log = print_r($log,true);
 	        return call_user_func($this->logcallback,$log);
 	    }
 	}
+
 	/**
 	 * 数据XML编码
 	 * @param mixed $data 数据
@@ -123,10 +140,12 @@ class Qwechat
 	    }
 	    return $xml;
 	}
+
 	public static function xmlSafeStr($str)
 	{
 	    return '<![CDATA['.preg_replace("/[\\x00-\\x08\\x0b-\\x0c\\x0e-\\x1f]/",'',$str).']]>';
 	}
+
 	/**
 	 * XML编码
 	 * @param mixed $data 数据
@@ -152,6 +171,8 @@ class Qwechat
 	    $xml   .= "</{$root}>";
 	    return $xml;
 	}
+
+
 	/**
 	 * 微信api不支持中文转义的json结构
 	 * @param array $arr
@@ -199,6 +220,7 @@ class Qwechat
 	        return '[' . $json . ']'; //Return numerical JSON
 	    return '{' . $json . '}'; //Return associative JSON
 	}
+
 	/**
 	 * 过滤文字回复\r\n换行符
 	 * @param string $text
@@ -208,6 +230,7 @@ class Qwechat
 	    if (!$this->_text_filter) return $text;
 	    return str_replace("\r\n", "\n", $text);
 	}
+
 	/**
 	 * GET 请求
 	 * @param string $url
@@ -230,6 +253,7 @@ class Qwechat
 	        return false;
 	    }
 	}
+
 	/**
 	 * POST 请求
 	 * @param string $url
@@ -266,6 +290,7 @@ class Qwechat
 			return false;
 		}
 	}
+
 	/**
 	 * For weixin server validation
 	 */
@@ -284,6 +309,7 @@ class Qwechat
 	        return false;
 	    }
 	}
+
 	/**
 	 * 微信验证，包括post来的xml解密
 	 * @param bool $return 是否返回
@@ -301,6 +327,7 @@ class Qwechat
             }
         } else {
             $encryptStr = isset($_GET["echostr"]) ? $_GET["echostr"]: '';
+
         }
         if ($encryptStr) {
             $ret=$this->checkSignature($encryptStr);
@@ -335,6 +362,7 @@ class Qwechat
         }
         return false;
     }
+
     /**
      * 获取微信服务器发来的信息
      */
@@ -351,6 +379,7 @@ class Qwechat
 		}
 		return $this;
 	}
+
 	/**
 	 * 获取微信服务器发来的信息
 	 */
@@ -358,6 +387,7 @@ class Qwechat
 	{
 		return $this->_receive;
 	}
+
 	/**
 	 * 获取微信服务器发来的原始加密信息
 	 */
@@ -365,6 +395,7 @@ class Qwechat
 	{
 	    return $this->postxml;
 	}
+
 	/**
 	 * 获取消息发送者
 	 */
@@ -374,6 +405,7 @@ class Qwechat
 		else
 			return false;
 	}
+
 	/**
 	 * 获取消息接受者
 	 */
@@ -383,6 +415,7 @@ class Qwechat
 		else
 			return false;
 	}
+
 	/**
 	 * 获取接收消息的应用id
 	 */
@@ -392,6 +425,7 @@ class Qwechat
 		else
 			return false;
 	}
+
 	/**
 	 * 获取接收消息的类型
 	 */
@@ -401,6 +435,7 @@ class Qwechat
 		else
 			return false;
 	}
+
 	/**
 	 * 获取消息ID
 	 */
@@ -410,6 +445,7 @@ class Qwechat
 		else
 			return false;
 	}
+
 	/**
 	 * 获取消息发送时间
 	 */
@@ -419,6 +455,7 @@ class Qwechat
 		else
 			return false;
 	}
+
 	/**
 	 * 获取接收消息内容正文
 	 */
@@ -428,6 +465,7 @@ class Qwechat
 		else
 			return false;
 	}
+
 	/**
 	 * 获取接收消息图片
 	 */
@@ -440,6 +478,7 @@ class Qwechat
 		else
 			return false;
 	}
+
 	/**
 	 * 获取接收地理位置
 	 */
@@ -454,6 +493,7 @@ class Qwechat
 		} else
 			return false;
 	}
+
 	/**
 	 * 获取上报地理位置事件
 	 */
@@ -467,6 +507,7 @@ class Qwechat
 		} else
 			return false;
 	}
+
 	/**
 	 * 获取接收事件推送
 	 */
@@ -483,6 +524,7 @@ class Qwechat
 			return false;
 		}
 	}
+
 	/**
 	 * 获取自定义菜单的扫码推事件信息
 	 *
@@ -511,6 +553,7 @@ class Qwechat
 	        return false;
 	    }
 	}
+
 	/**
 	 * 获取自定义菜单的图片发送事件信息
 	 *
@@ -554,6 +597,7 @@ class Qwechat
 	        return false;
 	    }
 	}
+
 	/**
 	 * 获取自定义菜单的地理位置选择器事件推送
 	 *
@@ -591,6 +635,7 @@ class Qwechat
 	        return false;
 	    }
 	}
+
 	/**
 	 * 获取接收语音推送
 	 */
@@ -603,6 +648,7 @@ class Qwechat
 		} else
 			return false;
 	}
+
 	/**
 	 * 获取接收视频推送
 	 */
@@ -615,6 +661,7 @@ class Qwechat
 		} else
 			return false;
 	}
+
 	/**
 	 * 设置回复消息
 	 * Example: $obj->text('hello')->reply();
@@ -632,6 +679,7 @@ class Qwechat
 		$this->Message($msg);
 		return $this;
 	}
+
 	/**
 	 * 设置回复消息
 	 * Example: $obj->image('media_id')->reply();
@@ -649,6 +697,7 @@ class Qwechat
 		$this->Message($msg);
 		return $this;
 	}
+
 	/**
 	 * 设置回复消息
 	 * Example: $obj->voice('media_id')->reply();
@@ -666,6 +715,7 @@ class Qwechat
 		$this->Message($msg);
 		return $this;
 	}
+
 	/**
 	 * 设置回复消息
 	 * Example: $obj->video('media_id','title','description')->reply();
@@ -687,6 +737,7 @@ class Qwechat
 		$this->Message($msg);
 		return $this;
 	}
+
 	/**
 	 * 设置回复图文
 	 * @param array $newsData
@@ -703,7 +754,9 @@ class Qwechat
 	 */
 	public function news($newsData=array())
 	{
+
 		$count = count($newsData);
+
 		$msg = array(
 			'ToUserName' => $this->getRevFrom(),
 			'FromUserName'=>$this->getRevTo(),
@@ -711,10 +764,12 @@ class Qwechat
 			'CreateTime'=>time(),
 			'ArticleCount'=>$count,
 			'Articles'=>$newsData,
+
 		);
 		$this->Message($msg);
 		return $this;
 	}
+
 	/**
 	 * 设置发送消息
 	 * @param array $msg 消息数组
@@ -733,6 +788,7 @@ class Qwechat
 	        return $this->_msg;
 	    }
 	}
+
 	/**
 	 *
 	 * 回复微信服务器, 此函数支持链式操作
@@ -767,9 +823,11 @@ class Qwechat
 		elseif ($smsg){
 			echo $smsg;
 		    return true;
+
 		}else
 		    return false;
 	}
+
 	private function generate($encrypt, $signature, $timestamp, $nonce)
 	{
 	    //格式化加密信息
@@ -781,6 +839,7 @@ class Qwechat
 </xml>";
 	    return sprintf($format, $encrypt, $signature, $timestamp, $nonce);
 	}
+
 	/**
 	 * 设置缓存，按需重载
 	 * @param string $cachename
@@ -792,6 +851,7 @@ class Qwechat
 		//TODO: set cache implementation
 		return false;
 	}
+
 	/**
 	 * 获取缓存，按需重载
 	 * @param string $cachename
@@ -801,6 +861,7 @@ class Qwechat
 		//TODO: get cache implementation
 		return false;
 	}
+
 	/**
 	 * 清除缓存，按需重载
 	 * @param string $cachename
@@ -810,6 +871,7 @@ class Qwechat
 		//TODO: remove cache implementation
 		return false;
 	}
+
 	/**
 	 * 通用auth验证方法
 	 * @param string $appid
@@ -825,11 +887,13 @@ class Qwechat
 		    $this->access_token=$token;
 		    return $this->access_token;
 		}
+
 		$authname = 'qywechat_access_token'.$appid;
 		if ($rs = $this->getCache($authname))  {
 			$this->access_token = $rs;
 			return $rs;
 		}
+
 		$result = $this->http_get(self::API_URL_PREFIX.self::TOKEN_GET_URL.'corpid='.$appid.'&corpsecret='.$appsecret);
 		if ($result)
 		{
@@ -846,6 +910,7 @@ class Qwechat
 		}
 		return false;
 	}
+
 	/**
 	 * 删除验证数据
 	 * @param string $appid
@@ -857,6 +922,7 @@ class Qwechat
 		$this->removeCache($authname);
 		return true;
 	}
+
 	/**
 	 * 删除JSAPI授权TICKET
 	 * @param string $appid 用于多个appid时使用
@@ -868,6 +934,7 @@ class Qwechat
 		$this->removeCache($authname);
 		return true;
 	}
+
 	/**
 	 * 获取JSAPI授权TICKET
 	 * @param string $appid 用于多个appid时使用,可空
@@ -901,6 +968,8 @@ class Qwechat
 		}
 		return false;
 	}
+
+
 	/**
 	 * 获取JsApi使用签名
 	 * @param string $url 网页的URL，自动处理#及其后面部分
@@ -934,6 +1003,7 @@ class Qwechat
 	    );
 	    return $signPackage;
 	}
+
 	/**
 	 * 获取签名
 	 * @param array $arrdata 签名数组
@@ -954,6 +1024,7 @@ class Qwechat
 		$Sign = $method($paramstring);
 		return $Sign;
 	}
+
 	/**
 	 * 生成随机字串
 	 * @param number $length 长度，默认为16，最长为32字节
@@ -969,6 +1040,8 @@ class Qwechat
 		}
 		return $str;
 	}
+
+
 	/**
 	 * 创建菜单
 	 * @param array $data 菜单数组数据
@@ -1041,6 +1114,7 @@ class Qwechat
 		}
 		return false;
 	}
+
 	/**
 	 * 获取菜单
 	 * @return array('menu'=>array(....s))
@@ -1063,6 +1137,7 @@ class Qwechat
 		}
 		return false;
 	}
+
 	/**
 	 * 删除菜单
 	 * @return boolean
@@ -1085,6 +1160,7 @@ class Qwechat
 		}
 		return false;
 	}
+
 	/**
 	 * 上传多媒体文件 (只有三天的有效期，过期自动被删除)
 	 * 注意：上传大文件时可能需要先调用 set_time_limit(0) 避免超时
@@ -1113,6 +1189,7 @@ class Qwechat
 		}
 		return false;
 	}
+
 	/**
 	 * 根据媒体文件ID获取媒体文件
 	 * @param string $media_id 媒体文件id
@@ -1133,6 +1210,7 @@ class Qwechat
 		}
 		return false;
 	}
+
 	/**
 	 * 获取企业微信服务器IP地址列表
 	 * @return array('127.0.0.1','127.0.0.1')
@@ -1152,6 +1230,67 @@ class Qwechat
 		}
 		return false;
 	}
+
+	/**
+	 * 获取应用列表
+	 * @return boolean|array	 成功返回结果
+	 * {
+		   "errcode": 0,
+		   "errmsg": "ok",
+		   "agentlist": [
+		       {
+		           "agentid": "5",
+		           "name": "企业小助手",
+		           "square_logo_url": "url",
+		           "round_logo_url": "url"
+		       },
+		       {
+		           "agentid": "8",
+		           "name": "HR小助手",
+		           "square_logo_url": "url",
+		           "round_logo_url": "url"
+		       }
+		       ]  
+		}
+	 */
+	public function getAgents(){
+	    if (!$this->access_token && !$this->checkAuth()) return false;
+	    $result = $this->http_get(self::API_URL_PREFIX.self::AGENT_LIST_URL.'access_token='.$this->access_token);
+	    if ($result)
+	    {
+	        $json = json_decode($result,true);
+	        if (!$json || !empty($json['errcode'])) {
+	            $this->errCode = $json['errcode'];
+	            $this->errMsg = $json['errmsg'];
+	            return false;
+	        }
+	        return $json;
+	    }
+	    return false;
+	}
+
+	/**
+	 * 获取应用详情
+	 * @return boolean|array	 成功返回结果
+	 * 
+	 */
+	public function getAgent($agentid=0){
+	    if (!$this->access_token && !$this->checkAuth()) return false;
+	    $result = $this->http_get(self::API_URL_PREFIX.self::AGENT_GET_URL.'access_token='.$this->access_token.'&agentid='.$agentid);
+	    if ($result)
+	    {
+	        $json = json_decode($result,true);
+	        if (!$json || !empty($json['errcode'])) {
+	            $this->errCode = $json['errcode'];
+	            $this->errMsg = $json['errmsg'];
+	            return false;
+	        }
+	        return $json;
+	    }
+	    return false;
+	}
+
+
 	/**
 	 * 创建部门
 	 * @param array $data 	结构体为:
@@ -1183,6 +1322,8 @@ class Qwechat
 	    }
 	    return false;
 	}
+
+
 	/**
 	 * 更新部门
 	 * @param array $data 	结构体为:
@@ -1213,6 +1354,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 删除部门
 	 * @param $id
@@ -1237,6 +1379,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 移动部门
 	 * @param $data
@@ -1266,6 +1409,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 获取部门列表
 	 * @return boolean|array	 成功返回结果
@@ -1303,6 +1447,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 创建成员
 	 * @param array $data 	结构体为:
@@ -1339,6 +1484,8 @@ class Qwechat
 	    }
 	    return false;
 	}
+
+
 	/**
 	 * 更新成员
 	 * @param array $data 	结构体为:
@@ -1374,6 +1521,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 删除成员
 	 * @param $userid  员工UserID。对应管理端的帐号
@@ -1398,6 +1546,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 批量删除成员
 	 * @param array $userid  员工UserID数组。对应管理端的帐号
@@ -1429,6 +1578,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 获取成员信息
 	 * @param $userid  员工UserID。对应管理端的帐号
@@ -1465,6 +1615,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 获取部门成员
 	 * @param $department_id   部门id
@@ -1498,6 +1649,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 获取部门成员详情
 	 * @param $department_id   部门id
@@ -1541,6 +1693,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 根据code获取成员信息
 	 * 通过Oauth2.0或者设置了二次验证时获取的code，用于换取成员的UserId和DeviceId
@@ -1556,7 +1709,7 @@ class Qwechat
 	public function getUserId($code,$agentid=0){
 	    if (!$agentid) $agentid=$this->agentid;
 	    if (!$this->access_token && !$this->checkAuth()) return false;
-	    $result = $this->http_get(self::API_URL_PREFIX.self::USER_GETINFO_URL.'access_token='.$this->access_token.'&code='.$code.'&agentid'.$agentid);
+	    $result = $this->http_get(self::API_URL_PREFIX.self::USER_GETINFO_URL.'access_token='.$this->access_token.'&code='.$code.'&agentid='.$agentid);
 	    if ($result)
 	    {
 	        $json = json_decode($result,true);
@@ -1569,6 +1722,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 邀请成员关注
 	 * 向未关注企业号的成员发送关注邀请。认证号优先判断顺序weixinid>手机号>邮箱绑定>邮件；非认证号只能邮件邀请
@@ -1601,6 +1755,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 创建标签
 	 * @param array $data 	结构体为:
@@ -1630,6 +1785,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 更新标签
 	 * @param array $data 	结构体为:
@@ -1658,6 +1814,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 删除标签
 	 * @param $tagid  标签TagID
@@ -1682,6 +1839,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 获取标签成员
 	 * @param $tagid  标签TagID
@@ -1712,6 +1870,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 增加标签成员
 	 * @param array $data 	结构体为:
@@ -1745,6 +1904,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 删除标签成员
 	 * @param array $data 	结构体为:
@@ -1778,6 +1938,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 获取标签列表
 	 * @return boolean|array	 成功返回数组结果，这里附上json样例
@@ -1805,6 +1966,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 主动发送信息接口
 	 * @param array $data 	结构体为:
@@ -1892,6 +2054,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * 二次验证
 	 * 企业在开启二次验证时，必须填写企业二次验证页面的url。
@@ -1921,6 +2084,7 @@ class Qwechat
 	    }
 	    return false;
 	}
+
 	/**
 	 * oauth 授权跳转接口
 	 * @param string $callback 回调URI
@@ -1930,7 +2094,62 @@ class Qwechat
 	public function getOauthRedirect($callback,$state='STATE',$scope='snsapi_base'){
 	    return self::OAUTH_PREFIX.self::OAUTH_AUTHORIZE_URL.'appid='.$this->appid.'&redirect_uri='.urlencode($callback).'&response_type=code&scope='.$scope.'&state='.$state.'#wechat_redirect';
 	}
+
+
+
+	/**  客服功能
+	 * 向企业号客服发送客服消息
+	 * 注意：上传大文件时可能需要先调用 set_time_limit(0) 避免超时
+	 * 注意：数组的键值任意，但文件名前必须加@，使用单引号以避免本地路径斜杠被转义
+	 * @param array $data {"media":'@Path\filename.jpg'}
+	 * @param type 媒体文件类型:图片（image）、语音（voice）、视频（video），普通文件(file)
+	 * @return boolean|array
+	 * {
+	 *    "type": "image",
+	 *    "media_id": "0000001",
+	 *    "created_at": "1380000000"
+	 * }
+	 */
+	public function kfSend($data){
+		
+		if (!$this->access_token && !$this->checkAuth()) return false;
+		$result = $this->http_post(self::API_URL_PREFIX.self::KF_SEND.'access_token='.$this->access_token,self::json_encode($data));
+		
+		if ($result)
+		{
+			$json = json_decode($result,true);
+			if (!$json || !empty($json['errcode'])) {
+				$this->errCode = $json['errcode'];
+				$this->errMsg = $json['errmsg'];
+				return false;
+			}
+			return $json;
+		}
+		return false;
+	}
+
+
+	public function kfList(){
+		
+		if (!$this->access_token && !$this->checkAuth()) return false;
+		$result = $this->http_get(self::API_URL_PREFIX.self::KF_LIST.'access_token='.$this->access_token);
+		if ($result)
+		{
+			$json = json_decode($result,true);
+			if (!$json || !empty($json['errcode'])) {
+				$this->errCode = $json['errcode'];
+				$this->errMsg = $json['errmsg'];
+				return false;
+			}
+			return $json;
+		}
+		return false;
+	}
+
 }
+
+
+
 /**
  * PKCS7Encoder class
  *
@@ -1939,6 +2158,7 @@ class Qwechat
 class PKCS7Encoder
 {
     public static $block_size = 32;
+
     /**
      * 对需要加密的明文进行填充补位
      * @param $text 需要进行填充补位操作的明文
@@ -1961,6 +2181,7 @@ class PKCS7Encoder
         }
         return $text . $tmp;
     }
+
     /**
      * 对解密后的明文进行补位删除
      * @param decrypted 解密后的明文
@@ -1968,13 +2189,16 @@ class PKCS7Encoder
      */
     function decode($text)
     {
+
         $pad = ord(substr($text, -1));
         if ($pad < 1 || $pad > PKCS7Encoder::$block_size) {
             $pad = 0;
         }
         return substr($text, 0, (strlen($text) - $pad));
     }
+
 }
+
 /**
  * Prpcrypt class
  *
@@ -1983,9 +2207,11 @@ class PKCS7Encoder
 class Prpcrypt
 {
     public $key;
+
     function __construct($k) {
         $this->key = base64_decode($k . "=");
     }
+
     /**
      * 兼容老版本php构造函数，不能在 __construct() 方法前边，否则报错
      */
@@ -1993,6 +2219,7 @@ class Prpcrypt
     {
         $this->key = base64_decode($k . "=");
     }
+
     /**
      * 对明文进行加密
      * @param string $text 需要加密的明文
@@ -2000,6 +2227,7 @@ class Prpcrypt
      */
     public function encrypt($text, $appid)
     {
+
         try {
             //获得16位随机字符串，填充到明文之前
             $random = $this->getRandomStr();//"aaaabbbbccccdddd";
@@ -2016,6 +2244,7 @@ class Prpcrypt
             $encrypted = mcrypt_generic($module, $text);
             mcrypt_generic_deinit($module);
             mcrypt_module_close($module);
+
             //			print(base64_encode($encrypted));
             //使用BASE64对加密后的字符串进行编码
             return array(ErrorCode::$OK, base64_encode($encrypted));
@@ -2024,6 +2253,7 @@ class Prpcrypt
             return array(ErrorCode::$EncryptAESError, null);
         }
     }
+
     /**
      * 对密文进行解密
      * @param string $encrypted 需要解密的密文
@@ -2031,6 +2261,7 @@ class Prpcrypt
      */
     public function decrypt($encrypted, $appid)
     {
+
         try {
             //使用BASE64对需要解密的字符串进行解码
             $ciphertext_dec = base64_decode($encrypted);
@@ -2044,6 +2275,8 @@ class Prpcrypt
         } catch (Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
         }
+
+
         try {
             //去除补位字符
             $pkc_encoder = new PKCS7Encoder;
@@ -2063,13 +2296,17 @@ class Prpcrypt
         if ($from_appid != $appid)
             return array(ErrorCode::$ValidateAppidError, null);
         return array(0, $xml_content);
+
     }
+
+
     /**
      * 随机生成16位字符串
      * @return string 生成的字符串
      */
     function getRandomStr()
     {
+
         $str = "";
         $str_pol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
         $max = strlen($str_pol) - 1;
@@ -2078,7 +2315,9 @@ class Prpcrypt
         }
         return $str;
     }
+
 }
+
 /**
  * error code
  * 仅用作类内部使用，不用于官方API接口的errCode码
