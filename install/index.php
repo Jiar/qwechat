@@ -2,7 +2,7 @@
 error_reporting(0);
 set_time_limit(600);
 
-define('KOL_ROOT', str_replace('\\', '/', substr(dirname(__FILE__), 0, -7)));
+define('KOL_ROOT', str_replace('\\', '/', substr(dirname(__FILE__), 0, -strlen('install'))));
 
 include_once('header.php');
 $step = $_GET['step'];

@@ -35,7 +35,7 @@ class AdminController extends Controller {
         if(session('?adminId') && session('?adminToken')) {
             redirect(U('Admin/admin'));
         } else {
-            $this->display('rAdmin/egister');
+            $this->display('Admin/register');
         }
     }
 

@@ -19,13 +19,6 @@
     <link href="__CSS__/qwechat-admin.css" rel="stylesheet">
     <link href="__CSS__/common-jiar.css" rel="stylesheet">
 
-    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="http://cdn.bootcss.com/metisMenu/1.1.3/metisMenu.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.min.js"></script>
-    <!-- Custom JS -->
-    <script src="__JS__/qwechat-admin.js"></script>
-
 </head>
 
 <body>
@@ -307,89 +300,96 @@
 </div>
 <!-- /#wrapper -->
 
-<style type="text/css">
-.tree {
-    min-height:120px;
-    padding:20px;
-    margin:20px;
-    background-color:#fbfbfb;
-    -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
-    box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
-}
-.tree li>ul.item_line {
-    height: 38px;
-    line-height: 38px;
-    margin: 0px;
-    padding: 0px;
-}
-.tree li>ul.item_line:hover {
-    background:#eee;
-    color:#000;
-    cursor:pointer;
-}
-.tree li>ul.item_line>span {
-    display:inline-block;
-    padding:0px 8px;
-    text-decoration:none;
-}
-.tree li>ul.item_line>a {
-    text-decoration:none;
-}
-</style> 
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/metisMenu/1.1.3/metisMenu.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <!-- Custom JS -->
+    <script src="__JS__/qwechat-admin.js"></script>
 
-<script type="text/javascript">
-$(function () {
-    // $('.tree li:has(ul)').addClass('parent_li');
-    $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
-    $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
-    $(".tree li:not([class='parent_li item_li'])").find(' > ul.item_line > span').css('display', 'none');
-    $('.tree li.parent_li > ul.item_line > span').on('click', function (e) {
-        var children = $(this).parent('ul.item_line').parent('li.parent_li').find(' > ul.son_ul > li.item_li');
-        if (children.is(":visible")) {
-            children.hide('fast');
-            children.css('display', 'none');
-            $(this).attr('title', '展开分支').find(' > i').addClass('glyphicon-plus').removeClass('glyphicon-minus');
-        } else {
-            children.show('fast');
-            children.css('display', 'block');
-            $(this).attr('title', '折叠分支').find(' > i').addClass('glyphicon-minus').removeClass('glyphicon-plus');
-        }
-        e.stopPropagation();
-    });
-    $('.tree li > ul.item_line').on('mouseover mouseout', function (e) {
-        var dropdown = $(this).find(' > li.dropdown');
-        if(event.type == "mouseover"){
-            //鼠标悬浮
-            dropdown.css('display', 'inline');
-        } else if(event.type == "mouseout"){
-            //鼠标离开
-            dropdown.css('display', 'none');
-        }
-    });
-    $("li.deleteDepartment").click(function(e) {
-        e.preventDefault();
-        bootbox.prompt("What is your name?", function(result) {
-            if (result === null) {
-                console.log('cancel');
+    <style type="text/css">
+    .tree {
+        min-height:120px;
+        padding:20px;
+        margin:20px;
+        background-color:#fbfbfb;
+        -webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+    .tree li>ul.item_line {
+        height: 38px;
+        line-height: 38px;
+        margin: 0px;
+        padding: 0px;
+    }
+    .tree li>ul.item_line:hover {
+        background:#eee;
+        color:#000;
+        cursor:pointer;
+    }
+    .tree li>ul.item_line>span {
+        display:inline-block;
+        padding:0px 8px;
+        text-decoration:none;
+    }
+    .tree li>ul.item_line>a {
+        text-decoration:none;
+    }
+    </style> 
+
+    <script type="text/javascript">
+    $(function () {
+        // $('.tree li:has(ul)').addClass('parent_li');
+        $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
+        $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
+        $(".tree li:not([class='parent_li item_li'])").find(' > ul.item_line > span').css('display', 'none');
+        $('.tree li.parent_li > ul.item_line > span').on('click', function (e) {
+            var children = $(this).parent('ul.item_line').parent('li.parent_li').find(' > ul.son_ul > li.item_li');
+            if (children.is(":visible")) {
+                children.hide('fast');
+                children.css('display', 'none');
+                $(this).attr('title', '展开分支').find(' > i').addClass('glyphicon-plus').removeClass('glyphicon-minus');
             } else {
-                console.log(result);
+                children.show('fast');
+                children.css('display', 'block');
+                $(this).attr('title', '折叠分支').find(' > i').addClass('glyphicon-minus').removeClass('glyphicon-plus');
+            }
+            e.stopPropagation();
+        });
+        $('.tree li > ul.item_line').on('mouseover mouseout', function (e) {
+            var dropdown = $(this).find(' > li.dropdown');
+            if(event.type == "mouseover"){
+                //鼠标悬浮
+                dropdown.css('display', 'inline');
+            } else if(event.type == "mouseout"){
+                //鼠标离开
+                dropdown.css('display', 'none');
             }
         });
-    });
-    $('.tree li > ul.item_line').click(function(e) {
-        e.preventDefault();
-        bootbox.prompt("What is your name?", function(result) {
-            if (result === null) {
-                console.log('cancel');
-            } else {
-                console.log(result);
-            }
+        $("li.deleteDepartment").click(function(e) {
+            e.preventDefault();
+            bootbox.prompt("What is your name?", function(result) {
+                if (result === null) {
+                    console.log('cancel');
+                } else {
+                    console.log(result);
+                }
+            });
         });
+        $('.tree li > ul.item_line').click(function(e) {
+            e.preventDefault();
+            bootbox.prompt("What is your name?", function(result) {
+                if (result === null) {
+                    console.log('cancel');
+                } else {
+                    console.log(result);
+                }
+            });
+        });
+        
     });
-    
-});
-</script>
+    </script>
 
 </body>
 
