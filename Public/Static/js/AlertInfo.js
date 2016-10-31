@@ -16,9 +16,7 @@ var AlertInfo = (function() {
         clearTimeout(hideHandler);
 
         elem.find("span").html(text);
-        elem.delay(200).fadeIn().delay(4000).fadeOut("normal", function({
-            elem.css('display', 'none');
-        }));
+        elem.delay(200).fadeIn().delay(4000).fadeOut();
     };
 
     return that;
