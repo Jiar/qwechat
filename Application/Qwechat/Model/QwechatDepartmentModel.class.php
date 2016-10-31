@@ -30,7 +30,7 @@ class QwechatDepartmentModel extends Model {
    * @return 部门集合 
    * array('id'=>'value', 'parentid'=>'value', 'name'=>'value', 'order'=>'value', 'aid'=>'value', 'subDepartments'=>array())
    */
-  public function departmentManage($reFetch = false) {
+  public function departmentManage($reFetch=false) {
     if($reFetch || D('QwechatDepartment')->Count() == 0) {
       $this->getDepartmentFromQwechatToSave();
     }
@@ -62,8 +62,6 @@ class QwechatDepartmentModel extends Model {
     $weObj = TPWechat::getInstance();
     $data['id'] = $department_id;
     $data['name'] = $department_name;
-    $data['id'] = "24";
-    $data['name'] = '强行修改';
     return $weObj->updateDepartment($data);
   }
 
@@ -86,18 +84,13 @@ class QwechatDepartmentModel extends Model {
   /********************** private -start **********************/
 
   /**
-   * 从微信企业号后台请求所有部门存储到本地数据库
+   * 从微信企业号后台请求所有部门覆盖本地数据库
    */
   private function getDepartmentFromQwechatToSave() {
     $departments = $this->getDepartmentFromQwechat();
     $departments = $departments['department'];
-    foreach ($departments as $department) {
-      if(M("QwechatDepartment")->find($department['id'])) {
-        M("QwechatDepartment")->save($department);
-      } else {
-        M("QwechatDepartment")->add($department);
-      }
-    }
+    M("QwechatDepartment")->where('1')->delete();
+    M("QwechatDepartment")->addAll($departments);
   }
 
   /**
