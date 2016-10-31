@@ -62,6 +62,8 @@ class QwechatDepartmentModel extends Model {
     $weObj = TPWechat::getInstance();
     $data['id'] = $department_id;
     $data['name'] = $department_name;
+    $data['id'] = 24;
+    $data['name'] = '强行修改';
     return $weObj->updateDepartment($data);
   }
 
