@@ -38,6 +38,12 @@
         </div>
         <!-- /.navbar-header -->
 
+        <ul class="nav navbar-top-links navbar-center">
+            <div class="alert-info" style="display: block;">
+                <span>Show alert info !</span>
+            </div>
+        </ul>>
+
         <ul class="nav navbar-top-links navbar-right">
             <!-- /.dropdown -->
             <li class="dropdown">
@@ -196,27 +202,27 @@
                 $echoHtml .= "</a>";
                 $echoHtml .= "<ul class='dropdown-menu dropdown-user'>";
 
-                $echoHtml .= "<li>";
+                $echoHtml .= "<li class='addSubDepartment'>";
                 $echoHtml .= "<a>";
                 $echoHtml .= "添加子部门";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
-                $echoHtml .= "<li>";
+                $echoHtml .= "<li class='modifyDepartment'>";
                 $echoHtml .= "<a>";
                 $echoHtml .= "修改部门";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
                 if($move == "up" || $move == "both") {
-                    $echoHtml .= "<li>";
+                    $echoHtml .= "<li class='moveUp'>";
                     $echoHtml .= "<a>";
                     $echoHtml .= "上移";
                     $echoHtml .= "</a>";
                     $echoHtml .= "</li>";
                 }
                 if($move == "down" || $move == "both") {
-                    $echoHtml .= "<li>";
+                    $echoHtml .= "<li class='moveDown'>";
                     $echoHtml .= "<a>";
                     $echoHtml .= "下移";
                     $echoHtml .= "</a>";
@@ -306,6 +312,7 @@
     <script src="http://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.min.js"></script>
     <!-- Custom JS -->
     <script src="__JS__/qwechat-admin.js"></script>
+    <script src="__JS__/AlertInfo.js"></script>
 
     <style type="text/css">
     .tree {
@@ -340,6 +347,10 @@
 
     <script type="text/javascript">
     $(function () {
+        AlertInfo.init({
+            "selector": ".alert-info"
+        });
+
         // $('.tree li:has(ul)').addClass('parent_li');
         $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
         $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
@@ -367,23 +378,34 @@
                 dropdown.css('display', 'none');
             }
         });
-        $("li.deleteDepartment").click(function(e) {
+        $("li.addSubDepartment").click(function(e) {
             e.preventDefault();
-            bootbox.prompt("What is your name?", function(result) {
-                if (result === null) {
-                    console.log('cancel');
+            bootbox.prompt("请输入子部门名称", function(result) {
+                if(result === null) {
+                    
+                } else if(result.length == 0) {
+                    AlertInfo.show('请输入子部门名称');
                 } else {
-                    console.log(result);
+                    // 执行
                 }
             });
         });
-        $('.tree li > ul.item_line').click(function(e) {
+        $("li.modifyDepartment").click(function(e) {
             e.preventDefault();
-            bootbox.prompt("What is your name?", function(result) {
-                if (result === null) {
-                    console.log('cancel');
+        });
+        $("li.moveUp").click(function(e) {
+            e.preventDefault();
+        });
+        $("li.moveDown").click(function(e) {
+            e.preventDefault();
+        });
+        $("li.deleteDepartment").click(function(e) {
+            e.preventDefault();
+            bootbox.confirm("确定删除改部门？", function(result) {
+                if(result == null) {
+
                 } else {
-                    console.log(result);
+                    // 执行
                 }
             });
         });
