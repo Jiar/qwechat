@@ -66,6 +66,8 @@ class OrganizeController extends BaseController {
 			$backEntity['success'] = 0;
             $backEntity['info'] = L('_UPDATE_FAIL_');
 		}
+		$backEntity['success'] = 0;
+        $backEntity['info'] = array('department_id'=>$department_id, 'department_name'=>$department_name);
 		$this->ajaxReturn(json_encode($backEntity), 'JSON');
 	}
 
