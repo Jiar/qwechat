@@ -392,7 +392,8 @@
                             closeButton: false,
                         });
                         var sup_department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
-
+                        console.log('sup_department_id:'+sup_department_id);
+                        console.log('sub_department_name:'+result);
                         $.ajax({
                             type: 'POST',
                             url: "{:U('Qwechat/Organize/addSubDepartment')}",
