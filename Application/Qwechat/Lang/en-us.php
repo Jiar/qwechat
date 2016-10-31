@@ -49,5 +49,19 @@ return array(
     '_UPDATE_SUCCESS_' => 'update success',
     '_DELETE_FAIL_' => 'delete fail',
     '_DELETE_SUCCESS_' => 'delete success',
-    
+
+    // 部门管理
+    '_ADD_SUB_DEPARTMENT_' => 'add sub department',
+    '_UPDATE_DEPARTMENT_' => 'update department',
+    '_MOVE_UP_' => 'move up',
+    '_MOVE_DOWN_' => 'move down',
+    '_DELETE_DEPARTMENT_' => 'delete department',
+    '_SPREAD_BRANCH_' => 'spread branch',
+    '_FOLDING_BRANCH_' => 'folding branch',
+    '_PLEASE_INPUT_SUB_DEPARTMENT_NAME_' => 'please input sub department name',
+    '_PLEASE_INPUT_NEW_SUB_DEPARTMENT_NAME_' => 'please input new sub department name',
+    '_CONFIRM_TO_DELETE_DEPARTMENT_' => 'confirm to delete department ?',
+    '_NOW_IS_PUSHING__PLEASE_WAIT_' => 'now is pushing, please wait...'
+
+
 );

@@ -20,6 +20,7 @@
 namespace Qwechat\Sdk;
 
 class Qwechat {
+
     const MSGTYPE_TEXT 		= 'text';
     const MSGTYPE_IMAGE 	= 'image';
     const MSGTYPE_LOCATION 	= 'location';
@@ -107,8 +108,7 @@ class Qwechat {
 	public $errMsg = "no access";
 	public $logcallback;
 
-	protected function __construct($options)
-	{
+	protected function __construct($options) {
 		$this->token = isset($options['token'])?$options['token']:'';
 		$this->encodingAesKey = isset($options['encodingaeskey'])?$options['encodingaeskey']:'';
 		$this->appid = isset($options['appid'])?$options['appid']:'';
@@ -118,7 +118,7 @@ class Qwechat {
 		$this->logcallback = isset($options['logcallback'])?$options['logcallback']:false;
 	}
 
-	protected function log($log){
+	protected function log($log) {
 	    if ($this->debug && function_exists($this->logcallback)) {
 	        if (is_array($log)) $log = print_r($log,true);
 	        return call_user_func($this->logcallback,$log);
@@ -142,8 +142,7 @@ class Qwechat {
 	    return $xml;
 	}
 
-	public static function xmlSafeStr($str)
-	{
+	public static function xmlSafeStr($str) {
 	    return '<![CDATA['.preg_replace("/[\\x00-\\x08\\x0b-\\x0c\\x0e-\\x1f]/",'',$str).']]>';
 	}
 
@@ -2260,9 +2259,7 @@ class Prpcrypt
      * @param string $encrypted 需要解密的密文
      * @return string 解密得到的明文
      */
-    public function decrypt($encrypted, $appid)
-    {
-
+    public function decrypt($encrypted, $appid) {
         try {
             //使用BASE64对需要解密的字符串进行解码
             $ciphertext_dec = base64_decode($encrypted);
@@ -2276,8 +2273,6 @@ class Prpcrypt
         } catch (Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
         }
-
-
         try {
             //去除补位字符
             $pkc_encoder = new PKCS7Encoder;
@@ -2297,7 +2292,6 @@ class Prpcrypt
         if ($from_appid != $appid)
             return array(ErrorCode::$ValidateAppidError, null);
         return array(0, $xml_content);
-
     }
 
 
@@ -2305,9 +2299,7 @@ class Prpcrypt
      * 随机生成16位字符串
      * @return string 生成的字符串
      */
-    function getRandomStr()
-    {
-
+    function getRandomStr() {
         $str = "";
         $str_pol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
         $max = strlen($str_pol) - 1;
@@ -2323,8 +2315,8 @@ class Prpcrypt
  * error code
  * 仅用作类内部使用，不用于官方API接口的errCode码
  */
-class ErrorCode
-{
+class ErrorCode {
+
     public static $OK = 0;
     public static $ValidateSignatureError = 40001;
     public static $ParseXmlError = 40002;
@@ -2351,6 +2343,7 @@ class ErrorCode
             '40010'=>'base64解密失败',
             '40011'=>'生成xml失败',
     );
+
     public static function getErrText($err) {
         if (isset(self::$errCode[$err])) {
             return self::$errCode[$err];

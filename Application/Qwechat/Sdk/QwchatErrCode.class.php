@@ -15,6 +15,7 @@
 namespace Qwechat\Sdk;
 
 class ErrCode {
+	
 	public static $errCode=array(
 	        '-1'=>'系统繁忙',
 	        '0'=>'请求成功',

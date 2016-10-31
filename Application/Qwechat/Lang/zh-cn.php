@@ -49,5 +49,20 @@ return array(
     '_UPDATE_SUCCESS_' => '更新成功',
     '_DELETE_FAIL_' => '删除失败',
     '_DELETE_SUCCESS_' => '删除成功',
+
+    // 部门管理
+    '_ADD_SUB_DEPARTMENT_' => '添加子部门',
+    '_UPDATE_DEPARTMENT_' => '更新部门',
+    '_MOVE_UP_' => '上移',
+    '_MOVE_DOWN_' => '下移',
+    '_DELETE_DEPARTMENT_' => '删除部门',
+    '_SPREAD_BRANCH_' => '展开分支',
+    '_FOLDING_BRANCH_' => '折叠分支',
+    '_PLEASE_INPUT_SUB_DEPARTMENT_NAME_' => '请输入子部门名称',
+    '_PLEASE_INPUT_NEW_SUB_DEPARTMENT_NAME_' => '请输入新的部门名称',
+    '_CONFIRM_TO_DELETE_DEPARTMENT_' => '确定删除该部门？',
+    '_NOW_IS_PUSHING__PLEASE_WAIT_' => '正在提交，请稍候...',
+    
+
   
 );

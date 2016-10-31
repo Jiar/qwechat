@@ -204,34 +204,34 @@
 
                 $echoHtml .= "<li class='createSubDepartment'>";
                 $echoHtml .= "<a>";
-                $echoHtml .= "添加子部门";
+                $echoHtml .= "{:L('_ADD_SUB_DEPARTMENT_')}";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
                 $echoHtml .= "<li class='updateDepartment'>";
                 $echoHtml .= "<a>";
-                $echoHtml .= "修改部门";
+                $echoHtml .= "{:L('_UPDATE_DEPARTMENT_')}";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
                 if($move == "up" || $move == "both") {
                     $echoHtml .= "<li class='moveUp'>";
                     $echoHtml .= "<a>";
-                    $echoHtml .= "上移";
+                    $echoHtml .= "{:L('_MOVE_UP_')}";
                     $echoHtml .= "</a>";
                     $echoHtml .= "</li>";
                 }
                 if($move == "down" || $move == "both") {
                     $echoHtml .= "<li class='moveDown'>";
                     $echoHtml .= "<a>";
-                    $echoHtml .= "下移";
+                    $echoHtml .= "{:L('_MOVE_DOWN_')}";
                     $echoHtml .= "</a>";
                     $echoHtml .= "</li>";
                 }
 
                 $echoHtml .= "<li class='deleteDepartment'>";
                 $echoHtml .= "<a>";
-                $echoHtml .= "删除部门";
+                $echoHtml .= "{:L('_DELETE_DEPARTMENT_')}";
                 $echoHtml .= "</a>";
                 $echoHtml .= "</li>";
 
@@ -349,19 +349,19 @@
         AlertInfo.init({
             "selector": ".alert-info"
         });
-        $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-plus']").parent('span').attr('title', '展开分支');
-        $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-minus']").parent('span').attr('title', '折叠分支');
+        $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-plus']").parent('span').attr('title', '{:L('_SPREAD_BRANCH_')}');
+        $(".tree li.parent_li > ul.item_line > span > [class='glyphicon-minus']").parent('span').attr('title', '{:L('_FOLDING_BRANCH_')}');
         $(".tree li:not([class='parent_li item_li'])").find(' > ul.item_line > span').css('display', 'none');
         $('.tree li.parent_li > ul.item_line > span').on('click', function (e) {
             var children = $(this).parent('ul.item_line').parent('li.parent_li').find(' > ul.son_ul > li.item_li');
             if (children.is(":visible")) {
                 children.hide('fast');
                 children.css('display', 'none');
-                $(this).attr('title', '展开分支').find(' > i').addClass('glyphicon-plus').removeClass('glyphicon-minus');
+                $(this).attr('title', '{:L('_SPREAD_BRANCH_')}').find(' > i').addClass('glyphicon-plus').removeClass('glyphicon-minus');
             } else {
                 children.show('fast');
                 children.css('display', 'block');
-                $(this).attr('title', '折叠分支').find(' > i').addClass('glyphicon-minus').removeClass('glyphicon-plus');
+                $(this).attr('title', '{:L('_FOLDING_BRANCH_')}').find(' > i').addClass('glyphicon-minus').removeClass('glyphicon-plus');
             }
             e.stopPropagation();
         });
@@ -378,11 +378,11 @@
         $("li.createSubDepartment").click(function(e) {
             e.preventDefault();
             var sup_department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
-            bootbox.prompt("请输入子部门名称", function(result) {
+            bootbox.prompt("{:L('_PLEASE_INPUT_SUB_DEPARTMENT_NAME_')}", function(result) {
                 if(result != null) {
                     result = $.trim(result);
                     if(result.length == 0) {
-                        AlertInfo.show('请输入子部门名称');
+                        AlertInfo.show('{:L('_PLEASE_INPUT_SUB_DEPARTMENT_NAME_')}');
                     } else {
                         var dialog;
                         $.ajax({
@@ -392,7 +392,7 @@
                             dataType: 'json',
                             beforeSend : function(){
                                 dialog = bootbox.dialog({
-                                    message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
+                                    message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
                                     closeButton: false,
                                 });
                             },
@@ -416,11 +416,11 @@
         $("li.updateDepartment").click(function(e) {
             e.preventDefault();
             var department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
-            bootbox.prompt("请输入新的部门名称", function(result) {
+            bootbox.prompt("{:L('_PLEASE_INPUT_NEW_SUB_DEPARTMENT_NAME_')}", function(result) {
                 if(result != null) {
                     result = $.trim(result);
                     if(result.length == 0) {
-                        AlertInfo.show('请输入新的部门名称');
+                        AlertInfo.show('{:L('_PLEASE_INPUT_NEW_SUB_DEPARTMENT_NAME_')}');
                     } else {
                         var dialog;
                         $.ajax({
@@ -430,7 +430,7 @@
                             dataType: 'json',
                             beforeSend : function(){
                                 dialog = bootbox.dialog({
-                                    message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
+                                    message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
                                     closeButton: false,
                                 });
                             },
@@ -460,7 +460,7 @@
         $("li.deleteDepartment").click(function(e) {
             e.preventDefault();
             var department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
-            bootbox.confirm("确定删除改部门？", function(result) {
+            bootbox.confirm("{:L('_CONFIRM_TO_DELETE_DEPARTMENT_')}", function(result) {
                 if(result != null) {
                     var dialog;
                     $.ajax({
@@ -470,7 +470,7 @@
                         dataType: 'json',
                         beforeSend : function(){
                             dialog = bootbox.dialog({
-                                message: '<p><i class="fa fa-spin fa-spinner"></i>正在提交，请稍候...</p>',
+                                message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
                                 closeButton: false,
                             });
                         },
