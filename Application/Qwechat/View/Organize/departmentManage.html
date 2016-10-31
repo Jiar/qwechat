@@ -424,6 +424,7 @@
                         AlertInfo.show('请输入新的部门名称');
                     } else {
                         var dialog;
+                        console.log("department_id:"+department_id);
                         $.ajax({
                             type: 'POST',
                             url: "{:U('Qwechat/Organize/updateDepartment')}",
@@ -464,6 +465,7 @@
             bootbox.confirm("确定删除改部门？", function(result) {
                 if(result != null) {
                     var dialog;
+                    console.log("department_id:"+department_id);
                     $.ajax({
                         type: 'POST',
                         url: "{:U('Qwechat/Organize/deleteDepartment')}",

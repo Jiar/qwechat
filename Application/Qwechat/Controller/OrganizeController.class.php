@@ -61,7 +61,7 @@ class OrganizeController extends BaseController {
 		if(D('QwechatDepartment')->updateDepartment($department_id, $department_name)) {
 			// $this->redirect('Organize/departmentManage' ,array($reFetch=>true));
 			$backEntity['success'] = 1;
-            $backEntity['info'] = L('_UPDATE_FAIL_');
+            $backEntity['info'] = L('_UPDATE_SUCCESS_');
 		} else {
 			$backEntity['success'] = 0;
             $backEntity['info'] = L('_UPDATE_FAIL_');
