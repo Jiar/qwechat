@@ -62,6 +62,8 @@ class QwechatDepartmentModel extends Model {
     $weObj = TPWechat::getInstance();
     $data['id'] = $department_id;
     $data['name'] = $department_name;
+    trace('department_id:', $department_id);
+    trace('department_name:', $department_name);
     return $weObj->updateDepartment($data);
   }
 
@@ -74,6 +76,7 @@ class QwechatDepartmentModel extends Model {
    */
   public function deleteDepartment($department_id) {
     $weObj = TPWechat::getInstance();
+    trace('department_id:', $department_id);
     return $weObj->deleteDepartment($department_id);
   }
 
