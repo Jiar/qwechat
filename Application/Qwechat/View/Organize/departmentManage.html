@@ -461,6 +461,7 @@
             e.preventDefault();
             var department_id = $(this).parent('ul.dropdown-menu').parent('li.dropdown').parent('ul.item_line').find(' > input.sup_department_id').attr('name');
             bootbox.confirm("{:L('_CONFIRM_TO_DELETE_DEPARTMENT_')}", function(result) {
+                console.log(result);
                 if(result != null) {
                     var dialog;
                     $.ajax({
