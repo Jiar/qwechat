@@ -380,7 +380,7 @@
         });
         $("li.addSubDepartment").click(function(e) {
             e.preventDefault();
-            var addSubDepartment = $(this);
+            var addSubDepartment = e;
             bootbox.prompt("请输入子部门名称", function(result) {
                 if(result != null) {
                     result = $.trim(result);
