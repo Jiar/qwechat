@@ -378,9 +378,10 @@
                 dropdown.css('display', 'none');
             }
         });
-        $("li.addSubDepartment").click(function(e) {
-            e.preventDefault();
-            var addSubDepartment = $(this);
+        $("li.addSubDepartment").click(function(event) {
+            event.preventDefault();
+            var target = $(event.target);
+            var addSubDepartment = target;
             bootbox.prompt("请输入子部门名称", function(result) {
                 if(result != null) {
                     result = $.trim(result);
