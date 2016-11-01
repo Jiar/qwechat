@@ -57,10 +57,10 @@ class QwechatMemberModel extends Model {
             if(count($departmentStr) != 0) {
                 $departmentStr .= ',';
             }
-            $member['department'] = $departmentStr;
+            &$member['department'] = $departmentStr;
         }
-        echo '</br>';
-        echo '</br>';
+        echo PHP_EOL;
+        echo PHP_EOL;
         var_dump($members);
         if($members['errcode'] == 0) {
             $members = $members['userlist'];
