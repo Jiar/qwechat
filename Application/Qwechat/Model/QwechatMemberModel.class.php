@@ -62,9 +62,6 @@ class QwechatMemberModel extends Model {
                 $member['department'] = $departmentStr;
                 array_push($members, $member);
             }
-            echo '</ br>';
-            echo '</ br>';
-            var_dump($members);
             M("QwechatMember")->where('1')->delete();
             // 如果使用addAll，会出现如果某个字段没有值，则报错的现象（听说这是个Bug。3.2.3有这个问题，3.2.2没有这个问题）
             // M("QwechatMember")->addAll($members);
