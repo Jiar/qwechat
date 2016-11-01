@@ -386,17 +386,17 @@
                     if(result.length == 0) {
                         AlertInfo.show('{:L('_PLEASE_INPUT_SUB_DEPARTMENT_NAME_')}');
                     } else {
-                        var dialog;
+                        dialog = bootbox.dialog({
+                                    message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
+                                    closeButton: false,
+                                });
                         $.ajax({
                             type: 'POST',
                             url: "{:U('Qwechat/Organize/createSubDepartment')}",
                             data: {'sup_department_id': sup_department_id, 'sub_department_name': result},
                             dataType: 'json',
                             beforeSend : function(){
-                                dialog = bootbox.dialog({
-                                    message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
-                                    closeButton: false,
-                                });
+                                
                             },
                             success: function (msg, status) {
                                 dialog.modal('hide');
