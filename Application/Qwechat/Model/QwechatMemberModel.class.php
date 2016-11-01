@@ -44,27 +44,27 @@ class QwechatMemberModel extends Model {
     private function getUserListInfoFromQwechatToSave($department_id=1,$fetch_child=1,$status=0) {
         //从微信企业号后台请求所有成员覆盖本地数据库的同时也需要从微信企业号后台请求所有部门覆盖本地数据库
         $membersBf = $this->getUserListInfoFromQwechat($department_id,$fetch_child,$status);
-        $members = array();
-        $membersCount = count($membersBf);
-        for($i=0;$i<$membersCount;$i++) {
-            $member = $membersBf[$i];
-            $departmentArr = $member['department'];
-            $departmentArrCount = count($departmentArr);
-            $departmentStr = '';
-            for($j=0;$j<$departmentArrCount;$j++) {
-                $departmentStr .= ',' .$departmentArr[$j];
+        if($membersBf['errcode'] == 0) {
+            $membersBf = $membersBf['userlist'];
+            $members = array();
+            $membersCount = count($membersBf);
+            for($i=0;$i<$membersCount;$i++) {
+                $member = $membersBf[$i];
+                $departmentArr = $member['department'];
+                $departmentArrCount = count($departmentArr);
+                $departmentStr = '';
+                for($j=0;$j<$departmentArrCount;$j++) {
+                    $departmentStr .= ',' .$departmentArr[$j];
+                }
+                if(count($departmentStr) != 0) {
+                    $departmentStr .= ',';
+                }
+                $member['department'] = $departmentStr;
+                array_push($members, $member);
             }
-            if(count($departmentStr) != 0) {
-                $departmentStr .= ',';
-            }
-            $member['department'] = $departmentStr;
-            array_push($members, $member);
-        }
-        echo '</ br>';
-        echo '</ br>';
-        var_dump($members);
-        if($members['errcode'] == 0) {
-            $members = $members['userlist'];
+            echo '</ br>';
+            echo '</ br>';
+            var_dump($members);
             M("QwechatMember")->where('1')->delete();
             M("QwechatMember")->addAll($members);
         }
