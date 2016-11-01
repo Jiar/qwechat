@@ -135,7 +135,7 @@ class QwechatMemberModel extends Model {
      * @return 部门Id集合
      */
     private function getSubDepartmentIds($department_id) {
-        $list = M("QwechatDepartment")->getField('id,parentid')->select();
+        $list = M("QwechatDepartment")->getField('id,parentid');
         $result = array();
         array_push($result, $department_id);
         return $this->recursionSubDepartmentIds($list, $result, $department_id);
