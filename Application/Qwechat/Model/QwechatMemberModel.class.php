@@ -66,7 +66,10 @@ class QwechatMemberModel extends Model {
             echo '</ br>';
             var_dump($members);
             M("QwechatMember")->where('1')->delete();
-            M("QwechatMember")->addAll($members);
+            // M("QwechatMember")->addAll($members);
+            foreach ($members as $member) {
+                M("QwechatMember")->add($member);
+            }
         }
     }
 
