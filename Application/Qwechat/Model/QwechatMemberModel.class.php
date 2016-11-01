@@ -123,11 +123,11 @@ class QwechatMemberModel extends Model {
             foreach($departmentIds as $departmentId) {
                 array_push($result, ','.$departmentId.',');
             }
-            var_dump($result);
+            trace('$result:'.$result);
             $where['department'] = array('like',$result,'OR');
         }
-        var_dump($where);
-        // return M('QwechatMember')->distinct(true)->where($where)->select(); 
+        trace('$where:'.$where);
+        return M('QwechatMember')->distinct(true)->where($where)->select(); 
     }
 
     /**
@@ -138,9 +138,11 @@ class QwechatMemberModel extends Model {
      */
     private function getSubDepartmentIds($department_id) {
         $list = M("QwechatDepartment")->getField('id,parentid');
+        trace('$list:'.$list);
         $result = array();
         array_push($result, $department_id);
-        return $this->recursionSubDepartmentIds($list, $result, $department_id);
+        $this->recursionSubDepartmentIds($list, $result, $department_id);
+        return $result;
     }
 
     /**
