@@ -125,7 +125,7 @@ class QwechatMemberModel extends Model {
             }
             $where['department'] = array('like',$result,'OR');
         }
-        return M('QwechatMember')->where($where)->distinct(true)->select(); 
+        return M('QwechatMember')->distinct(true)->where($where)->select(); 
     }
 
     /**
