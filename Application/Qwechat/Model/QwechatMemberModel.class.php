@@ -126,7 +126,7 @@ class QwechatMemberModel extends Model {
         if($fetch_child == 0) {
             $where['department']=array('like',','.$department_id.',');
         } else if($fetch_child == 1) {
-            $departmentIds = getSubDepartmentIds($department_id);
+            $departmentIds = $this->getSubDepartmentIds($department_id);
             $result = array();
             foreach($departmentIds as $departmentId) {
                 array_push($result, ','.$departmentId.',');
