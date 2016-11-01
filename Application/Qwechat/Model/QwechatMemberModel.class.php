@@ -47,7 +47,7 @@ class QwechatMemberModel extends Model {
         var_dump($members);
         $membersCount = count($members);
         for($i=0;$i<$membersCount;$i++) {
-            $member = $members[$i];
+            $member = &$members[$i];
             $departmentArr = $member['department'];
             $departmentArrCount = count($departmentArr);
             $departmentStr = '';
