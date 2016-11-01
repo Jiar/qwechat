@@ -15,8 +15,6 @@ class QwechatMemberModel extends Model {
     protected $_validate = array(
         array('userid','require','成员userId不能为空', self::EXISTS_VALIDATE),
         array('name','require','成员名称不能为空', self::EXISTS_VALIDATE),
-        array('mobile','require','成员手机号不能为空', self::EXISTS_VALIDATE),
-        array('weixinid','require','成员微信Id不能为空', self::EXISTS_VALIDATE),
     );
 
     /********************** Controller's Function 对应 Model 操作 -start **********************/
