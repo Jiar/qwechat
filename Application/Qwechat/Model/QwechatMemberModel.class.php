@@ -45,6 +45,23 @@ class QwechatMemberModel extends Model {
         //从微信企业号后台请求所有成员覆盖本地数据库的同时也需要从微信企业号后台请求所有部门覆盖本地数据库
         $members = $this->getUserListInfoFromQwechat($department_id,$fetch_child,$status);
         var_dump($members);
+        $membersCount = count($members);
+        for(int $i=0;$i<$membersCount;$i++) {
+            $member = $members[$i];
+            $departmentArr = $member['department'];
+            $departmentArrCount = count($departmentArr);
+            $departmentStr = '';
+            for(int $j=0;$j<$departmentArrCount;$j++) {
+                $departmentStr .= ',' .$departmentArr[$j];
+            }
+            if(count($departmentStr) != 0) {
+                $departmentStr .= ',';
+            }
+            $member['department'] = $departmentStr;
+        }
+        echo '</br>';
+        echo '</br>';
+        var_dump($members);
         if($members['errcode'] == 0) {
             $members = $members['userlist'];
             M("QwechatMember")->where('1')->delete();
