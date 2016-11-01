@@ -160,7 +160,7 @@ class QwechatMemberModel extends Model {
      * @return 部门Id集合
      */
     private function getSubDepartmentIds($department_id) {
-        $list = M("QwechatMember")->getField('id,parentid');
+        $list = M("QwechatDepartment")->getField('id, parentid');
         trace('$list:'.$list);
         $result = array();
         array_push($result, $department_id);
