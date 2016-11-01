@@ -46,12 +46,12 @@ class QwechatMemberModel extends Model {
         $members = $this->getUserListInfoFromQwechat($department_id,$fetch_child,$status);
         var_dump($members);
         $membersCount = count($members);
-        for(int $i=0;$i<$membersCount;$i++) {
+        for($i=0;$i<$membersCount;$i++) {
             $member = $members[$i];
             $departmentArr = $member['department'];
             $departmentArrCount = count($departmentArr);
             $departmentStr = '';
-            for(int $j=0;$j<$departmentArrCount;$j++) {
+            for($j=0;$j<$departmentArrCount;$j++) {
                 $departmentStr .= ',' .$departmentArr[$j];
             }
             if(count($departmentStr) != 0) {
