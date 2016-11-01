@@ -26,7 +26,7 @@ class QwechatMemberModel extends Model {
      * @param  $reFetch       true:从微信企业号后台获取(同时覆盖本地数据) false:从本地数据库获取
      * @return 成员集合
      */
-    public function getUserListInfo($department_id=0,$fetch_child=1,$status=0,$reFetch=false) {
+    public function getUserListInfo($department_id=1,$fetch_child=1,$status=0,$reFetch=false) {
         if($reFetch || D('QwechatMember')->Count() == 0) {
             $this->getUserListInfoFromQwechatToSave($department_id,$fetch_child,$status);
         }
@@ -41,7 +41,7 @@ class QwechatMemberModel extends Model {
     /**
     * 从微信企业号后台请求所有成员覆盖本地数据库
     */
-    private function getUserListInfoFromQwechatToSave($department_id=0,$fetch_child=1,$status=0) {
+    private function getUserListInfoFromQwechatToSave($department_id=1,$fetch_child=1,$status=0) {
         //从微信企业号后台请求所有成员覆盖本地数据库的同时也需要从微信企业号后台请求所有部门覆盖本地数据库
         $members = $this->getUserListInfoFromQwechat($department_id,$fetch_child,$status);
         var_dump($members);
@@ -80,7 +80,7 @@ class QwechatMemberModel extends Model {
      *      ]
      * }
      */
-    private function getUserListInfoFromQwechat($department_id=0,$fetch_child=1,$status=0) {
+    private function getUserListInfoFromQwechat($department_id=1,$fetch_child=1,$status=0) {
         $weObj = TPWechat::getInstance();
         return $weObj->getUserListInfo($department_id, $fetch_child, $status);
     }
@@ -93,7 +93,7 @@ class QwechatMemberModel extends Model {
      * @param $status          0获取全部员工，1获取已关注成员列表，2获取禁用成员列表，4获取未关注成员列表。status可叠加
      * @return 成员集合
      */
-    private function getUserListInfoFromLocal($department_id=0,$fetch_child=1,$status=0) {
+    private function getUserListInfoFromLocal($department_id=1,$fetch_child=1,$status=0) {
         $where = array();
         if($status == 0) {
             $where['status'] = 0;
