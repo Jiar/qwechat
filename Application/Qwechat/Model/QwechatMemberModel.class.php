@@ -66,6 +66,7 @@ class QwechatMemberModel extends Model {
             echo '</ br>';
             var_dump($members);
             M("QwechatMember")->where('1')->delete();
+            // 如果使用addAll，会出现如果某个字段没有值，则报错的现象（听说这是个Bug。3.2.3有这个问题，3.2.2没有这个问题）
             // M("QwechatMember")->addAll($members);
             foreach ($members as $member) {
                 M("QwechatMember")->add($member);
@@ -159,7 +160,7 @@ class QwechatMemberModel extends Model {
      * @return 部门Id集合
      */
     private function getSubDepartmentIds($department_id) {
-        $list = M("QwechatDepartment")->getField('id,parentid');
+        $list = M("QwechatMember")->getField('id,parentid');
         trace('$list:'.$list);
         $result = array();
         array_push($result, $department_id);
