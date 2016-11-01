@@ -19,7 +19,7 @@ class EmployeeController extends BaseController {
      * @param  $reFetch       true:从微信企业号后台获取(同时覆盖本地数据) false:从本地数据库获取
      * @return 成员集合
      */
-    public function employeeManage_action($department_id=0,$fetch_child=1,$status=0,$reFetch=false) {
+    public function employeeManage_action($department_id=1,$fetch_child=1,$status=0,$reFetch=false) {
     	$members = D('QwechatMember')->getUserListInfo($department_id,$fetch_child,$status,$reFetch);
     	$this->assign('members', $members);
     	$this->display('Employee/employeeManage');
