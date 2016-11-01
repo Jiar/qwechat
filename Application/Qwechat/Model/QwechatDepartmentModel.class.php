@@ -14,9 +14,9 @@ class QwechatDepartmentModel extends Model {
   
   protected $patchValidate = ture;
   protected $_validate = array(
-    array('name','require','应用名称不能为空', self::EXISTS_VALIDATE),
-    array('name', '0,100', '应用名称太长', self::EXISTS_VALIDATE, 'length'),
     array('id','number','id必须为数字', self::EXISTS_VALIDATE),
+    array('name','require','应用名称不能为空', self::EXISTS_VALIDATE),
+    array('name', '0,32', '应用名称太长', self::EXISTS_VALIDATE, 'length'),
     array('parentid','number','parentid必须为数字', self::EXISTS_VALIDATE),
     array('order','number','order必须为数字', self::EXISTS_VALIDATE),
   );

@@ -9,8 +9,8 @@ use Qwechat\Sdk\TPWechat;
 use Qwechat\Sdk\errCode;
 
 /**
-* 基础控制器
-*/
+ * 基础控制器
+ */
 class BaseController extends Controller {
 	
 	function _initialize() {

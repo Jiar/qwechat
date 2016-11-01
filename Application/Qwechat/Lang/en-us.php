@@ -61,7 +61,11 @@ return array(
     '_PLEASE_INPUT_SUB_DEPARTMENT_NAME_' => 'please input sub department name',
     '_PLEASE_INPUT_NEW_SUB_DEPARTMENT_NAME_' => 'please input new sub department name',
     '_CONFIRM_TO_DELETE_DEPARTMENT_' => 'confirm to delete department ?',
-    '_NOW_IS_PUSHING__PLEASE_WAIT_' => 'now is pushing, please wait...'
+    '_NOW_IS_PUSHING__PLEASE_WAIT_' => 'now is pushing, please wait...',
+    '_REFRESH_DEPARTMENT_' => 'Refresh department',
+
+    // 员工管理
+    '_REFRESH_EMPLOYEE_' => 'Refresh employee',
 
 
 );

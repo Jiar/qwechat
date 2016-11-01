@@ -9,15 +9,15 @@ use Qwechat\Model\QwechatModel;
 use Qwechat\Model\QwechatConfigModel;
 
 /**
-* 应用管理分栏控制器
-*/
+ * 应用管理分栏控制器
+ */
 class ApplicationController extends BaseController {
 	
 	/**
-	* 应用管理
-	*
-	* 分页获取企业应用列表
-	*/
+	 * 应用管理
+	 *
+	 * 分页获取企业应用列表
+	 */
 	public function applicationManage_action($page = 1, $row = 20) {
 		// $mode = new QwechatModel();
 		// $result = $mode -> applicationManage($page, $row);
@@ -27,8 +27,8 @@ class ApplicationController extends BaseController {
 	}
 
 	/**
-	* 基础配置
-	*/
+	 * 基础配置
+	 */
 	public function basicConfig_action($corpid = '', $corpsecret = '') {
 		if(IS_POST) {
 			$corpid = I('post.corpid');

@@ -124,6 +124,40 @@
                 <h1 class="page-header"> {:L('_EMPLOYEEMANAGE_SUB1_')}</h1>
             </div>
             <!-- /.col-lg-12 -->
+
+            <a type="button" class="btn btn-default" href="{:U('Qwechat/Employee/employeeManage', array('department_id'=>0, 'fetch_child'=>1, 'status'=>0, 'reFetch'=>true))}">{:L('_REFRESH_EMPLOYEE_')}</a>
+
+            <div style="margin-right: 0;
+                        margin-left: 0;
+                        background-color: #fff;
+                        border-color: #ddd;
+                        border-width: 1px;
+                        border-radius: 4px;
+                        -webkit-box-shadow: none;
+                        box-shadow: none;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>姓名/th>
+                      <th>账号</th>
+                      <th>手机</th>
+                      <th>邮箱</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <volist name="members" id="member">
+                        <td>{$member.userid}</td>
+                        <td><img src="{$member.avatar}" style="width: 30px; height: 30px;">{$member.name}</td>
+                        <td>{$member.weixinid}</td>
+                        <td>{$member.mobile}</td>
+                        <td>{$member.email}</td>
+                      </volist>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
         </div>
 
 

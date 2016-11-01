@@ -6,27 +6,27 @@
 namespace Qwechat\Controller;
 
 /**
-* 组织设置分栏控制器
-*/
+ * 组织设置分栏控制器
+ */
 class OrganizeController extends BaseController {
 
 	/**
-	* 集团设置
-	*/
+	 * 集团设置
+	 */
 	public function groupSettings_action() {
 		$this->display('Organize/groupSettings');
 	}
 
 	/**
-	* 分店管理
-	*/
+	 * 分店管理
+	 */
 	public function branchManage_action() {
 		$this->display('Organize/branchManage');
 	}
 
 	/**
-	* 部门管理
-	*/
+	 * 部门管理
+	 */
 	public function departmentManage_action($reFetch=false) {
 		$departments = D('QwechatDepartment')->departmentManage($reFetch);
 		$this->assign('departments', $departments);

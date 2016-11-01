@@ -62,6 +62,11 @@ return array(
     '_PLEASE_INPUT_NEW_SUB_DEPARTMENT_NAME_' => '请输入新的部门名称',
     '_CONFIRM_TO_DELETE_DEPARTMENT_' => '确定删除该部门？',
     '_NOW_IS_PUSHING__PLEASE_WAIT_' => '正在提交，请稍候...',
+    '_REFRESH_DEPARTMENT_' => '下拉部门',
+
+    // 员工管理
+    '_REFRESH_EMPLOYEE_' => '下拉员工',
+    
     
 
   

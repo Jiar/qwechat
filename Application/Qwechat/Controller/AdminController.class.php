@@ -12,7 +12,9 @@ use Think\Controller;
  */
 class AdminController extends Controller {
 
-    // 进入主界面
+    /**
+     * 进入主界面
+     */
     public function admin_action() {
         if(session('?adminId') && session('?adminToken')) {
             $this->redirect('Qwechat/qwechat');
@@ -21,7 +23,9 @@ class AdminController extends Controller {
         }
     }
 
-    // 进入登录、注册界面
+    /**
+     * 进入登录、注册界面
+     */
     public function login_action() {
         if(session('?adminId') && session('?adminToken')) {
             $this->redirect('Admin/admin');
@@ -30,7 +34,9 @@ class AdminController extends Controller {
         }
     }
 
-    // 进入注册界面
+    /**
+     * 进入注册界面
+     */
     public function register_action() {
         if(session('?adminId') && session('?adminToken')) {
             $this->redirect('Admin/admin');
@@ -39,7 +45,9 @@ class AdminController extends Controller {
         }
     }
 
-    // 登录操作
+    /**
+     * 登录操作
+     */
     public function signin_action() {
         if(session('?adminId') && session('?adminToken')) {
             $this->redirect('Admin/admin');
@@ -94,7 +102,9 @@ class AdminController extends Controller {
         }
     }
 
-    // 注册操作
+    /**
+     * 注册操作
+     */
     public function signup_action() {
         $name = I('post.name');
         $data['name'] = $name;
@@ -119,7 +129,9 @@ class AdminController extends Controller {
         }
     }
 
-    // 退出操作
+    /**
+     * 退出操作
+     */
     public function signout_action() {
         session('[destroy]');
         session('[regenerate]');
@@ -128,7 +140,10 @@ class AdminController extends Controller {
         $this->redirect('Admin/login');
     }
 
-    // 登录后保存session和cookie
+    /**
+     * 登录后保存session和cookie
+     * @param  $result 管理员信息
+     */
     private function saveDataBySignin($result) {
         if(count($result) != 0) {
             $id = $result['id'];
@@ -148,7 +163,12 @@ class AdminController extends Controller {
         }
     }
 
-    // 检查注册信息中的name、email是否是审核被拒绝的管理员，如果是，返回id
+    /**
+     * 检查注册信息中的name、email是否是审核被拒绝的管理员，如果是，返回id
+     * 
+     * @param  $name  名字
+     * @param  $email 邮箱
+     */
     private function getExamineRefuseId($name, $email) {
         $admin = D("Admin");
         $result = $admin->getByName($name);
