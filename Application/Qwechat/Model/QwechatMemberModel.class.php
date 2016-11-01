@@ -114,9 +114,7 @@ class QwechatMemberModel extends Model {
      */
     private function getUserListInfoFromLocal($department_id=1,$fetch_child=1,$status=0) {
         $where = array();
-        if($status == 0) {
-            $where['status'] = 0;
-        } else if(status == 1) {
+        if(status == 1) {
             $where['status'] = 1;
         } else if(status == 2) {
             $where['status'] = 2;
@@ -131,7 +129,7 @@ class QwechatMemberModel extends Model {
         } else if(status == 6) {
             // $where['status'] = array('in','2,4');
             $where['status'] = array('in',array(2, 4));
-        } else if(status == 7) {
+        } else if(status == 0 || status == 7) {
             // $where['status'] = array('in','1,2,4');
             $where['status'] = array('in',array(1, 2, 4));
         }
@@ -151,7 +149,7 @@ class QwechatMemberModel extends Model {
         echo '$where:';
         var_dump($where);
         echo '</br></br>';
-        return M('QwechatMember')->distinct(true)->where($where)->select(); 
+        return M('QwechatMember')->where($where)->distinct(true)->select(); 
     }
 
     /**

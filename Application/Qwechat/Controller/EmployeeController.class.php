@@ -21,7 +21,7 @@ class EmployeeController extends BaseController {
      */
     public function employeeManage_action($department_id=1,$fetch_child=1,$status=0,$reFetch=false) {
     	$members = D('QwechatMember')->getUserListInfo($department_id,$fetch_child,$status,$reFetch);
-        echo '$result:';
+        echo '$members:';
         var_dump($members);
         echo '</br></br>';
     	$this->assign('members', $members);
