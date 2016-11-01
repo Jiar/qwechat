@@ -133,4 +133,5 @@ class QwechatDepartmentModel extends Model {
 
   /********************** private -end **********************/
 
+
 }
