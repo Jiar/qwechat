@@ -123,9 +123,11 @@ class QwechatMemberModel extends Model {
             foreach($departmentIds as $departmentId) {
                 array_push($result, ','.$departmentId.',');
             }
+            var_dump($result);
             $where['department'] = array('like',$result,'OR');
         }
-        return M('QwechatMember')->distinct(true)->where($where)->select(); 
+        var_dump($where);
+        // return M('QwechatMember')->distinct(true)->where($where)->select(); 
     }
 
     /**
