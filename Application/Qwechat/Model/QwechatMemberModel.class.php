@@ -43,11 +43,12 @@ class QwechatMemberModel extends Model {
     */
     private function getUserListInfoFromQwechatToSave($department_id=1,$fetch_child=1,$status=0) {
         //从微信企业号后台请求所有成员覆盖本地数据库的同时也需要从微信企业号后台请求所有部门覆盖本地数据库
-        $members = $this->getUserListInfoFromQwechat($department_id,$fetch_child,$status);
-        var_dump($members);
-        $membersCount = count($members);
+        $membersBf = $this->getUserListInfoFromQwechat($department_id,$fetch_child,$status);
+        var_dump($membersBf);
+        $members = array();
+        $membersCount = count($membersBf);
         for($i=0;$i<$membersCount;$i++) {
-            $member = &$members[$i];
+            $member = $membersBf[$i];
             $departmentArr = $member['department'];
             $departmentArrCount = count($departmentArr);
             $departmentStr = '';
@@ -57,11 +58,11 @@ class QwechatMemberModel extends Model {
             if(count($departmentStr) != 0) {
                 $departmentStr .= ',';
             }
-            $department = &$member['department'];
-            $department = $departmentStr;
+            $member['department'] = $departmentStr;
+            array_push($members, $member);
         }
-        echo PHP_EOL;
-        echo PHP_EOL;
+        echo '</ br>';
+        echo '</ br>';
         var_dump($members);
         if($members['errcode'] == 0) {
             $members = $members['userlist'];
