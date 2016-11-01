@@ -47,7 +47,7 @@ class QwechatMemberModel extends Model {
         if($membersBf['errcode'] == 0) {
             $membersBf = $membersBf['userlist'];
             $members = array();
-            $membersCount = count($membersBf);
+            $membersBfCount = count($membersBf);
             for($i=0;$i<$membersCount;$i++) {
                 $member = $membersBf[$i];
                 $departmentArr = $member['department'];
