@@ -43,24 +43,12 @@ class QwechatMemberModel extends Model {
     */
     private function getUserListInfoFromQwechatToSave($department_id=0,$fetch_child=1,$status=0) {
         //从微信企业号后台请求所有成员覆盖本地数据库的同时也需要从微信企业号后台请求所有部门覆盖本地数据库
-        $this->getDepartmentFromQwechatToSave();
         $members = $this->getUserListInfoFromQwechat($department_id,$fetch_child,$status);
-        if($members['errmsg'] == 'ok') {
+        if($members['errcode'] == 0) {
             $members = $members['userlist'];
             M("QwechatMember")->where('1')->delete();
             M("QwechatMember")->addAll($members);
         }
-    }
-
-    /**
-    * 从微信企业号后台请求所有部门覆盖本地数据库
-    */
-    private function getDepartmentFromQwechatToSave() {
-        $weObj = TPWechat::getInstance();
-        $departments = $weObj->getDepartment();
-        $departments = $departments['department'];
-        M("QwechatDepartment")->where('1')->delete();
-        M("QwechatDepartment")->addAll($departments);
     }
 
     /**
@@ -115,13 +103,17 @@ class QwechatMemberModel extends Model {
         } else if(status == 4) {
             $where['status'] = 4;
         } else if(status == 3) {
-            $where['status'] = array('in','1,2');
+            // $where['status'] = array('in','1,2');
+            $where['status'] = array('in',array(1, 2));
         } else if(status == 5) {
-            $where['status'] = array('in','1,4');
+            // $where['status'] = array('in','1,4');
+            $where['status'] = array('in',array(1, 4));
         } else if(status == 6) {
-            $where['status'] = array('in','2,4');
+            // $where['status'] = array('in','2,4');
+            $where['status'] = array('in',array(2, 4));
         } else if(status == 7) {
-            $where['status'] = array('in','1,2,4');
+            // $where['status'] = array('in','1,2,4');
+            $where['status'] = array('in',array(1, 2, 4));
         }
         if($fetch_child == 0) {
             $where['department']=array('like',','.$department_id.',');
@@ -143,7 +135,7 @@ class QwechatMemberModel extends Model {
      * @return 部门Id集合
      */
     private function getSubDepartmentIds($department_id) {
-        $list = M("QwechatDepartment")->getField('id,parentid');
+        $list = M("QwechatDepartment")->getField('id,parentid')->select();
         $result = array();
         array_push($result, $department_id);
         return $this->recursionSubDepartmentIds($list, $result, $department_id);
