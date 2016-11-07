@@ -243,7 +243,7 @@
                                 var result = eval("("+msg+")");
                                 AlertInfo.show(result.info);
                                 if (result.success === 1) {
-                                    window.location.href="{:U('Qwechat/Employee/employeeManage', array('reFetch'=>true))}"; 
+                                    // window.location.href="{:U('Qwechat/Employee/employeeManage', array('reFetch'=>true))}"; 
                                 }
                             },
                             error: function (xhr, desc, err) {
