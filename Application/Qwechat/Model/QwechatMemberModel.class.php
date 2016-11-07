@@ -39,7 +39,9 @@ class QwechatMemberModel extends Model {
      * @return 员工详情
      */
     public function getEmployeeDetail($userid) {
-        return D('QwechatMember')->find($userid);
+        $member = D('QwechatMember')->find($userid);
+        trace($member);
+        return $member;
     }
 
     /********************** Controller's Function 对应 Model 操作 -end **********************/
