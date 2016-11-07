@@ -17,6 +17,7 @@
     <link href="http://cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="__CSS__/qwechat-admin.css" rel="stylesheet">
+    <link href="__CSS__/common-jiar.css" rel="stylesheet">
 
 </head>
 
@@ -221,7 +222,7 @@
             $("#deleteEmployee").click(function() {
                 var checkedMemberIds =[]; 
                 console.log("123456");
-                $("#members tbody tr td input.memberIds[type=checkbox]:checked").each(function(){ 
+                $("#members tbody tr td input.memberIds[type=checkbox]").each(function(){ 
                     console.log($(this).val());
                     checkedMemberIds.push($(this).val()); 
                 }); 
