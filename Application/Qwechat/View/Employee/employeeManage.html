@@ -206,7 +206,10 @@
 <!-- /#wrapper -->
 
     <script type="text/javascript">
-        $(function() {
+        $(function () {
+            AlertInfo.init({
+                "selector": ".alert-info"
+            });
             $("#deleteEmployee").click(function() {
                 var checkedMemberIds =[]; 
                 $("table.members > tbody tr td > input.memberIds[type=checkbox]:checked").each(function(){ 
@@ -240,7 +243,7 @@
                         });
                 }
             });
-        })
+        });
     </script>
 
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
