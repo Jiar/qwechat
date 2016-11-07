@@ -221,17 +221,11 @@
             });
             $("#deleteEmployee").click(function() {
                 var checkedMemberIds =[]; 
-                console.log("123456");
-                $('input[name="memberIds"]:checked').each(function(){
+                $('#members tbody tr td input[name="memberIds"]:checked').each(function(){
                     console.log($(this).val());
                     checkedMemberIds.push($(this).val());
                 });
-                $("#members tbody tr td input.memberIds[type=checkbox]").each(function(){ 
-                    console.log($(this).val());
-                    checkedMemberIds.push($(this).val()); 
-                }); 
                 if(checkedMemberIds.length == 0) {
-                    console.log("哈哈哈");
                     AlertInfo.show('{:L('_PLEASE_CHECK_BOX_FIRST_')}');
                 } else {
                     dialog = bootbox.dialog({
