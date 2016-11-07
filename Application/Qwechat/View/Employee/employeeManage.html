@@ -148,8 +148,8 @@
                 </thead>
                 <tbody>
                     <volist name="members" id="member">
-                        <a href="{:U('Qwechat/Employee/employeeDetail'), array('userid' => $member.userid)}">
                         <tr>
+                            <a href="{:U('Qwechat/Employee/employeeDetail'), array('userid' => $member.userid)}">
                             <td>{$member.userid}</td>
                             <td><img src="{$member.avatar}" 
                             alt="{$member.name}"
@@ -162,8 +162,8 @@
                             <td>{$member.weixinid}</td>
                             <td>{$member.mobile}</td>
                             <td>{$member.email}</td>
+                            </a>
                         </tr>
-                        </a>
                     </volist>
                 </tbody>
             </table>
