@@ -66,7 +66,13 @@ return array(
 
     // 员工管理
     '_REFRESH_EMPLOYEE_' => 'Refresh employee',
-    '_EMPLOYEE_DETAIL_' => 'Employee detail',
+    '_EMPLOYEE_DETAIL_' => 'Employee detail',             
+    '_ACCOUNT_' => 'account',
+    '_NAME_' => 'name',
+    '_WECHAT_NO_' => 'wechat no',
+    '_PHONE_NUMBER_' => 'phone number',
+    '_EMAIL_' => 'email',
+    '_DETAIL_' => 'detail',
 
 
 );

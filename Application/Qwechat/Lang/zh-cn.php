@@ -67,8 +67,12 @@ return array(
     // 员工管理
     '_REFRESH_EMPLOYEE_' => '下拉员工',
     '_EMPLOYEE_DETAIL_' => '员工详情',
+    '_ACCOUNT_' => '账号',
+    '_NAME_' => '姓名',
+    '_WECHAT_NO_' => '微信号',
+    '_PHONE_NUMBER_' => '手机',
+    '_EMAIL_' => '邮箱',
+    '_DETAIL_' => '详情',
     
-    
-
   
 );
