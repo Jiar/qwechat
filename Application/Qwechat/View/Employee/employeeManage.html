@@ -222,6 +222,10 @@
             $("#deleteEmployee").click(function() {
                 var checkedMemberIds =[]; 
                 console.log("123456");
+                $('input[name="memberIds"]:checked').each(function(){
+                    console.log($(this).val());
+                    checkedMemberIds.push($(this).val());
+                });
                 $("#members tbody tr td input.memberIds[type=checkbox]").each(function(){ 
                     console.log($(this).val());
                     checkedMemberIds.push($(this).val()); 
