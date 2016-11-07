@@ -38,7 +38,6 @@ class EmployeeController extends BaseController {
      * @return 员工详情
      */
     public function employeeDetail_action($userid) {
-        trace($userid);
         $member = D('QwechatMember')->getEmployeeDetail($userid);
         $this->assign('member', $member);
         $this->display('Employee/employeeDetail');

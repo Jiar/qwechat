@@ -40,7 +40,6 @@ class QwechatMemberModel extends Model {
      */
     public function getEmployeeDetail($userid) {
         $member = D('QwechatMember')->find($userid);
-        trace($member);
         return $member;
     }
 
