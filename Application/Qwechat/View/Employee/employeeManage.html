@@ -139,6 +139,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>{:L('_ACCOUNT_')}</th>
                         <th>{:L('_NAME_')}</th>
                         <th>{:L('_WECHAT_NO_')}</th>
@@ -149,6 +150,7 @@
                 <tbody>
                     <volist name="members" id="member">
                         <tr>
+                            <td><input type="checkbox"></td>
                             <td>{$member.userid}</td>
                             <td><img src="{$member.avatar}" 
                             alt="{$member.name}"
