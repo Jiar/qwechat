@@ -73,6 +73,7 @@ return array(
     '_PHONE_NUMBER_' => '手机',
     '_EMAIL_' => '邮箱',
     '_DETAIL_' => '详情',
+    '_SUBORDINATE_DEPARTMENT_' => '所属部门',
     
   
 );

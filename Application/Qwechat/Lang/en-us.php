@@ -73,6 +73,7 @@ return array(
     '_PHONE_NUMBER_' => 'phone number',
     '_EMAIL_' => 'email',
     '_DETAIL_' => 'detail',
+    '_SUBORDINATE_DEPARTMENT_' => 'Subordinate department',
 
 
 );
