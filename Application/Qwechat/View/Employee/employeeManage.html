@@ -235,7 +235,7 @@
                     $.ajax({
                             type: 'POST',
                             url: "{:U('Qwechat/Employee/deleteEmployees')}",
-                            data: JSON.stringify({memberIds: checkedMemberIds}),
+                            data: {memberIds: checkedMemberIds},
                             dataType: 'json',
                             beforeSend : function(){},
                             success: function (msg, status) {
