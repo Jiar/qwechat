@@ -48,6 +48,7 @@ class QwechatMemberModel extends Model {
                 array_push($departmentNames, $department['name']);
             }
         }
+        trace($departmentNames);
         $member['departmentNames'] = $departmentNames;
         return $member;
     }
