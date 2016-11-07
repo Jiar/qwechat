@@ -48,8 +48,9 @@ class QwechatMemberModel extends Model {
                 array_push($departments, $department);
             }
         }
-        $member['departments'] = $departments;
-        return $member;
+        $result['member'] = $member;
+        $result['departments'] = $departments;
+        return $result;
     }
 
     /********************** Controller's Function 对应 Model 操作 -end **********************/

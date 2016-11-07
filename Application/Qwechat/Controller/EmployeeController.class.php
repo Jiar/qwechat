@@ -38,9 +38,9 @@ class EmployeeController extends BaseController {
      * @return 员工详情
      */
     public function employeeDetail_action($userid) {
-        $member = D('QwechatMember')->getEmployeeDetail($userid);
-        $this->assign('member', $member);
-        $this->assign('departments', $member['departments']);
+        $result = D('QwechatMember')->getEmployeeDetail($userid);
+        $this->assign('member', $result['member']);
+        $this->assign('departments', $result['departments']);
         $this->display('Employee/employeeDetail');
     }
 
