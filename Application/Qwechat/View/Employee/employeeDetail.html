@@ -120,54 +120,62 @@
 
     <div id="page-wrapper">
         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header"> {:L('_EMPLOYEEMANAGE_SUB1_')}</h1>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        <a type="button" class="btn btn-default" href="{:U('Qwechat/Employee/employeeManage', array('department_id'=>1, 'fetch_child'=>1, 'status'=>0, 'reFetch'=>true))}">{:L('_REFRESH_EMPLOYEE_')}</a>
 
-        <div style="margin-top: 10px;
-                    margin-right: 0px;
-                    margin-left: 0px;
-                    background-color: #fff;
-                    border-color: #ddd;
-                    border-width: 1px;
-                    border-radius: 4px;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>账号</th>
-                        <th>姓名</th>
-                        <th>微信号</th>
-                        <th>手机</th>
-                        <th>邮箱</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <volist name="members" id="member">
-                        <a href="{:U('Qwechat/Employee/employeeDetail'), array('userid' => $member.userid)}">
-                        <tr>
-                            <td>{$member.userid}</td>
-                            <td><img src="{$member.avatar}" 
-                            alt="{$member.name}"
-                            style=" width: 30px; 
-                                    height: 30px; 
-                                    border-width: 0px;
-                                    border-radius: 15px;">
-                                    &nbsp;
-                                    {$member.name}</td>
-                            <td>{$member.weixinid}</td>
-                            <td>{$member.mobile}</td>
-                            <td>{$member.email}</td>
-                        </tr>
-                        </a>
-                    </volist>
-                </tbody>
-            </table>
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading"> {:L('_EMPLOYEE_DETAIL_')}</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+
+                        <div align="center" class="row">
+                            <p><img src="{$member['avatar']}" alt="{$member['name']}" style="width:70px; height:70px; border-radius:50%; margin-top:20px; margin-bottom:10px;" /></p>
+                            <div class="col-md-6 col-md-offset-3" style="line-height: 28px;">
+
+                                <div class="col-xs-6" align="right">
+                                    账号:
+                                </div>
+                                <div class="col-xs-6" align="left">
+                                    {$member['userid']}
+                                </div>
+
+                                <div class="col-xs-6" align="right">
+                                    姓名:
+                                </div>
+                                <div class="col-xs-6" align="left">
+                                    {$member['name']}
+                                </div>
+
+                                <div class="col-xs-6" align="right">
+                                    微信号:
+                                </div>
+                                <div class="col-xs-6" align="left">
+                                    {$member['weixinid']}
+                                </div>
+
+                                <div class="col-xs-6" align="right">
+                                    手机:
+                                </div>
+                                <div class="col-xs-6" align="left">
+                                    {$member['mobile']}
+                                </div>
+
+                                <div class="col-xs-6" align="right">
+                                    邮箱:
+                                </div>
+                                <div class="col-xs-6" align="left">
+                                    {$member['email']}
+                                </div>
+
+                            </div>
+                        </div>
+
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+
         </div>
+        
 
     </div>
     <!-- /#page-wrapper -->

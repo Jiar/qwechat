@@ -33,6 +33,15 @@ class QwechatMemberModel extends Model {
         return $this->getUserListInfoFromLocal($department_id,$fetch_child,$status);
     }
 
+    /**
+     * 员工详情
+     * @param  $userid 员工账号
+     * @return 员工详情
+     */
+    public function getEmployeeDetail($userid) {
+        return D('QwechatMember')->find($userid)
+    }
+
     /********************** Controller's Function 对应 Model 操作 -end **********************/
 
 

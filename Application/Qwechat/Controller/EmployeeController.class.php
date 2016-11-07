@@ -32,4 +32,15 @@ class EmployeeController extends BaseController {
 		$this->display('Employee/leaveEmployee');
 	}
 
+    /**
+     * 员工详情
+     * @param  $userid 员工账号
+     * @return 员工详情
+     */
+    public function employeeDetail_action($userid) {
+        $member = D('QwechatMember')->getEmployeeDetail($userid)
+        $this->assign('member', $member);
+        $this->display('Employee/employeeDetail');
+    }
+
 }

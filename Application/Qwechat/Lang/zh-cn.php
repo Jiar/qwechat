@@ -66,6 +66,7 @@ return array(
 
     // 员工管理
     '_REFRESH_EMPLOYEE_' => '下拉员工',
+    '_EMPLOYEE_DETAIL_' => '员工详情',
     
     
 

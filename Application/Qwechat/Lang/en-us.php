@@ -66,6 +66,7 @@ return array(
 
     // 员工管理
     '_REFRESH_EMPLOYEE_' => 'Refresh employee',
+    '_EMPLOYEE_DETAIL_' => 'Employee detail',
 
 
 );
