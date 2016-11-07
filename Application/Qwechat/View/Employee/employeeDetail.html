@@ -169,8 +169,11 @@
                                 <div class="col-xs-6" align="right">
                                     {:L('_SUBORDINATE_DEPARTMENT_')}:
                                 </div>
+                                <php>
+                                    $departmentNames = $member['departmentNames'];
+                                </php>
                                 <div class="col-xs-6" align="left">
-                                    <volist name="{$member.departmentNames}" id="departmentName">
+                                    <volist name="{$departmentNames}" id="departmentName">
                                     {$departmentName}<br />
                                     </volist>&nbsp;
                                 </div>
