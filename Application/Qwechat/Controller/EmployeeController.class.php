@@ -56,6 +56,7 @@ class EmployeeController extends BaseController {
      */
     public function deleteEmployees_action(){
         $memberIds = I('post.memberIds');
+        $memberIds = explode(',', $memberIds); 
         $result = D('QwechatMember')->deleteEmployees($memberIds);
         if($result) {
             $backEntity['success'] = 1;
