@@ -41,15 +41,14 @@ class QwechatMemberModel extends Model {
     public function getEmployeeDetail($userid) {
         $member = D('QwechatMember')->find($userid);
         $departmentIds = explode(",", $member['department']);
-        $departmentNames = array();
+        $departments = array();
         foreach ($departmentIds as  $departmentId) {
             if(!empty($departmentId)) {
                 $department = D('QwechatDepartment')->find($departmentId);
-                array_push($departmentNames, $department['name']);
+                array_push($departments, $department);
             }
         }
-        trace($departmentNames);
-        $member['departmentNames'] = $departmentNames;
+        $member['departments'] = $departments;
         return $member;
     }
 
