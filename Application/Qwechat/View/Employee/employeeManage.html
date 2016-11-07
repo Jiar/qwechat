@@ -228,6 +228,7 @@
                 if(checkedMemberIds.length == 0) {
                     AlertInfo.show('{:L('_PLEASE_CHECK_BOX_FIRST_')}');
                 } else {
+                    console.log(checkedMemberIds.toString());
                     dialog = bootbox.dialog({
                                     message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
                                     closeButton: false,
