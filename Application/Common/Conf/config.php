@@ -17,4 +17,8 @@ return array(
         '__JS__' => __ROOT__ . '/Public/Static/js',
         '__IMAGES__' => __ROOT__ . '/Public/Static/images',
     ),
+
+    'LOG_RECORD'            =>  true,
+    'LOG_LEVEL'             =>  'EMERG,ALERT,CRIT,ERR,WARN,NOTICE,INFO,DEBUG,SQL',
+
 );
