@@ -220,12 +220,14 @@
             });
             $("#deleteEmployee").click(function() {
                 var checkedMemberIds =[]; 
-                $("#members > tbody tr td > input.memberIds[type=checkbox]:checked").each(function(){ 
+                console.log("123456");
+                $("#members tbody tr td input.memberIds[type=checkbox]:checked").each(function(){ 
                     console.log($(this).val());
                     checkedMemberIds.push($(this).val()); 
                 }); 
                 if(checkedMemberIds.length == 0) {
-                    AlertInfo.show("{:L('_PLEASE_CHECK_BOX_FIRST_')}");
+                    console.log("哈哈哈");
+                    AlertInfo.show('{:L('_PLEASE_CHECK_BOX_FIRST_')}');
                 } else {
                     dialog = bootbox.dialog({
                                     message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
