@@ -1567,6 +1567,7 @@ class Qwechat {
 	    if (!$this->access_token && !$this->checkAuth()) return false;
 	    $result = $this->http_post(self::API_URL_PREFIX.self::USER_BATCHDELETE_URL.'access_token='.$this->access_token,self::json_encode($data));
 	    Think\Log::write('批量删除成员' .$result,'DEBUG');
+	    return $result;
 	    if ($result)
 	    {
 	        $json = json_decode($result,true);

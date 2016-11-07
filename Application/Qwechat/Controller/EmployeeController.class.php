@@ -56,13 +56,15 @@ class EmployeeController extends BaseController {
      */
     public function deleteEmployees_action(){
         $memberIds = I('post.memberIds');
-        if(D('QwechatMember')->deleteEmployees($memberIds)) {
+        $result = D('QwechatMember')->deleteEmployees($memberIds);
+        if($result) {
             $backEntity['success'] = 1;
             $backEntity['info'] = L('_DELETE_SUCCESS_');
         } else {
             $backEntity['success'] = 0;
             $backEntity['info'] = L('_DELETE_FAIL_');
         }
+        $backEntity['info'] = $result;
         $this->ajaxReturn(json_encode($backEntity), 'JSON');
     }
 
