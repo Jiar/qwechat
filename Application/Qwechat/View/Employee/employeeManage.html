@@ -168,6 +168,30 @@
             </table>
         </div>
 
+        <php>
+            $pageBegin = 0;
+            if($pageIndex-5>0) {
+                $pageBegin = $pageIndex-5;
+            }
+            $pageEnd = $pageNumbers;
+            if($pageIndex+5<$pageNumbers) {
+                $pageEnd = $pageIndex+5;
+            }
+            echo "<nav>";
+            echo "<ul class='pagination'>"
+            echo "<li class='disabled'><a href='#'>&laquo;</a></li>"
+            for($i=$pageBegin;$i<=$pageEnd;$i++) {
+                if($i == $pageIndex) {
+                    echo "<li class='active'><a href='" .U('Qwechat/Employee/employeeManage', array('department_id'=>1,'fetch_child'=>1,'status'=>0,'reFetch'=>false,'pageIndex'=>$i,'pageSize'=>10)) ."'>" .$i ."</a></li>";
+                } else {
+                    echo "<li><a href='" .U('Qwechat/Employee/employeeManage', array('department_id'=>1,'fetch_child'=>1,'status'=>0,'reFetch'=>false,'pageIndex'=>$i,'pageSize'=>10)) ."'>" .$i ."</a></li>";
+                }
+            }
+            echo "</ul>";
+            echo "</nav>";
+        </php>
+        <!-- {:U('Qwechat/Employee/employeeManage')} -->
+
     </div>
     <!-- /#page-wrapper -->
 

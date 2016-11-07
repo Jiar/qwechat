@@ -23,14 +23,16 @@ class QwechatMemberModel extends Model {
      * @param  $department_id 部门id
      * @param  $fetch_child   1/0：是否递归获取子部门下面的成员
      * @param  $status        0获取全部员工，1获取已关注成员列表，2获取禁用成员列表，4获取未关注成员列表。status可叠加
-     * @param  $reFetch       true:从微信企业号后台获取(同时覆盖本地数据) false:从本地数据库获取
-     * @return 成员集合
+     * @param  $reFetch       true:从微信企业号后台获取(同时覆盖本地数据，此时从后台获取所有数据，无分页) false:从本地数据库获取
+     * @param  $pageIndex     分页查询：第几页
+     * @param  $pageSize      分页查询：每页数量
+     * @return 成员集合信息     array('pageIndex'=>?,'pageSize'=>'?,count'=>?,'members'=>?)
      */
-    public function getUserListInfo($department_id=1,$fetch_child=1,$status=0,$reFetch=false) {
+    public function getUserListInfo($department_id=1,$fetch_child=1,$status=0,$reFetch=false,$pageIndex=1,$pageSize=10) {
         if($reFetch || D('QwechatMember')->Count() == 0) {
             $this->getUserListInfoFromQwechatToSave($department_id,$fetch_child,$status);
         }
-        return $this->getUserListInfoFromLocal($department_id,$fetch_child,$status);
+        return $this->getUserListInfoFromLocal($department_id,$fetch_child,$status,$pageIndex,$pageSize);
     }
 
     /**
@@ -127,12 +129,14 @@ class QwechatMemberModel extends Model {
     /**
      * 从微信企业号后台获取部门成员详情列表
      * 
-     * @param $department_id   部门id
-     * @param $fetch_child     1/0：是否递归获取子部门下面的成员
-     * @param $status          0获取全部员工，1获取已关注成员列表，2获取禁用成员列表，4获取未关注成员列表。status可叠加
-     * @return 成员集合
+     * @param  $department_id   部门id
+     * @param  $fetch_child     1/0：是否递归获取子部门下面的成员
+     * @param  $status          0获取全部员工，1获取已关注成员列表，2获取禁用成员列表，4获取未关注成员列表。status可叠加
+     * @param  $pageIndex       分页查询：第几页
+     * @param  $pageSize        分页查询：每页数量
+     * @return 成员集合信息     array('pageIndex'=>?,'pageSize'=>'?,count'=>?,'members'=>?)
      */
-    private function getUserListInfoFromLocal($department_id=1,$fetch_child=1,$status=0) {
+    private function getUserListInfoFromLocal($department_id=1,$fetch_child=1,$status=0,$pageIndex=1,$pageSize=10) {
         $where = array();
         if(status == 1) {
             $where['status'] = 1;
@@ -163,7 +167,11 @@ class QwechatMemberModel extends Model {
             }
             $where['department'] = array('like',$result,'OR');
         }
-        return M('QwechatMember')->distinct(true)->where($where)->select(); 
+        $memberInfos['pageIndex'] = $pageIndex;
+        $memberInfos['pageSize'] = $pageSize;
+        $memberInfos['count'] = M('QwechatMember')->distinct(true)->where($where)->count();
+        $memberInfos['members'] = M('QwechatMember')->distinct(true)->where($where)->page($pageIndex .',' .$pageSize)->select();
+        return $memberInfos;
     }
 
     /**
