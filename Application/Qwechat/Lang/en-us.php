@@ -66,6 +66,7 @@ return array(
 
     // 员工管理
     '_REFRESH_EMPLOYEE_' => 'Refresh employee',
+    '_DELETE_EMPLOYEE_' => 'Delete department',
     '_EMPLOYEE_DETAIL_' => 'Employee detail',             
     '_ACCOUNT_' => 'account',
     '_NAME_' => 'name',
@@ -74,6 +75,9 @@ return array(
     '_EMAIL_' => 'email',
     '_DETAIL_' => 'detail',
     '_SUBORDINATE_DEPARTMENT_' => 'Subordinate department',
+    '_PLEASE_CHECK_BOX_FIRST_' => 'please check box first',
+    '_DELETE_SUCCESS_' => 'delete success',
+    '_DELETE_FAIL_' => 'delete fail',
 
 
 );

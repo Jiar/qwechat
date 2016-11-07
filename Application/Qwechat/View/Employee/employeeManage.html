@@ -118,6 +118,10 @@
         <!-- /.navbar-static-side -->
     </nav>
 
+    <div class="alert-info center-container" style="display: none; height: 36px;">
+        <span>Show alert info !</span>
+    </div>
+
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -126,6 +130,7 @@
             <!-- /.col-lg-12 -->
         </div>
         <a type="button" class="btn btn-default" href="{:U('Qwechat/Employee/employeeManage', array('department_id'=>1, 'fetch_child'=>1, 'status'=>0, 'reFetch'=>true))}">{:L('_REFRESH_EMPLOYEE_')}</a>
+        <a type="button" id="deleteEmployee" class="btn btn-danger" href="#">{:L('_DELETE_EMPLOYEE_')}</a>
 
         <div style="margin-top: 10px;
                     margin-right: 0px;
@@ -136,7 +141,7 @@
                     border-radius: 4px;
                     -webkit-box-shadow: none;
                     box-shadow: none;">
-            <table class="table table-hover">
+            <table class="table table-hover members">
                 <thead>
                     <tr>
                         <th></th>
@@ -150,7 +155,7 @@
                 <tbody>
                     <volist name="members" id="member">
                         <tr>
-                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox" name="memberIds" value="{$member.userid}"></td>
                             <td>{$member.userid}</td>
                             <td><img src="{$member.avatar}" 
                             alt="{$member.name}"
@@ -200,12 +205,51 @@
 </div>
 <!-- /#wrapper -->
 
+    <script type="text/javascript">
+        $(function() {
+            $("#deleteEmployee").click(function() {
+                var checkedMemberIds =[]; 
+                $("table.members > tbody tr td > input.memberIds[type=checkbox]:checked").each(function(){ 
+                    checkedMemberIds.push($(this).val()); 
+                }); 
+                if(checkedMemberIds.length == 0) {
+                    AlertInfo.show('{:L('_PLEASE_CHECK_BOX_FIRST_')}');
+                } else {
+                    dialog = bootbox.dialog({
+                                    message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
+                                    closeButton: false,
+                                });
+                    $.ajax({
+                            type: 'POST',
+                            url: "{:U('Qwechat/Employee/deleteEmployees')}",
+                            data: checkedMemberIds,
+                            dataType: 'json',
+                            beforeSend : function(){},
+                            success: function (msg, status) {
+                                dialog.modal('hide');
+                                var result = eval("("+msg+")");
+                                AlertInfo.show(result.info);
+                                if (result.success === 1) {
+                                    window.location.href="{:U('Qwechat/Employee/employeeManage', array('reFetch'=>true))}"; 
+                                }
+                            },
+                            error: function (xhr, desc, err) {
+                                dialog.modal('hide');
+                                AlertInfo.show("error: " + desc + "&nbsp;" + err);
+                            }
+                        });
+                }
+            });
+        })
+    </script>
+
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="http://cdn.bootcss.com/metisMenu/1.1.3/metisMenu.min.js"></script>
     <script src="http://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.min.js"></script>
     <!-- Custom JS -->
     <script src="__JS__/qwechat-admin.js"></script>
+    <script src="__JS__/AlertInfo.js"></script>
 
 </body>
 

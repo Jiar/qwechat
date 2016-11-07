@@ -66,6 +66,7 @@ return array(
 
     // 员工管理
     '_REFRESH_EMPLOYEE_' => '下拉员工',
+    '_DELETE_EMPLOYEE_' => '删除员工',
     '_EMPLOYEE_DETAIL_' => '员工详情',
     '_ACCOUNT_' => '账号',
     '_NAME_' => '姓名',
@@ -74,6 +75,9 @@ return array(
     '_EMAIL_' => '邮箱',
     '_DETAIL_' => '详情',
     '_SUBORDINATE_DEPARTMENT_' => '所属部门',
+    '_PLEASE_CHECK_BOX_FIRST_' => '请先勾选',
+    '_DELETE_SUCCESS_' => '删除成功',
+    '_DELETE_FAIL_' => '删除失败',
     
   
 );

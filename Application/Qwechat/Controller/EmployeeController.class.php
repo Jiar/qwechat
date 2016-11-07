@@ -51,4 +51,20 @@ class EmployeeController extends BaseController {
         $this->display('Employee/employeeDetail');
     }
 
+    /**
+     * 批量删除员工
+     * @param  $memberIds 员工Id
+     */
+    public function deleteEmployees_action($memberIds){
+        if(D('QwechatMember')->deleteEmployees($memberIds)) {
+            $backEntity['success'] = 1;
+            $backEntity['info'] = L('_DELETE_SUCCESS_');
+        } else {
+            $backEntity['success'] = 0;
+            $backEntity['info'] = L('_DELETE_FAIL_');
+        }
+        $this->ajaxReturn(json_encode($backEntity), 'JSON');
+    }
+
 }
+

@@ -55,6 +55,16 @@ class QwechatMemberModel extends Model {
         return $result;
     }
 
+    /**
+     * 批量删除员工
+     * @param  $memberIds 员工Id
+     */
+    public function deleteEmployees($memberIds){
+        $memberIds = json_decode($memberIds,true);
+        $weObj = TPWechat::getInstance();
+        return $weObj->deleteUsers($memberIds);
+    }
+
     /********************** Controller's Function 对应 Model 操作 -end **********************/
 
 
