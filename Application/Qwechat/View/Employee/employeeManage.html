@@ -141,7 +141,7 @@
                     border-radius: 4px;
                     -webkit-box-shadow: none;
                     box-shadow: none;">
-            <table class="table table-hover members">
+            <table id="members" class="table table-hover">
                 <thead>
                     <tr>
                         <th></th>
@@ -168,7 +168,7 @@
                             <td>{$member.weixinid}</td>
                             <td>{$member.mobile}</td>
                             <td>{$member.email}</td>
-                            <td><a type="button" class="btn btn-danger btn-xs" href="{:U('Qwechat/Employee/employeeDetail', array('userid' => $member['userid']))}">{:L('_DETAIL_')}</a></td>
+                            <td><a type="button" class="btn btn-info btn-xs" href="{:U('Qwechat/Employee/employeeDetail', array('userid' => $member['userid']))}">{:L('_DETAIL_')}</a></td>
                         </tr>
                     </volist>
                 </tbody>
@@ -220,11 +220,12 @@
             });
             $("#deleteEmployee").click(function() {
                 var checkedMemberIds =[]; 
-                $("table.members > tbody tr td > input.memberIds[type=checkbox]:checked").each(function(){ 
+                $("#members > tbody tr td > input.memberIds[type=checkbox]:checked").each(function(){ 
+                    console.log($(this).val());
                     checkedMemberIds.push($(this).val()); 
                 }); 
                 if(checkedMemberIds.length == 0) {
-                    AlertInfo.show('{:L('_PLEASE_CHECK_BOX_FIRST_')}');
+                    AlertInfo.show("{:L('_PLEASE_CHECK_BOX_FIRST_')}");
                 } else {
                     dialog = bootbox.dialog({
                                     message: '<p><i class="fa fa-spin fa-spinner"></i>{:L('_NOW_IS_PUSHING__PLEASE_WAIT_')}</p>',
