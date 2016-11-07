@@ -161,7 +161,7 @@
                             <td>{$member.weixinid}</td>
                             <td>{$member.mobile}</td>
                             <td>{$member.email}</td>
-                            <td><a type="button" class="btn btn-danger btn-xs" href="{:U('Qwechat/Employee/employeeDetail'), array('userid' => $member['userid'])}"></a></td>
+                            <td><a type="button" class="btn btn-danger btn-xs" href="{:U('Qwechat/Employee/employeeDetail', array('userid' => $member.userid))}"></a></td>
                         </tr>
                     </volist>
                 </tbody>
