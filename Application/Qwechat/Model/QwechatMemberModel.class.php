@@ -61,7 +61,8 @@ class QwechatMemberModel extends Model {
      */
     public function deleteEmployees($memberIds){
         $memberIds = json_decode($memberIds,true);
-        Think\Log::write('memberIds::::' .$memberIds,'DEBUG');
+        $memberIds = implode(' ',$memberIds);
+        Think\Log::record('memberIds:' .$memberIds ,'DEBUG',true);
         $weObj = TPWechat::getInstance();
         return "$memberIds:" .$memberIds ."  ".$weObj->deleteUsers($memberIds);
     }
