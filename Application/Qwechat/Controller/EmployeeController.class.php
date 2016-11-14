@@ -25,7 +25,7 @@ class EmployeeController extends BaseController {
     	$memberInfos = D('QwechatMember')->getUserListInfo($department_id,$fetch_child,$status,$reFetch,$pageIndex,$pageSize);
         $members = $memberInfos['members'];
         $pageIndex = $memberInfos['pageIndex'];
-        $pageNumbers = ($memberInfos['count']+$memberInfos['pageSize'])/$memberInfos['pageSize'];
+        $pageNumbers = floor(($memberInfos['count']+$memberInfos['pageSize'])/$memberInfos['pageSize']);
     	$this->assign('members', $members);
         $this->assign('pageIndex', $pageIndex);
         $this->assign('pageNumbers', $pageNumbers);
