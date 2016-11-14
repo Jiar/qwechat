@@ -52,6 +52,13 @@ class EmployeeController extends BaseController {
     }
 
     /**
+     * 新增员工
+     */
+    public function createEmployee_action() {
+        $this->display('Employee/createEmployee');
+    }
+
+    /**
      * 批量删除员工
      */
     public function deleteEmployees_action(){

@@ -66,6 +66,7 @@ return array(
 
     // 员工管理
     '_REFRESH_EMPLOYEE_' => 'Refresh employee',
+    '_CREATE_EMPLOYEE_' => 'Create employee',
     '_DELETE_EMPLOYEE_' => 'Delete department',
     '_EMPLOYEE_DETAIL_' => 'Employee detail',             
     '_ACCOUNT_' => 'account',

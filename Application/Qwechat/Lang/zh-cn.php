@@ -66,6 +66,7 @@ return array(
 
     // 员工管理
     '_REFRESH_EMPLOYEE_' => '下拉员工',
+    '_CREATE_EMPLOYEE_' => '新增员工',
     '_DELETE_EMPLOYEE_' => '删除员工',
     '_EMPLOYEE_DETAIL_' => '员工详情',
     '_ACCOUNT_' => '账号',
