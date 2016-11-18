@@ -59,6 +59,7 @@ class EmployeeController extends BaseController {
      *            
      */
     public function employee_action($department_id=1,$fetch_child=1,$status=0,$reFetch=false,$pageIndex=1,$pageSize=10) {
+        header("Access-Control-Allow-Origin: *");
         $memberInfos = D('QwechatMember')->getUserListInfo($department_id,$fetch_child,$status,$reFetch,$pageIndex,$pageSize);
         $members = $memberInfos['members'];
         $backEntity['success'] = 1;
