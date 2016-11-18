@@ -19,7 +19,6 @@ class EmployeeController extends BaseController {
      * @param  $reFetch       true:从微信企业号后台获取(同时覆盖本地数据，此时从后台获取所有数据，无分页) false:从本地数据库获取
      * @param  $pageIndex     分页查询：第几页
      * @param  $pageSize      分页查询：每页数量
-     * @return 成员集合信息     array('pageIndex'=>?,'pageSize'=>'?,count'=>?,'members'=>?)
      */
     public function employeeManage_action($department_id=1,$fetch_child=1,$status=0,$reFetch=false,$pageIndex=1,$pageSize=10) {
     	$memberInfos = D('QwechatMember')->getUserListInfo($department_id,$fetch_child,$status,$reFetch,$pageIndex,$pageSize);
@@ -30,6 +29,41 @@ class EmployeeController extends BaseController {
         $this->assign('pageIndex', $pageIndex);
         $this->assign('pageNumbers', $pageNumbers);
     	$this->display('Employee/employeeManage');
+    }
+
+    /**
+     * 批量获取员工信息
+     * 
+     * @param  $department_id 部门id
+     * @param  $fetch_child   1/0：是否递归获取子部门下面的成员
+     * @param  $status        0获取全部员工，1获取已关注成员列表，2获取禁用成员列表，4获取未关注成员列表。status可叠加
+     * @param  $reFetch       true:从微信企业号后台获取(同时覆盖本地数据，此时从后台获取所有数据，无分页) false:从本地数据库获取
+     * @param  $pageIndex     分页查询：第几页
+     * @param  $pageSize      分页查询：每页数量
+     * @return {"success":0, "info":"info"}
+     *
+     * {
+     *                   "userid": "zhangsan",
+     *                   "name": "李四",
+     *                   "department": [1, 2],
+     *                   "position": "后台工程师",
+     *                   "mobile": "15913215421",
+     *                   "gender": 1,     //性别。gender=0表示男，=1表示女
+     *                   "tel": "62394",
+     *                   "email": "zhangsan@gzdev.com",
+     *                   "weixinid": "lisifordev",        //微信号
+     *                   "avatar": "http://wx.qlogo.cn/mmopen/ajNVdqHZLLA3W..../0",   //头像url。注：如果要获取小图将url最后的"/0"改成"/64"即可
+     *                   "status": 1      //关注状态: 1=已关注，2=已冻结，4=未关注
+     *                   "extattr": {"attrs":[{"name":"爱好","value":"旅游"},{"name":"卡号","value":"1234567234"}]}
+     *            }
+     *            
+     */
+    public function employee_action($department_id=1,$fetch_child=1,$status=0,$reFetch=false,$pageIndex=1,$pageSize=10) {
+        $memberInfos = D('QwechatMember')->getUserListInfo($department_id,$fetch_child,$status,$reFetch,$pageIndex,$pageSize);
+        $members = $memberInfos['members'];
+        $backEntity['success'] = 1;
+        $backEntity['info'] = $members;
+        $this->ajaxReturn(json_encode($backEntity), 'JSON');
     }
 
 	/**
